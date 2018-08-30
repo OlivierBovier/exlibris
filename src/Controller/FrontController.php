@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FrontController extends AbstractController
 {
     /**
-    * @Route("/")
+    * @Route("/", name="app_front_home")
     */
     public function home()
     {
