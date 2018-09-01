@@ -5,10 +5,18 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
+//Include the images to Webpack
+//const imgContext = require.context('../img', true, /\.(png|jpg|jpeg|gif|ico|svg|webp)$/);
+//imgContext.keys().forEach(imgContext);
+
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 var $ = require('jquery');
+
+// JS is equivalent to the normal "bootstrap" package
+// no need to set this to a variable, just require it
+require('bootstrap');
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
