@@ -13,13 +13,25 @@
 	  </ol>
 	  <div class="carousel-inner">
 	    <div class="carousel-item active">
-	      <img class="d-block w-100" src=".../800x400?auto=yes&bg=777&fg=555&text=First slide" alt="First slide">
+	      <img class="d-block w-100" src= {{ asset('images/carousel_echelle.jpg') }} alt="First slide">
+	      <div class="carousel-caption d-none d-md-block">
+		    <h5>Sélection des lecteurs</h5>
+		    <p>Ils vous disent tout sur les livres qu'ils ont aimé !</p>
+		  </div>
 	    </div>
 	    <div class="carousel-item">
-	      <img class="d-block w-100" src=".../800x400?auto=yes&bg=666&fg=444&text=Second slide" alt="Second slide">
+	      <img class="d-block w-100" src= {{ asset('images/carousel_festival_bd.jpg') }} alt="Second slide">
+	      <div class="carousel-caption d-none d-md-block">
+		    <h5>Festival bd</h5>
+		    <p>Ouvert aux enfants de 7 à 77 ans !</p>
+		  </div>
 	    </div>
 	    <div class="carousel-item">
-	      <img class="d-block w-100" src=".../800x400?auto=yes&bg=555&fg=333&text=Third slide" alt="Third slide">
+	      <img class="d-block w-100" src={{ asset('images/carousel_selection_livre_ete.jpg') }} alt="Third slide">
+	      <div class="carousel-caption d-none d-md-block">
+		    <h5>Des livres pour cet été</h5>
+		    <p>A lire sur la plage, sans modération !</p>
+		  </div>
 	    </div>
 	  </div>
 	  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
