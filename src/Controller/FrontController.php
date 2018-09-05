@@ -32,5 +32,21 @@ class FrontController extends AbstractController
         return $this->render('front/fiche.html.twig');
     }
 
+    /**
+    * @Route("/mentions", name="mentions")
+    */
+    public function mentions()
+    {
+        return $this->render('front/mentions.html.twig');
+    }
+
+    /**
+    * @Route("/infos-pratiques", name="infos_prat")
+    */
+    public function infos_prat()
+    {
+        return $this->render('front/infos_prat.html.twig');
+    }
+
 
 }

@@ -39,7 +39,7 @@ class Commandes
     private $total_ttc_cde;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -107,12 +107,12 @@ class Commandes
         return $this;
     }
 
-    public function getUser(): ?Users
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?Users $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 

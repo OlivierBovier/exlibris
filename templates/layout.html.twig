@@ -16,6 +16,12 @@
           <li class="nav-item active">
             <a class="nav-link" href= {{ path('catalog') }} >Catalogue</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href= {{ path('security_registration') }} >Inscription</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href= {{ path('security_update') }} >Modifier vos données</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
           </li>
@@ -28,13 +34,17 @@
     </nav>
 </div>
 
+<main role="main" class="container">
 {% block contenu %}
 
-{% endblock %}	
+{% endblock %}
+</main>
 
 <footer class="footer">
       <div class="container">
-        <span class="text-muted">Copyright &copy; ExLibris - 2018</span>
+        <span class="text-muted">Copyright &copy; ExLibris 2018</span> - 
+        <a class="text-muted" href= {{ path('mentions') }} >Mentions légales</a> - 
+        <a class="text-muted" href= {{ path('infos_prat') }} >Info pratiques</a>
       </div>
 </footer>		
 
