@@ -19,6 +19,15 @@
           <li class="nav-item active">
             <a class="nav-link" href= {{ path('security_registration') }} >Inscription</a>
           </li>
+          {% if not app.user %}
+              <li class="nav-item active">
+                <a class="nav-link" href= {{ path('security_login') }} >Connexion</a>
+              </li>
+          {% else %}
+              <li class="nav-item active">
+                <a class="nav-link" href= {{ path('security_logout') }} >Déconnexion</a>
+              </li>
+          {% endif %}
           <li class="nav-item active">
             <a class="nav-link" href= {{ path('security_update') }} >Modifier vos données</a>
           </li>
