@@ -83,10 +83,16 @@ class User implements UserInterface, \Serializable
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
+    
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
-        $this->commandes = new ArrayCollection(); 
+        $this->commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,11 +275,7 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
+    
     public function eraseCredentials()
     {
     }
@@ -300,5 +302,16 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function getRoles() {
+        if (empty($this->roles)) {
+            return ['ROLE_USER'];
+        }
+        return $this->roles;
+    }
+
+    function addRole($role) {
+        $this->roles[] = $role;
     }
 }

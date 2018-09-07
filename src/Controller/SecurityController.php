@@ -1,5 +1,5 @@
 <?php
-
+// src/Controller/SecurityController.php
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use App\Entity\Role;
 use App\Form\RegistrationType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -27,6 +28,8 @@ class SecurityController extends AbstractController
     	if($form->isSubmitted() && $form->isValid()) {
     		$hash = $encoder->encodePassword($user, $user->getPassword());
     		$user->setPassword($hash);
+
+            $user->addRole('ROLE_USER');
 
     		$manager->persist($user);
     		$manager->flush();
