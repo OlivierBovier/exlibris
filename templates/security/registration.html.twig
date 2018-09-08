@@ -1,17 +1,17 @@
 {% extends "layout.html.twig" %}
 
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% form_theme formRegistr 'bootstrap_4_layout.html.twig' %}
 
 {% block contenu %}
-	<h1>Inscrivez-vous ici</h1>
-	{{ form_start(form) }}
-	{{ form_row(form.username, {'label': 'Nom d\'utilisateur', 'attr': {'placeholder': 'votre nom d\'utilisateur ici...'}}) }}
-	{{ form_row(form.email, {'attr': {'placeholder': 'votre mail ici...'}}) }}
-	{{ form_row(form.adresse, {'attr': {'placeholder': 'votre adresse ici...'}}) }}
-	{{ form_row(form.codePostal, {'attr': {'placeholder': 'votre code postal ici...'}}) }}
-	{{ form_row(form.ville, {'attr': {'placeholder': 'votre ville ici...'}}) }}
-	{{ form_row(form.password, {'label': 'mot de passe', 'attr': {'placeholder': 'votre mot de passe ici...'}}) }}
-	{{ form_row(form.confirmPassword, {'label': 'mot de passe','attr': {'placeholder': 'confirmez votre mot de passe...'}}) }}
+	<h2>Inscrivez-vous ici</h2>
+	{{ form_start(formRegistr) }}
+	{{ form_row(formRegistr.username, {'label': 'Nom d\'utilisateur', 'attr': {'placeholder': 'votre nom d\'utilisateur ici...'}}) }}
+	{{ form_row(formRegistr.email, {'attr': {'placeholder': 'votre mail ici...'}}) }}
+	{{ form_row(formRegistr.adresse, {'attr': {'placeholder': 'votre adresse ici...'}}) }}
+	{{ form_row(formRegistr.codePostal, {'attr': {'placeholder': 'votre code postal ici...'}}) }}
+	{{ form_row(formRegistr.ville, {'attr': {'placeholder': 'votre ville ici...'}}) }}
+	{{ form_row(formRegistr.password, {'label': 'mot de passe', 'attr': {'placeholder': 'votre mot de passe ici...'}}) }}
+	{{ form_row(formRegistr.confirmPassword, {'label': 'mot de passe','attr': {'placeholder': 'confirmez votre mot de passe...'}}) }}
 	<button type="submit" class="btn btn-success">Inscription</button>
-	{{ form_end(form) }}
+	{{ form_end(formRegistr) }}
 {% endblock %}

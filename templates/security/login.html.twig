@@ -1,6 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block contenu %}
+
 	<h2>Connectez vous ici</h2>
 
 	{% for flashMessage in app.session.flashbag.get('notice') %}
@@ -20,3 +21,4 @@
 	</form>	
 
 {% endblock %}
+

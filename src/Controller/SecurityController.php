@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Role;
 use App\Form\RegistrationType;
+use App\Form\ConnectionType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -20,13 +21,11 @@ class SecurityController extends AbstractController
     * @route("/inscription", name="security_registration")
     */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, Session $session) {
-    	$user = new User();
-    	
-    	$form = $this->createForm(RegistrationType::class, $user);
+    	$user = new User();   	
+    	$formRegistr = $this->createForm(RegistrationType::class, $user);
+    	$formRegistr->handleRequest($request);
 
-    	$form->handleRequest($request);
-
-    	if($form->isSubmitted() && $form->isValid()) {
+    	if ($formRegistr->isSubmitted() && $formRegistr->isValid()) {
     		$hash = $encoder->encodePassword($user, $user->getPassword());
     		$user->setPassword($hash);
 
@@ -41,14 +40,14 @@ class SecurityController extends AbstractController
     	}
 
     	return $this->render("security/registration.html.twig", [
-    		'form' => $form->createView()
+    		'formRegistr' => $formRegistr->createView()
     	]);
     }
 
     /**
     * @route("/connexion", name="security_login")
     */
-    public function login(Session $session) {
+    public function login(Request $request, Session $session) {
 
         return $this->render("security/login.html.twig");
     }
