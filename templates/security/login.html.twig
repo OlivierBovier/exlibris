@@ -1,7 +1,12 @@
 {% extends "layout.html.twig" %}
 
 {% block contenu %}
-	<h2>connexion</h2>
+	<h2>Connectez vous ici</h2>
+
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+    	<div class="alert alert-success">{{flashMessage}}</div>
+	{% endfor %}
+
 	<form action="{{ path('security_login')}}" method="post">
 		<div class="form-group">
 			<input placeholder="Adresse email..." required name="_username" type="text" class="form-control">		
