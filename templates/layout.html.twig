@@ -2,7 +2,7 @@
 
 {% block body %}
  
-<div class="header"> 
+<header class="container border border-dark"> 
 	<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
       <a class="navbar-brand" href= {{ path('front_home') }} ><img class="logo" src={{ asset('images/logo.jpg') }} height="90"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
         </form>
       </div>
   </nav>
-</div>
+</header>
 
 <main role="main" class="container">
 {% block contenu %}
@@ -43,12 +43,11 @@
 {% endblock %}
 </main>
 
-<footer class="footer">
-      <div class="container">
-        <span class="text-muted">Copyright &copy; ExLibris 2018</span> - 
-        <a class="text-muted" href= {{ path('mentions') }} >Mentions légales</a> - 
-        <a class="text-muted" href= {{ path('infos_prat') }} >Info pratiques</a>
-      </div>
+
+<footer class="container border border-dark">
+    <span class="text-muted">Copyright &copy; ExLibris 2018</span> - 
+    <a class="text-muted" href= {{ path('mentions') }} >Mentions légales</a> - 
+    <a class="text-muted" href= {{ path('infos_prat') }} >Info pratiques</a>
 </footer>		
 
 {% endblock %}

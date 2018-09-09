@@ -50,11 +50,24 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $asonimage->setResume('Ce somptueux roman en forme de requiem pour une photographe défunte est aussi l’occasion d’évoquer le nationalisme corse, la violence des guerres modernes et les liens ambigus qu’entretiennent l’image, la photographie, le réel et la mort.');
         $manager->persist($asonimage);
 
+        $sermon = new Livres();
+        $sermon->setAuteur($this->getReference(AuteursFixtures::FERRARI));
+        $sermon->setEditeur($this->getReference(EditeursFixtures::ACTESSUD));
+        $sermon->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $sermon->setISBN('978-2-330-02280-8');
+        $sermon->setTitre('Le sermon sur la chute de Rome');
+        $sermon->setNbPages(2208);
+        $sermon->setDateParution(\DateTime::createFromFormat('Y-m-d', "2013-08-17"));
+        $sermon->setPrixHt(7.7);
+        $sermon->setEstConseil(1);
+        $sermon->setResume('Dans un village corse perché loin de la côte, le bar local est en train de connaître une mutation profonde sous l\'impulsion de ses nouveaux gérants. A la sur-prise générale, ces deux enfants du pays ont tourné le dos à de prometteuses études de philosophie sur le continent pour, fidèles aux enseignements de Leibniz, transformer un modeste débit de boissons en "meilleur des mondes possibles". Mais c\'est bientôt l\'enfer en personne qui s\'invite au comptoir, réactivant les blessures anciennes d\'êtres assujettis à d\'indigents rêves de bonheur et victimes, à leur insu, de la tragique propension de l\'âme humaine à se corrompre. Entrant par-delà les siècles en résonance avec le sermon par lequel saint Augustin tenta de consoler ses fidèles de la fragilité des royaumes terrestres, Jérôme Ferrari jette, au fil d\'une écriture somptueuse, une lumière impitoyable sur la malédiction qui condamne les mortels à voir s\'effondrer les mondes qu\'ils édifient et à refonder sans trêve, sur le sang ou les larmes, leurs impossibles mythologies.');
+        $manager->persist($sermon);
+
         $passagers = new Livres();
         $passagers->setAuteur($this->getReference(AuteursFixtures::BOURGEON));
         $passagers->setEditeur($this->getReference(EditeursFixtures::GLENAT));
         $passagers->addCategory($this->getReference(CategoriesFixtures::BD));
-        $passagers->setISBN('978-2-7234-0132-4');
+        $passagers->setISBN('978-2-723-40132-4');
         $passagers->setTitre('Les Passagers du Vent - La Fille sous la dunette');
         $passagers->setNbPages(48);
         $passagers->setDateParution(\DateTime::createFromFormat('Y-m-d', "1980-01-01"));
@@ -62,6 +75,19 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $passagers->setEstConseil(1);
         $passagers->setResume('"La Fille sous la dunette" est le premier des cinq tomes des "Passagers du Vent", série créée par François Bourgeon. XVIIIe siècle, à bord d\'un navire. Hoël Tragan aperçoit deux jeunes femmes sous la dunette. Piqué par la curiosité, il s\'aventure dans la zone interdite à l\'équipage. Repéré, il est arrêté et mis aux fers. Il reçoit alors la visite d\'un "jeune homme" qui s\'avère être Isa, l\'une des filles qu\'il avait vues. Isa lui racontera comment, jeune enfant, elle avait changé d\'identité avec son amie par jeu, ce qui lui valut de perdre son titre de noblesse. Après diverses péripéties, notamment un combat contre des vaisseaux britanniques, Hoël est fait prisonnier par la Royal Navy...');
         $manager->persist($passagers);
+
+        $meilleurmonde = new Livres();
+        $meilleurmonde->setAuteur($this->getReference(AuteursFixtures::HUXLEY));
+        $meilleurmonde->setEditeur($this->getReference(EditeursFixtures::POCKET));
+        $meilleurmonde->addCategory($this->getReference(CategoriesFixtures::ANTICIPATION));
+        $meilleurmonde->setISBN('978-2-266-28303-8');
+        $meilleurmonde->setTitre('Le meilleur des mondes');
+        $meilleurmonde->setNbPages(320);
+        $meilleurmonde->setDateParution(\DateTime::createFromFormat('Y-m-d', "1932-01-01"));
+        $meilleurmonde->setPrixHt(4.95);
+        $meilleurmonde->setEstConseil(1);
+        $meilleurmonde->setResume('Demain, le bonheur sera universel. Et obligatoire ! Dans le meilleur des mondes les foetus sont « préparés» dans des incubatrices en fonction du rôle qu\'on leur destine. Les futurs Alphas, de la caste des élites, reçoivent plus d\'oxygène, plus de «pseudo sang». Quant aux futurs Epsilons, à qui l\'on réserve les tâches les plus pénibles, on veille à ne pas développer leurs facultés intellectuelles : un bon ouvrier n\'a pas besoin de penser. Dans le meilleur des mondes, un système éducatif qui façonne les esprits comme les corps, une société communautaire qui proscrit l\'individualisme, où la cellule familiale ne peut exister. Dans ce meilleur des mondes méthodiquement planifié pour construire les hommes en fonction des besoins, pour contraindre un bonheur artificiel, pour museler les passions et les interrogations, il y aura bien un grain de sable pour s\'insérer dans les rouages. Un récit incontournable écrit en 1931, qui n\'a pas fini d\'influencer écrivains et cinéastes. ');
+        $manager->persist($meilleurmonde);
 
         $manager->flush();
     }

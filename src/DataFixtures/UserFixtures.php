@@ -13,6 +13,7 @@ class UserFixtures extends Fixture
 
     public const ADMIN = 'admin';
     public const ANNE_LAURE = 'anne_laure';
+    public const OLIVIER = 'olivier';
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
@@ -46,6 +47,20 @@ class UserFixtures extends Fixture
 
         $manager->persist($Anne_Laure);
         $this->addReference(self::ANNE_LAURE, $Anne_Laure);
+
+        $Olivier = new User();
+        $Olivier->setUsername('Olivier');
+        $Olivier->setEmail('olivier.bovier@free.fr');
+        $Olivier->setAdresse('1 Square Vivaldi');
+        $Olivier->setCodePostal('78150');
+        $Olivier->setVille('Le Chesnay');
+        $hash = $this->encoder->encodePassword($Olivier, 'a1b2c3d4');
+        $Olivier->setPassword($hash);
+        $Olivier->addRole('ROLE_USER');
+        $Olivier->setCreatedAt(new \DateTime());
+
+        $manager->persist($Olivier);
+        $this->addReference(self::OLIVIER, $Olivier);
 
         $manager->flush();
     }

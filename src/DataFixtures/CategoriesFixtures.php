@@ -10,6 +10,7 @@ class CategoriesFixtures extends Fixture
 {
     public const ROMAN = 'roman';
     public const BD = 'bd';
+    public const ANTICIPATION = 'anticipation';
 
     public function load(ObjectManager $manager)
     {
@@ -25,6 +26,12 @@ class CategoriesFixtures extends Fixture
 
         $manager->persist($bd);
         $this->addReference(self::BD, $bd);
+
+        $anticipation = new Categories();
+        $anticipation->setLibelleCategorie('Anticipation');
+
+        $manager->persist($anticipation);
+        $this->addReference(self::ANTICIPATION, $anticipation);
 
 
         $manager->flush();

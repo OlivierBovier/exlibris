@@ -13,6 +13,7 @@ class AuteursFixtures extends Fixture
     public const HOUELLEBECQ = 'houellebecq';
     public const FERRARI = 'ferrari';
     public const BOURGEON = 'bourgeon';
+    public const HUXLEY = 'huxley';
 
     public function load(ObjectManager $manager)
     {
@@ -48,6 +49,14 @@ class AuteursFixtures extends Fixture
 
         $manager->persist($bourgeon);
         $this->addReference(self::BOURGEON, $bourgeon);
+
+        $huxley = new Auteurs();
+        $huxley->setPrenomAuteur('Aldous');
+        $huxley->setNomAuteur('Huxley');
+        $huxley->setBiographieAuteur('Aldous Leonard Huxley, né le 26 juillet 1894 à Godalming (Royaume-Uni) et mort le 22 novembre 1963 à Los Angeles (États-Unis), est un écrivain, romancier et philosophe britannique, membre éminent de la famille Huxley. Il est diplômé du Balliol College de l\'Université d\'Oxford avec une mention très bien en littérature anglaise. Auteur de près de cinquante ouvrages , il est surtout connu pour ses romans, dont Le Meilleur des mondes roman d’anticipation dystopique ; pour des ouvrages non romanesques, comme Les Portes de la perception qui retrace les expériences vécues lors de la prise de drogue psychédélique ; et pour un large éventail d\'essais. Au début de sa carrière, Huxley a dirigé le magazine Oxford Poetry et publié des nouvelles et des poésies. Au milieu de sa carrière et plus tard, il a publié des récits de voyage et des scénarios cinématographiques. Il a passé la dernière partie de sa vie aux États-Unis, vivant à Los Angeles de 1937 jusqu\'à sa mort. En 1962, un an avant sa mort, il est élu Compagnon de littérature par la Royal Society of Literature. Huxley était humaniste, pacifiste et satiriste. Il s\'est également intéressé à des sujets spirituels tels que la parapsychologie et le mysticisme philosophique, en particulier l\'universalisme. Vers la fin de sa vie, Huxley fut largement reconnu comme l\'un des intellectuels prééminents de son temps. Il a été nominé sept fois pour le Prix Nobel de littérature');
+
+        $manager->persist($huxley);
+        $this->addReference(self::HUXLEY, $huxley);
 
         $manager->flush();
     }

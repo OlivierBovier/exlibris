@@ -19,6 +19,18 @@ class LivresRepository extends ServiceEntityRepository
         parent::__construct($registry, Livres::class);
     }
 
+    public function findAllRecent()
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.date_parution <= :val')
+            ->setParameter('val', new \DateTime('now'))
+            ->orderBy('l.date_parution', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Livres[] Returns an array of Livres objects
 //     */
@@ -47,4 +59,6 @@ class LivresRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    
 }

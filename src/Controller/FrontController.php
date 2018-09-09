@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Livres;
 
 class FrontController extends AbstractController
 {
@@ -13,7 +14,21 @@ class FrontController extends AbstractController
     */
     public function home()
     {
-        return $this->render('front/home.html.twig');
+        $livresrecents = $this->getDoctrine()
+            ->getRepository(Livres::class)
+            ->findAllRecent();
+
+        dump($livresrecents);
+
+        if (!$livresrecents) {
+            throw $this->createNotFoundException(
+                'Pas de livres récents dans notre base.'
+            );
+        }
+
+
+
+        return $this->render('front/home.html.twig', ['livresrecents' => $livresrecents]);
     }
 
     /**
