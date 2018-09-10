@@ -25,7 +25,7 @@ class LivresRepository extends ServiceEntityRepository
             ->andWhere('l.date_parution <= :val')
             ->setParameter('val', new \DateTime('now'))
             ->orderBy('l.date_parution', 'DESC')
-            ->setMaxResults(5)
+            ->setMaxResults(6)
             ->getQuery()
             ->getResult()
         ;

@@ -45,7 +45,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $asonimage->setTitre('A son image');
         $asonimage->setNbPages(317);
         $asonimage->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-08-22"));
-        $asonimage->setPrixHt(19);
+        $asonimage->setPrixHt(19.50);
         $asonimage->setEstConseil(0);
         $asonimage->setResume('Ce somptueux roman en forme de requiem pour une photographe défunte est aussi l’occasion d’évoquer le nationalisme corse, la violence des guerres modernes et les liens ambigus qu’entretiennent l’image, la photographie, le réel et la mort.');
         $manager->persist($asonimage);
