@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180909134025 extends AbstractMigration
+final class Version20180911204711 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
@@ -21,7 +21,7 @@ final class Version20180909134025 extends AbstractMigration
         $this->addSql('CREATE TABLE commandes (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, date_cde DATETIME NOT NULL, total_ht_cde DOUBLE PRECISION NOT NULL, tva_cde DOUBLE PRECISION NOT NULL, total_ttc_cde DOUBLE PRECISION NOT NULL, INDEX IDX_35D4282CA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE editeurs (id INT AUTO_INCREMENT NOT NULL, nom_editeur VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE lignes_cde (id INT AUTO_INCREMENT NOT NULL, commande_id INT NOT NULL, livre_id INT NOT NULL, qte_ligne_cde INT NOT NULL, INDEX IDX_DACB706282EA2E54 (commande_id), INDEX IDX_DACB706237D925CB (livre_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE livres (id INT AUTO_INCREMENT NOT NULL, auteur_id INT NOT NULL, editeur_id INT NOT NULL, isbn VARCHAR(17) NOT NULL, titre VARCHAR(255) NOT NULL, nb_pages INT NOT NULL, date_parution DATE NOT NULL, prix_ht DOUBLE PRECISION NOT NULL, est_conseil TINYINT(1) NOT NULL, resume LONGTEXT NOT NULL, jaquette VARCHAR(255) DEFAULT NULL, INDEX IDX_927187A460BB6FE6 (auteur_id), INDEX IDX_927187A43375BD21 (editeur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE livres (id INT AUTO_INCREMENT NOT NULL, auteur_id INT NOT NULL, editeur_id INT NOT NULL, isbn VARCHAR(17) NOT NULL, titre VARCHAR(255) NOT NULL, nb_pages INT NOT NULL, date_parution DATE NOT NULL, prix_ht DOUBLE PRECISION NOT NULL, est_conseil TINYINT(1) NOT NULL, resume LONGTEXT NOT NULL, image VARCHAR(255) NOT NULL, updated_at DATETIME DEFAULT NULL, INDEX IDX_927187A460BB6FE6 (auteur_id), INDEX IDX_927187A43375BD21 (editeur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE livres_categories (livres_id INT NOT NULL, categories_id INT NOT NULL, INDEX IDX_96B809B8EBF07F38 (livres_id), INDEX IDX_96B809B8A21214B7 (categories_id), PRIMARY KEY(livres_id, categories_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE mouv_stock (id INT AUTO_INCREMENT NOT NULL, livre_id INT NOT NULL, qte_mouv INT NOT NULL, date_mouv DATETIME NOT NULL, INDEX IDX_5F8DC87937D925CB (livre_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, adresse VARCHAR(255) DEFAULT NULL, code_postal VARCHAR(5) DEFAULT NULL, ville VARCHAR(255) DEFAULT NULL, password VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
