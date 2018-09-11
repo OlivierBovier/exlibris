@@ -5,9 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LivresRepository")
+ * @Vich\Uploadable
  */
 class Livres
 {
@@ -54,9 +56,16 @@ class Livres
     private $resume;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @var string
      */
-    private $jaquette;
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="livres_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Auteurs", inversedBy="livres")
@@ -187,16 +196,32 @@ class Livres
         return $this;
     }
 
-    public function getJaquette(): ?string
+    public function setImageFile(File $image = null)
     {
-        return $this->jaquette;
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
-    public function setJaquette(?string $jaquette): self
+    public function getImageFile()
     {
-        $this->jaquette = $jaquette;
+        return $this->imageFile;
+    }
 
-        return $this;
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 
     public function getAuteur(): ?Auteurs
