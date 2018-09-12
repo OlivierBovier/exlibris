@@ -1,0 +1,33 @@
+easy_admin:
+    site_name: 'ExLibris'
+    design:
+        menu:
+            - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
+            - { entity: 'livres', icon: 'user' }
+            - { entity: 'Auteurs', icon: 'user' }
+            - { entity: 'Editeurs', icon: 'tag' }
+            - { entity: 'Categories', label: 'Catégories', icon: 'tag' }
+            - { entity: 'Avis', icon: 'tag' }
+            - { entity: 'Commandes', icon: 'tag' }
+            - { entity: 'LignesCde', label: 'Lignes de comande', icon: 'tag' }
+            - { entity: 'MouvStock', label: 'Mouvements de stock', icon: 'tag' }
+    entities:
+       # List the entity class name you want to manage
+        User:
+            class: App\Entity\User
+        livres:
+            class: App\Entity\livres
+        Auteurs:
+            class: App\Entity\Auteurs
+        Editeurs:
+            class: App\Entity\Editeurs
+        Categories:
+            class: App\Entity\Categories
+        Avis:
+            class: App\Entity\Avis
+        Commandes:
+            class: App\Entity\Commandes
+        LignesCde:
+            class: App\Entity\LignesCde
+        MouvStock:
+            class: App\Entity\MouvStock
