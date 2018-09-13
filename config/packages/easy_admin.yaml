@@ -1,7 +1,13 @@
 easy_admin:
+    formats:
+        date: 'd/m/Y'
+        datetime: 'd/m/Y h:i'
+        time: 'h:i'
     translation_domain: 'messages'
     site_name: 'ExLibris'
     design:
+        color_scheme: 'light'
+        brand_color: '#f19f26'
         menu:
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
             - { entity: 'livres', icon: 'book' }
