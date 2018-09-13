@@ -14,6 +14,7 @@ class AuteursFixtures extends Fixture
     public const FERRARI = 'ferrari';
     public const BOURGEON = 'bourgeon';
     public const HUXLEY = 'huxley';
+    public const WAUTERS = 'wauters';
 
     public function load(ObjectManager $manager)
     {
@@ -57,6 +58,14 @@ class AuteursFixtures extends Fixture
 
         $manager->persist($huxley);
         $this->addReference(self::HUXLEY, $huxley);
+
+        $wauters = new Auteurs();
+        $wauters->setPrenomAuteur('Antoine');
+        $wauters->setNomAuteur('Wauters');
+        $wauters->setBiographieAuteur('Antoine Wauters a étudié la philosophie à l\'Université Libre de Bruxelles, où les cours de Jacques Sojcher vont particulièrement le marquer. C\'est grâce à lui qu\'il découvre Nietzsche, qu\'on retrouve dans son roman Nos mères. Ses études terminées, il gagne sa vie en effectuant des remplacements dans l\'enseignement, devenant tour à tour professeur de français et de religion dans le secondaire, puis de philosophie, à la Haute École Charlemagne. Il publie ses premiers livres en 2008, trois recueils de poésie. L\'un d\'eux, Debout sur la langue, reçoit le Prix Emile Polak de l\'Académie royale de langue et de littérature françaises de Belgique. En 2012, son récit poétique Césarine de nuit, chez Cheyne Éditeur, reçoit le Prix Marcel Thiry et le Prix de littérature française de la ville de Tournai, avant d\'être lu dans divers festivals par la comédienne Isabelle Nanty1,2. Dans le cadre de l\'exposition consacrée aux photographies de l\'artiste américain Cy Twombly organisée par Bozar3, il publie parallèlement Poésie pour Cy Twombly. Devenu éditeur chez Cheyne et directeur de la collection IF à l\'Arbre à paroles, il publie son premier roman chez Verdier en 2014. Rapidement remarqué, Nos mères reçoit le Prix Première de la RTBF, le Prix Révélation de la SGDL et est finaliste du Prix des cinq continents de la Francophonie, faisant d\'Antoine Wauters "la révélation littéraire belge de ces dernières années", selon les magazines Mariane et Focus Vif4. En 2015, le film Préjudice, long métrage d\'Antoine Cuypers qu\'Antoine Wauters a coscénarisé, sort en salles. Il réunit Nathalie Baye, Arno, Thomas Blanchard, Ariane Labed et Éric Caravaca. En novembre 2017, il participe à la première Nuit des Écrivains, organisée par Myriam Leroy et Pascal Claude, journalistes à la Première, aux côtés des écrivains Geneviève Damas, Laurent Gaudé, Joy Sorman et Abdallah Taia. Depuis mars 2018, il intervient ponctuellement comme professeur dans le cadre de L\'atelier des écritures contemporaines, Master de création littéraire de La Cambre.');
+
+        $manager->persist($wauters);
+        $this->addReference(self::WAUTERS, $wauters);
 
         $manager->flush();
     }

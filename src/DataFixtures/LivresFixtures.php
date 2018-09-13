@@ -101,6 +101,21 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $meilleurmonde->addCategory($this->getReference(CategoriesFixtures::ANTICIPATION));
         $manager->persist($meilleurmonde);
 
+        $penseauxpierres = new Livres();
+
+        $penseauxpierres->setISBN('978-2-864-32987-9');
+        $penseauxpierres->setTitre('Pense aux pierres sous tes pas');
+        $penseauxpierres->setNbPages(192);
+        $penseauxpierres->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-08-23"));
+        $penseauxpierres->setPrixHt(15);
+        $penseauxpierres->setEstConseil(1);
+        $penseauxpierres->setResume('Dans un pays dont on ignore le nom, où se succèdent des dictateurs qui tentent de le moderniser, une soeur et son frère jumeau vivent à la ferme de leurs parents, au milieu des plaines. Marcio travaille aux champs avec le père, un homme violent, tandis que Léonora s\'occupe de la maison avec sa mère. Ils ont douze ans à peine et leur complicité semble totale, leurs jeux interdits irrépressibles. Mais un soir, alors que leurs corps se rapprochent doucement dans le fenil, le père surgit et voit se confirmer ce qu\'il a toujours suspecté. Tandis qu\'un nouveau coup d\'Etat vient de se produire, les parents décident de séparer les jumeaux. Commence alors un combat long et incertain, celui de la réinvention de soi et de la quête obstinée de liberté.');
+        $penseauxpierres->setImage('pense_aux_pierres.jpg');
+        $penseauxpierres->setAuteur($this->getReference(AuteursFixtures::WAUTERS));
+        $penseauxpierres->setEditeur($this->getReference(EditeursFixtures::VERDIER));
+        $penseauxpierres->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $manager->persist($penseauxpierres);
+
         $manager->flush();
     }
 
