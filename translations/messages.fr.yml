@@ -12,6 +12,10 @@ admin:
         createdat: 'Date de création'
     livres:
         title: 'Livres'
+        isbn: 'Code ISBN'
+        titre: 'Titre'
+        parution: 'Parution'
+        image: 'Image'
     auteurs:
         title: 'Auteurs'
     editeurs:

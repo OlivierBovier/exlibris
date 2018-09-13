@@ -29,23 +29,33 @@ easy_admin:
                     - { property: 'email', label: admin.user.email, type: 'text' }
                     - { property: 'roles', label: admin.user.roles}
                     - { property: 'createdAt', label: admin.user.createdat}
-#            new:
-#                fields:
-#                    - { property: 'username', label: admin.user.username, type: 'text' }
-#                    - { property: 'usernameCanonical', label: admin.user.username_canonical, type: 'text' }
-#                    - { property: 'email', label: admin.common.email,  type: 'text' }
-#                    - { property: 'password', label: admin.user.password, type_options: { required: false } }
-#            edit:
-#                fields:
-#                    - { property: 'username', label: admin.user.username, type: 'text'}
-#                    - { property: 'email', label: admin.common.email,  type: 'text' }
-#                    - { property: 'lastlogin', label: admin.user.last_login,  type: 'datetime' }
-#                    - { property: 'enabled', label: admin.user.enabled,  type: 'text'}
-#                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, choices: { 'ROLE_SMILE': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN'}}}
+            new:
+                fields:
+                    - { property: 'username', label: admin.user.username, type: 'text'}
+                    - { property: 'email', label: admin.user.email,  type: 'text' }
+                    - { property: 'adresse', label: admin.user.address,  type: 'text' }
+                    - { property: 'codepostal', label: admin.user.cp,  type: 'text' }
+                    - { property: 'ville', label: admin.user.ville,  type: 'text' }
+                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, choices: { 'Utilisateur': 'ROLE_USER', 'Administrateur': 'ROLE_ADMIN'}}}
+                    - { property: 'password', label: admin.user.password, type: 'password', type_options: { required: false } }
+                    - { property: 'confirmPassword', label: admin.user.confirm_password, type_options: { required: false }, type: 'password' }
+            edit:
+                fields:
+                    - { property: 'username', label: admin.user.username, type: 'text'}
+                    - { property: 'email', label: admin.user.email,  type: 'text' }
+                    - { property: 'adresse', label: admin.user.address,  type: 'text' }
+                    - { property: 'codepostal', label: admin.user.cp,  type: 'text' }
+                    - { property: 'ville', label: admin.user.ville,  type: 'text' }
+                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, choices: { 'Utilisateur': 'ROLE_USER', 'Administrateur': 'ROLE_ADMIN'}}}
         livres:
             class: App\Entity\livres
             list:
                 title: admin.livres.title
+                fields:
+                    - { property: 'isbn', label: admin.livres.isbn, type: 'text'}
+                    - { property: 'titre', label: admin.livres.titre, type: 'text' }
+                    - { property: 'date_parution', label: admin.livres.parution}
+                    - { property: 'image', type: image, label: admin.livres.image, base_path: '%app.path.livres_images%' }
         Auteurs:
             class: App\Entity\Auteurs
             list:
