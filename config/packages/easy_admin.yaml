@@ -1,33 +1,70 @@
 easy_admin:
+    translation_domain: 'messages'
     site_name: 'ExLibris'
     design:
         menu:
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
-            - { entity: 'livres', icon: 'user' }
-            - { entity: 'Auteurs', icon: 'user' }
-            - { entity: 'Editeurs', icon: 'tag' }
-            - { entity: 'Categories', label: 'Catégories', icon: 'tag' }
-            - { entity: 'Avis', icon: 'tag' }
-            - { entity: 'Commandes', icon: 'tag' }
-            - { entity: 'LignesCde', label: 'Lignes de comande', icon: 'tag' }
+            - { entity: 'livres', icon: 'book' }
+            - { entity: 'Auteurs', icon: 'user-circle' }
+            - { entity: 'Editeurs', icon: 'address-book' }
+            - { entity: 'Categories', label: 'Catégories', icon: 'address-card' }
+            - { entity: 'Avis', icon: 'comment' }
+            - { entity: 'Commandes', icon: 'envelope' }
+            - { entity: 'LignesCde', label: 'Lignes de commande', icon: 'copy' }
             - { entity: 'MouvStock', label: 'Mouvements de stock', icon: 'tag' }
     entities:
        # List the entity class name you want to manage
         User:
             class: App\Entity\User
+            list:
+                title: admin.user.title
+                fields:
+                    - { property: 'username', label: admin.user.username, type: 'text'}
+                    - { property: 'email', label: admin.user.email, type: 'text' }
+                    - { property: 'roles', label: admin.user.roles}
+                    - { property: 'createdAt', label: admin.user.createdat}
+#            new:
+#                fields:
+#                    - { property: 'username', label: admin.user.username, type: 'text' }
+#                    - { property: 'usernameCanonical', label: admin.user.username_canonical, type: 'text' }
+#                    - { property: 'email', label: admin.common.email,  type: 'text' }
+#                    - { property: 'password', label: admin.user.password, type_options: { required: false } }
+#            edit:
+#                fields:
+#                    - { property: 'username', label: admin.user.username, type: 'text'}
+#                    - { property: 'email', label: admin.common.email,  type: 'text' }
+#                    - { property: 'lastlogin', label: admin.user.last_login,  type: 'datetime' }
+#                    - { property: 'enabled', label: admin.user.enabled,  type: 'text'}
+#                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, choices: { 'ROLE_SMILE': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN'}}}
         livres:
             class: App\Entity\livres
+            list:
+                title: admin.livres.title
         Auteurs:
             class: App\Entity\Auteurs
+            list:
+                title: admin.auteurs.title
         Editeurs:
             class: App\Entity\Editeurs
+            list:
+                title: admin.editeurs.title
         Categories:
             class: App\Entity\Categories
+            list:
+                title: admin.categories.title
         Avis:
             class: App\Entity\Avis
+            list:
+                title: admin.avis.title
         Commandes:
             class: App\Entity\Commandes
+            list:
+                title: admin.commandes.title
         LignesCde:
             class: App\Entity\LignesCde
+            list:
+                title: admin.lignescde.title
         MouvStock:
             class: App\Entity\MouvStock
+            list:
+                title: admin.mouvstock.title

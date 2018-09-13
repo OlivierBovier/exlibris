@@ -10,9 +10,9 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 class LivresFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
-    {       
+    {
         $miserables = new Livres();
-        
+
         $miserables->setISBN('978-2-253-09633-7');
         $miserables->setTitre('Les Misérables');
         $miserables->setNbPages(992);
@@ -27,7 +27,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($miserables);
 
         $particule = new Livres();
-        
+
         $particule->setISBN('978-2-080-67472-2');
         $particule->setTitre('Les Particules élémentaires');
         $particule->setNbPages(317);
@@ -42,7 +42,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($particule);
 
         $asonimage = new Livres();
-        
+
         $asonimage->setISBN('978-2-330-10944-8');
         $asonimage->setTitre('A son image');
         $asonimage->setNbPages(317);
@@ -57,10 +57,10 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($asonimage);
 
         $sermon = new Livres();
-        
+
         $sermon->setISBN('978-2-330-02280-8');
         $sermon->setTitre('Le sermon sur la chute de Rome');
-        $sermon->setNbPages(2208);
+        $sermon->setNbPages(208);
         $sermon->setDateParution(\DateTime::createFromFormat('Y-m-d', "2013-08-17"));
         $sermon->setPrixHt(7.7);
         $sermon->setEstConseil(1);
@@ -72,7 +72,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($sermon);
 
         $passagers = new Livres();
-        
+
         $passagers->setISBN('978-2-723-40132-4');
         $passagers->setTitre('Les Passagers du Vent - La Fille sous la dunette');
         $passagers->setNbPages(48);
@@ -87,7 +87,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($passagers);
 
         $meilleurmonde = new Livres();
-        
+
         $meilleurmonde->setISBN('978-2-266-28303-8');
         $meilleurmonde->setTitre('Le meilleur des mondes');
         $meilleurmonde->setNbPages(320);

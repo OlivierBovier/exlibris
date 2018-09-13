@@ -106,7 +106,6 @@ class Livres
     private $updatedAt;
 
 
-
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -115,7 +114,8 @@ class Livres
         $this->lignesCdes = new ArrayCollection();
     }
 
-    public function __toString(){
+    public function __toString()
+    {
         // to show the title of the book in the select
         return $this->titre;
     }
@@ -386,8 +386,8 @@ class Livres
     }
 
     /**
-    * @ORM\PreUpdate
-    */
+     * @ORM\PreUpdate
+     */
     public function updateDate()
     {
         $this->setUpdatedAt(new \Datetime());

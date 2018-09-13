@@ -1,0 +1,29 @@
+#ADMIN
+admin:
+    user:
+        title: 'Utilisateurs'
+        username: 'Nom d''utilisateur'
+        email: 'E-mail'
+        address: 'Adresse'
+        cp: 'Code postal'
+        ville: 'Ville'
+        password: 'Mot de passe'
+        roles: 'Rôles'
+        createdat: 'Date de création'
+    livres:
+        title: 'Livres'
+    auteurs:
+        title: 'Auteurs'
+    editeurs:
+        title: 'Editeurs'
+    categories:
+        title: 'Catégories'
+    avis:
+        title: 'Avis'
+    commandes:
+        title: 'Commandes'
+    lignescde:
+        title: 'Lignes de commande'
+    mouvstock:
+        title: 'Mouvements de stock'
+#End ADMIN

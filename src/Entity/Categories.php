@@ -33,7 +33,8 @@ class Categories
         $this->livres = new ArrayCollection();
     }
 
-    public function __toString(){
+    public function __toString()
+    {
         // to show the category name name in the select
         return $this->libelle_categorie;
     }
