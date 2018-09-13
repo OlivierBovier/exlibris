@@ -48,6 +48,11 @@ class Auteurs
         $this->livres = new ArrayCollection();
     }
 
+    public function __toString(){
+        // to show the Name of the Auteur in the select
+        return $this->getNomAuteur();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -115,6 +115,11 @@ class Livres
         $this->lignesCdes = new ArrayCollection();
     }
 
+    public function __toString(){
+        // to show the title of the book in the select
+        return $this->titre;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

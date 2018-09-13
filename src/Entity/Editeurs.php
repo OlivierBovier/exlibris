@@ -33,6 +33,11 @@ class Editeurs
         $this->livres = new ArrayCollection();
     }
 
+    public function __toString(){
+        // to show the editor name in the select
+        return $this->nom_editeur;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
