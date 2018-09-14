@@ -43,6 +43,22 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $particule->setActive(true);
         $manager->persist($particule);
 
+        $extension = new Livres();
+
+        $extension->setISBN('978-2-290-34952-6');
+        $extension->setTitre('Extension du domaine de la lutte');
+        $extension->setNbPages(156);
+        $extension->setDateParution(\DateTime::createFromFormat('Y-m-d', "1994-08-01"));
+        $extension->setPrixHt(12);
+        $extension->setEstConseil(1);
+        $extension->setResume('Le héros a trente ans. Cadre moyen, analyste-programmeur dans une société informatique, son salaire net atteint 2,5 fois le SMIC. Malgré cette insertion sociale, il n’attire pas les femmes. Dépourvu de beauté comme de charme, sujet à de fréquents accès dépressifs, il ne correspond guère à ce que les femmes recherchent en priorité sur le marché du sexe ou de la satisfaction narcissique. On ne connaît pas son nom mais personne ne semble s’en soucier. Joueur disqualifié mais spectateur perspicace de cette partie de faux-semblants qu’est la vie moderne occidentale, le narrateur décrit la lutte quotidienne de ses congénères, toujours en quête d’un peu d’amour, de plaisir, d’argent. Cette lutte, étendue à tous les aspects de la vie humaine sous l’influence du modèle libéral, transforme le moindre de nos gestes en un combat épique, au terme duquel notre position dans la société humaine est corrigée, à la hausse ou à la baisse. Même nos lits ne sont plus un refuge. Il faut s’y distinguer. La sexualité est un système de hiérarchie sociale. Résigné, le narrateur se place définitivement en dehors de cette lutte, enfermé dans la nostalgie de l’adolescence, son récit ne faisant toutefois jamais allusion à ses parents (sauf pour décrire rapidement la scène de sa conception) il souhaite parfois la mort sans pouvoir s’y résoudre. Souvent, son entourage fait preuve d’un dynamisme de façade qui tranche avec sa propre neurasthénie. Pourtant, le désenchantement survient toujours, comme s’il était impossible – ou risible – de s’impliquer dans le monde. Le narrateur décrit ainsi le décalage entre la projection existentielle d’un de ses amis et la réalité de sa vie quotidienne, mettant en perspective son idéologie élitiste et la médiocrité d’un célibat sans issue.');
+        $extension->setImage('extension_domaine_lutte.jpg');
+        $extension->setAuteur($this->getReference(AuteursFixtures::HOUELLEBECQ));
+        $extension->setEditeur($this->getReference(EditeursFixtures::FLAMMARION));
+        $extension->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $extension->setActive(true);
+        $manager->persist($extension);
+
         $asonimage = new Livres();
 
         $asonimage->setISBN('978-2-330-10944-8');
