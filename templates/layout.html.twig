@@ -16,10 +16,10 @@
           <li class="nav-item active">
             <a class="nav-link" href= {{ path('catalog') }} >Catalogue</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href= {{ path('security_registration') }} >Inscription</a>
-          </li>
           {% if not app.user %}
+              <li class="nav-item active">
+                  <a class="nav-link" href= {{ path('security_registration') }} >Inscription</a>
+              </li>
               <li class="nav-item active">
                 <a class="nav-link" href= {{ path('security_login') }} >Connexion</a>
               </li>
@@ -30,7 +30,7 @@
           {% endif %}
           {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item active">
-              <a class="nav-link" href= {{ path('admin') }} >Admin</a>
+              <a class="nav-link" href= {{ path('admin') }} >Espace d'Administration</a>
             </li>
           {% endif %}
 

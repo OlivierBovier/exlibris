@@ -22,6 +22,7 @@ easy_admin:
        # List the entity class name you want to manage
         User:
             class: App\Entity\User
+            disabled_actions: ['new']
             list:
                 title: admin.user.title
                 fields:
@@ -29,24 +30,9 @@ easy_admin:
                     - { property: 'email', label: admin.user.email, type: 'text' }
                     - { property: 'roles', label: admin.user.roles}
                     - { property: 'createdAt', label: admin.user.createdat}
-            new:
-                fields:
-                    - { property: 'username', label: admin.user.username, type: 'text'}
-                    - { property: 'email', label: admin.user.email,  type: 'text' }
-                    - { property: 'adresse', label: admin.user.address,  type: 'text' }
-                    - { property: 'codepostal', label: admin.user.cp,  type: 'text' }
-                    - { property: 'ville', label: admin.user.ville,  type: 'text' }
-                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, choices: { 'Utilisateur': 'ROLE_USER', 'Administrateur': 'ROLE_ADMIN'}}}
-                    - { property: 'password', label: admin.user.password, type: 'password', type_options: { required: false } }
-                    - { property: 'confirmPassword', label: admin.user.confirm_password, type_options: { required: false }, type: 'password' }
             edit:
                 fields:
-                    - { property: 'username', label: admin.user.username, type: 'text'}
-                    - { property: 'email', label: admin.user.email,  type: 'text' }
-                    - { property: 'adresse', label: admin.user.address,  type: 'text' }
-                    - { property: 'codepostal', label: admin.user.cp,  type: 'text' }
-                    - { property: 'ville', label: admin.user.ville,  type: 'text' }
-                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, choices: { 'Utilisateur': 'ROLE_USER', 'Administrateur': 'ROLE_ADMIN'}}}
+                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, expanded: true, choices: { 'Utilisateur': 'ROLE_USER', 'Administrateur': 'ROLE_ADMIN'}}}
         livres:
             class: App\Entity\livres
             list:

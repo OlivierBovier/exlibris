@@ -63,12 +63,6 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas tapé le même mot de passe !")
-     * @Assert\NotBlank()
-     */
-    private $confirmPassword;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Avis", mappedBy="user", orphanRemoval=true)
      */
     private $avis;

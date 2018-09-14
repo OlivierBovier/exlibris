@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
     	$formRegistr->handleRequest($request);
 
     	if ($formRegistr->isSubmitted() && $formRegistr->isValid()) {
-    		$hash = $encoder->encodePassword($user, $user->getPassword());
+    	    $hash = $encoder->encodePassword($user, $user->getPassword());
     		$user->setPassword($hash);
 
             $user->addRole('ROLE_USER');
