@@ -14,8 +14,12 @@ admin:
         title: 'Livres'
         isbn: 'Code ISBN'
         titre: 'Titre'
-        parution: 'Parution'
-        image: 'Image'
+        parution: 'Date de parution'
+        nbpages: 'Nombre de pages'
+        prixht: 'Prix Hors Taxes'
+        estconseil: 'Livre conseillé'
+        resume: 'Résumé'
+        image: 'Image associée au livre'
     auteurs:
         title: 'Auteurs'
     editeurs:

@@ -27,7 +27,7 @@ easy_admin:
                 title: admin.user.title
                 fields:
                     - { property: 'username', label: admin.user.username, type: 'text'}
-                    - { property: 'email', label: admin.user.email, type: 'text' }
+                    - { property: 'email', label: admin.user.email, type: 'email' }
                     - { property: 'roles', label: admin.user.roles}
                     - { property: 'createdAt', label: admin.user.createdat}
             edit:
@@ -38,10 +38,22 @@ easy_admin:
             list:
                 title: admin.livres.title
                 fields:
+                    - { property: 'titre', label: admin.livres.titre, type: 'text' }
+                    - { property: 'isbn', label: admin.livres.isbn, type: 'text'}
+                    - { property: 'date_parution', label: admin.livres.parution}
+                    - { property: 'prixHt', label: admin.livres.prixht }
+                    - { property: 'est_conseil', label: admin.livres.estconseil}
+                    - { property: 'image', type: image, label: admin.livres.image, base_path: '%app.path.livres_images%' }
+            edit:
+                fields:
                     - { property: 'isbn', label: admin.livres.isbn, type: 'text'}
                     - { property: 'titre', label: admin.livres.titre, type: 'text' }
-                    - { property: 'date_parution', label: admin.livres.parution}
-                    - { property: 'image', type: image, label: admin.livres.image, base_path: '%app.path.livres_images%' }
+                    - { property: 'nbPages', label: admin.livres.nbpages, type: 'integer' }
+                    - { property: 'prixHt', label: admin.livres.prixht }
+                    - { property: 'date_parution', label: admin.livres.parution, type: 'date'}
+                    - { property: 'est_conseil', label: admin.livres.estconseil}
+                    - { property: 'resume', label: admin.livres.resume}
+                    - { property: 'imageFile', type: 'vich_image', label: admin.livres.image }
         Auteurs:
             class: App\Entity\Auteurs
             list:
