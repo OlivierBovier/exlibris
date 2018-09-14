@@ -19,6 +19,16 @@ class AuteursRepository extends ServiceEntityRepository
         parent::__construct($registry, Auteurs::class);
     }
 
+    public function findOneById($id): ?Auteurs
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 //    /**
 //     * @return Auteurs[] Returns an array of Auteurs objects
 //     */

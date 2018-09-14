@@ -59,9 +59,9 @@
                 <div class="card h-100">
                   {# <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a> #}
 {#                   <a href="#"><img class="card-img-top" src="{{ asset('images/livres/les_miserables.jpg') }}" alt=""></a> #}
-                  <a href="#"><img class="card-img-top" src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}" alt=""></a>
+                  <a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} "><img class="card-img-top" src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}" alt=""></a>
                   <div class="card-body">
-                    <h4 class="card-title"><a href="#">{{ livrerecent.titre }}</a></h4>
+                    <h4 class="card-title"><a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">{{ livrerecent.titre }}</a></h4>
                     <h6 class="card-subtitle mb-2 text-muted">{{ livrerecent.auteur.PrenomAuteur }} {{ livrerecent.auteur.NomAuteur }}</h6>
                     <h5>{{ livrerecent.PrixHt|number_format(2, ',', ' ') }} €</h5>
                     <p class="card-text">{{ livrerecent.Resume|truncate(100, true) }}</p>

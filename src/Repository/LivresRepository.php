@@ -32,6 +32,16 @@ class LivresRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findOneById($id): ?Livres
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 //    /**
 //     * @return Livres[] Returns an array of Livres objects
 //     */

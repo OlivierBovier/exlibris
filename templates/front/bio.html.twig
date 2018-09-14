@@ -1,0 +1,30 @@
+{% extends "layout.html.twig" %}
+
+{% block title %} Fiche {% endblock %}
+
+{% block contenu %}
+
+  <div class="row">
+
+        <div class="col-lg-9">
+
+          <div class="card mt-4">
+            
+            <div class="card-body">
+              <h3 class="card-title">{{ bio.PrenomAuteur }} {{ bio.NomAuteur }}</h3>
+              <p class="card-text">{{ bio.BiographieAuteur }}</p>
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col-lg-9 -->
+
+        <div class="col-lg-3">
+          <div class="card-body">
+            <img class="card-img-top img-fluid" src="{{ asset('images/auteurs/' ~ bio.PhotoAuteur ~'') }}" alt="">
+          </div>
+        </div>
+        <!-- /.col-lg-3 -->
+    </div>
+
+{% endblock %}

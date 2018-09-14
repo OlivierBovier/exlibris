@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Livres;
+use App\Entity\Auteurs;
 
 class FrontController extends AbstractController
 {
@@ -18,8 +19,6 @@ class FrontController extends AbstractController
             ->getRepository(Livres::class)
             ->findAllRecent();
 
-        dump($livresrecents);
-
         if (!$livresrecents) {
             throw $this->createNotFoundException(
                 'Pas de livres récents dans notre base.'
@@ -29,8 +28,9 @@ class FrontController extends AbstractController
         return $this->render('front/home.html.twig', ['livresrecents' => $livresrecents]);
     }
 
+
     /**
-    * @Route("/catalog", name="catalog")
+    * @Route("/catalog", name="front_catalog")
     */
     public function catalog()
     {
@@ -38,15 +38,35 @@ class FrontController extends AbstractController
     }
 
     /**
-    * @Route("/fiche/{id}", name="fiche")
+    * @Route("/fiche/{id}", name="front_fiche")
     */
-    public function fiche()
+    public function fiche($id)
     {
-        return $this->render('front/fiche.html.twig');
+        $infolivre = $this->getDoctrine()
+            ->getRepository(Livres::class)
+            ->findOneById($id);
+
+        dump($infolivre);
+
+        return $this->render('front/fiche.html.twig', ['infolivre' => $infolivre]);
     }
 
     /**
-    * @Route("/mentions", name="mentions")
+    * @Route("/bio/{id}", name="front_bio")
+    */
+    public function bio($id)
+    {
+        $bio = $this->getDoctrine()
+            ->getRepository(Auteurs::class)
+            ->findOneById($id);
+
+        dump($bio);
+
+        return $this->render('front/bio.html.twig', ['bio' => $bio]);
+    }
+
+    /**
+    * @Route("/mentions", name="front_mentions")
     */
     public function mentions()
     {
@@ -54,7 +74,7 @@ class FrontController extends AbstractController
     }
 
     /**
-    * @Route("/infos-pratiques", name="infos_prat")
+    * @Route("/infos-pratiques", name="front_infos_prat")
     */
     public function infos_prat()
     {
