@@ -20,6 +20,7 @@ admin:
         estconseil: 'Livre conseillé'
         resume: 'Résumé'
         image: 'Image associée au livre'
+        active: 'Livre disponible à la vente'
     auteurs:
         title: 'Auteurs'
     editeurs:

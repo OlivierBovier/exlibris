@@ -22,8 +22,9 @@ class LivresRepository extends ServiceEntityRepository
     public function findAllRecent()
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.date_parution <= :val')
-            ->setParameter('val', new \DateTime('now'))
+            ->andWhere('l.date_parution <= :val1')
+            ->andWhere('l.active = :val2')
+            ->setParameters(array('val1' => new \DateTime('now'), 'val2' => true))
             ->orderBy('l.date_parution', 'DESC')
             ->setMaxResults(6)
             ->getQuery()

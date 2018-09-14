@@ -24,6 +24,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $miserables->setAuteur($this->getReference(AuteursFixtures::HUGO));
         $miserables->setEditeur($this->getReference(EditeursFixtures::FLAMMARION));
         $miserables->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $miserables->setActive(true);
         $manager->persist($miserables);
 
         $particule = new Livres();
@@ -39,6 +40,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $particule->setAuteur($this->getReference(AuteursFixtures::HOUELLEBECQ));
         $particule->setEditeur($this->getReference(EditeursFixtures::FLAMMARION));
         $particule->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $particule->setActive(true);
         $manager->persist($particule);
 
         $asonimage = new Livres();
@@ -50,10 +52,11 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $asonimage->setPrixHt(19.50);
         $asonimage->setEstConseil(0);
         $asonimage->setResume('Ce somptueux roman en forme de requiem pour une photographe défunte est aussi l’occasion d’évoquer le nationalisme corse, la violence des guerres modernes et les liens ambigus qu’entretiennent l’image, la photographie, le réel et la mort.');
+        $asonimage->setImage('a_son_image.jpg');
         $asonimage->setAuteur($this->getReference(AuteursFixtures::FERRARI));
         $asonimage->setEditeur($this->getReference(EditeursFixtures::ACTESSUD));
         $asonimage->addCategory($this->getReference(CategoriesFixtures::ROMAN));
-        $asonimage->setImage('a_son_image.jpg');
+        $asonimage->setActive(true);
         $manager->persist($asonimage);
 
         $sermon = new Livres();
@@ -65,10 +68,11 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $sermon->setPrixHt(7.7);
         $sermon->setEstConseil(1);
         $sermon->setResume('Dans un village corse perché loin de la côte, le bar local est en train de connaître une mutation profonde sous l\'impulsion de ses nouveaux gérants. A la sur-prise générale, ces deux enfants du pays ont tourné le dos à de prometteuses études de philosophie sur le continent pour, fidèles aux enseignements de Leibniz, transformer un modeste débit de boissons en "meilleur des mondes possibles". Mais c\'est bientôt l\'enfer en personne qui s\'invite au comptoir, réactivant les blessures anciennes d\'êtres assujettis à d\'indigents rêves de bonheur et victimes, à leur insu, de la tragique propension de l\'âme humaine à se corrompre. Entrant par-delà les siècles en résonance avec le sermon par lequel saint Augustin tenta de consoler ses fidèles de la fragilité des royaumes terrestres, Jérôme Ferrari jette, au fil d\'une écriture somptueuse, une lumière impitoyable sur la malédiction qui condamne les mortels à voir s\'effondrer les mondes qu\'ils édifient et à refonder sans trêve, sur le sang ou les larmes, leurs impossibles mythologies.');
+        $sermon->setImage('sermon_chute_rome.jpg');
         $sermon->setAuteur($this->getReference(AuteursFixtures::FERRARI));
         $sermon->setEditeur($this->getReference(EditeursFixtures::ACTESSUD));
         $sermon->addCategory($this->getReference(CategoriesFixtures::ROMAN));
-        $sermon->setImage('sermon_chute_rome.jpg');
+        $sermon->setActive(true);
         $manager->persist($sermon);
 
         $passagers = new Livres();
@@ -84,6 +88,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $passagers->setAuteur($this->getReference(AuteursFixtures::BOURGEON));
         $passagers->setEditeur($this->getReference(EditeursFixtures::GLENAT));
         $passagers->addCategory($this->getReference(CategoriesFixtures::BD));
+        $passagers->setActive(true);
         $manager->persist($passagers);
 
         $meilleurmonde = new Livres();
@@ -99,6 +104,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $meilleurmonde->setAuteur($this->getReference(AuteursFixtures::HUXLEY));
         $meilleurmonde->setEditeur($this->getReference(EditeursFixtures::POCKET));
         $meilleurmonde->addCategory($this->getReference(CategoriesFixtures::ANTICIPATION));
+        $meilleurmonde->setActive(true);
         $manager->persist($meilleurmonde);
 
         $penseauxpierres = new Livres();
@@ -114,6 +120,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $penseauxpierres->setAuteur($this->getReference(AuteursFixtures::WAUTERS));
         $penseauxpierres->setEditeur($this->getReference(EditeursFixtures::VERDIER));
         $penseauxpierres->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $penseauxpierres->setActive(true);
         $manager->persist($penseauxpierres);
 
         $manager->flush();

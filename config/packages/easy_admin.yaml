@@ -43,6 +43,7 @@ easy_admin:
                     - { property: 'date_parution', label: admin.livres.parution}
                     - { property: 'prixHt', label: admin.livres.prixht }
                     - { property: 'est_conseil', label: admin.livres.estconseil}
+                    - { property: 'active', label: admin.livres.active}
                     - { property: 'image', type: image, label: admin.livres.image, base_path: '%app.path.livres_images%' }
             edit:
                 fields:
@@ -52,6 +53,7 @@ easy_admin:
                     - { property: 'prixHt', label: admin.livres.prixht }
                     - { property: 'date_parution', label: admin.livres.parution, type: 'date'}
                     - { property: 'est_conseil', label: admin.livres.estconseil}
+                    - { property: 'active', label: admin.livres.active}
                     - { property: 'resume', label: admin.livres.resume}
                     - { property: 'imageFile', type: 'vich_image', label: admin.livres.image }
         Auteurs:
