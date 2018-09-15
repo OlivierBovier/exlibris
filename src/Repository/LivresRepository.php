@@ -32,6 +32,19 @@ class LivresRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAllConseil()
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.est_conseil = :val1')
+            ->andWhere('l.active = :val2')
+            ->setParameters(array('val1' => true, 'val2' => true))
+            ->orderBy('l.date_parution', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findOneById($id): ?Livres
     {
         return $this->createQueryBuilder('l')

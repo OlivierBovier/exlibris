@@ -13,6 +13,8 @@ class EditeursFixtures extends Fixture
     public const GLENAT = 'glenat';
     public const POCKET = 'pocket';
     public const VERDIER = 'verdier';
+    public const GRASSET = 'grasset';
+    public const LIANALEVI = 'lianalevi';
 
     public function load(ObjectManager $manager)
     {
@@ -47,7 +49,17 @@ class EditeursFixtures extends Fixture
         $manager->persist($verdier);
         $this->addReference(self::VERDIER, $verdier);
 
+        $grasset = new Editeurs();
+        $grasset->setNomEditeur('Grasset');
 
+        $manager->persist($grasset);
+        $this->addReference(self::GRASSET, $grasset);
+
+        $lianalevi = new Editeurs();
+        $lianalevi->setNomEditeur('Liana Lévi');
+
+        $manager->persist($lianalevi);
+        $this->addReference(self::LIANALEVI, $lianalevi);
 
         $manager->flush();
     }

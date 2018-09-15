@@ -52,19 +52,17 @@
 
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="text-muted text-right">Le top des nouveautés !</h2>
-  		<div class="row">
+		  <h2 class="text-muted text-right">Le top des nouveautés !</h2>
+  		  <div class="row">
             {% for livrerecent in livresrecents %}
-              <div class="col-lg-3 col-md-4 mb-4">
+              <div class="col-lg-2 col-md-3 mb-4">
                 <div class="card h-100">
-                  {# <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a> #}
-{#                   <a href="#"><img class="card-img-top" src="{{ asset('images/livres/les_miserables.jpg') }}" alt=""></a> #}
                   <a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} "><img class="card-img-top" src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}" alt="{{ livrerecent.titre }}"></a>
                   <div class="card-body">
-                    <h4 class="card-title"><a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">{{ livrerecent.titre }}</a></h4>
+                    <h5 class="card-title"><a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">{{ livrerecent.titre }}</a></h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ livrerecent.auteur.PrenomAuteur }} {{ livrerecent.auteur.NomAuteur }}</h6>
-                    <h5>{{ livrerecent.PrixHt|number_format(2, ',', ' ') }} €</h5>
-                    <p class="card-text">{{ livrerecent.Resume|truncate(100, true) }}</p>
+                    <h6>{{ livrerecent.PrixHt|number_format(2, ',', ' ') }} €</h6>
+                    <p class="card-text">{{ livrerecent.Resume|truncate(70, true) }}</p>
                     <p class="card-subtitle mb-2 text-muted">Parution le {{ livrerecent.dateParution|date("d/m/Y") }}</p>
                   </div>
                   <div class="card-footer">
@@ -73,20 +71,40 @@
                 </div>
               </div>
             {% endfor %}            
-      </div>
-      <!-- /.row -->
+          </div>
+        <!-- /.row -->
 		</div>	
 	</div>
 
 	<div class="row">
 		<div class="col-sm-12">
-      <h2 class="text-muted">Nos meilleures ventes</h2>			
+          <h2 class="text-muted">Nos meilleures ventes</h2>			
 		</div>	
 	</div>
 
 	<div class="row">
 		<div class="col-sm-12">
-      <h2 class="text-muted text-right">Conseils des libraires</h2>			
+          <h2 class="text-muted text-right">Conseils des libraires</h2>
+          <div class="row">
+            {% for livre_c in livresconseilles %}
+              <div class="col-lg-2 col-md-3 mb-4">
+                <div class="card h-100">
+                  <a href=" {{ path('front_fiche', { 'id': livre_c.id }) }} "><img class="card-img-top" src="{{ asset('images/livres/' ~ livre_c.image ~'') }}" alt="{{ livre_c.titre }}"></a>
+                  <div class="card-body">
+                    <h5 class="card-title"><a href=" {{ path('front_fiche', { 'id': livre_c.id }) }} ">{{ livre_c.titre }}</a></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ livre_c.auteur.PrenomAuteur }} {{ livre_c.auteur.NomAuteur }}</h6>
+                    <h6>{{ livre_c.PrixHt|number_format(2, ',', ' ') }} €</h6>
+                    <p class="card-text">{{ livre_c.Resume|truncate(70, true) }}</p>
+                    <p class="card-subtitle mb-2 text-muted">Parution le {{ livre_c.dateParution|date("d/m/Y") }}</p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}            
+          </div>
+          <!-- /.row -->		
 		</div>	
 	</div>
 

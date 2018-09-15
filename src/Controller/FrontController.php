@@ -25,7 +25,17 @@ class FrontController extends AbstractController
             );
         }
 
-        return $this->render('front/home.html.twig', ['livresrecents' => $livresrecents]);
+        $livresconseilles = $this->getDoctrine()
+            ->getRepository(Livres::class)
+            ->findAllConseil();
+
+        if (!$livresconseilles) {
+            throw $this->createNotFoundException(
+                'Pas de conseil de lecture en ce moment.'
+            );
+        }
+
+        return $this->render('front/home.html.twig', ['livresrecents' => $livresrecents, 'livresconseilles' => $livresconseilles]);
     }
 
 

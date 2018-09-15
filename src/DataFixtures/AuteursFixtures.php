@@ -15,6 +15,9 @@ class AuteursFixtures extends Fixture
     public const BOURGEON = 'bourgeon';
     public const HUXLEY = 'huxley';
     public const WAUTERS = 'wauters';
+    public const STEFANSSON = 'stefansson';
+    public const ARAMBURU = 'aramburu';
+    public const AVALLONE = 'avallone';
 
     public function load(ObjectManager $manager)
     {
@@ -72,6 +75,33 @@ class AuteursFixtures extends Fixture
 
         $manager->persist($wauters);
         $this->addReference(self::WAUTERS, $wauters);
+
+        $stefansson = new Auteurs();
+        $stefansson->setPrenomAuteur('Jón');
+        $stefansson->setNomAuteur('Kalman Stefánsson');
+        $stefansson->setBiographieAuteur('Jón Kalman Stefánsson (né le 17 décembre 1963 à Reykjavik) est un auteur islandais. Il grandit à Reykjavík et à Keflavík. Après avoir fini ses études au collège en 1982, il travailla en Islande de l\'ouest (par exemple dans les secteurs de la pêche et de la maçonnerie). Il entreprit ensuite des études en littérature à l\'université d\'Islande de 1986 à 1991, mais sans les terminer. Pendant cette période, il donna des cours dans différentes écoles et rédigea des articles pour le journal Morgunblaðið. Ensuite (de 1992 à 1995), il vécut à Copenhague, où il participa à divers travaux et s\'adonna à une lecture assidue. Il rentra en Islande et s\'occupa de la Bibliothèque municipale de Mosfellsbær jusqu\'en 2000. Son premier roman paraît en 1997 en Islande, mais c’est avec la trilogie romanesque composée de Entre ciel et terre, La Tristesse des anges et Le Cœur de l’homme, qu’il s’impose dans le monde entier comme un écrivain de premier plan. Il a reçu de nombreuses distinctions dans l’ensemble des pays où son œuvre est traduite. En 2015 notamment, il est récompensé par le prestigieux prix Millepages pour D’ailleurs, les poissons n’ont pas de pieds aux Editions Gallimard. ');
+        $stefansson->setImage('stefansson.jpg');
+
+        $manager->persist($stefansson);
+        $this->addReference(self::STEFANSSON, $stefansson);
+
+        $aramburu = new Auteurs();
+        $aramburu->setPrenomAuteur('Fernando');
+        $aramburu->setNomAuteur('Aramburu');
+        $aramburu->setBiographieAuteur('Fernando Aramburu Irigoyen, né en 1959 à Saint-Sébastien (province du Guipuscoa, Espagne), est un écrivain espagnol. Il remporte le prix national de littérature narrative en 2017. Il obtient une licence en philologie hispanique à l\'université de Saragosse en 1982. À Saint-Sébastien, sa ville natale, il participe à la fondation du Grupo CLOC de Arte y Desarte, qui édite entre 1978 et 1981 une revue. Depuis 1985, il vit en Allemagne où il donne des cours d\'espagnol. En 2009, il abandonne son poste de professeur pour se consacrer entièrement à la création littéraire. En 1996, il publie Fuegos con limón, roman basé sur ses expériences de jeunesse au sein du groupe CLOC. En septembre 2016, il publie le roman Patria qui remporte un grand succès critique et public (plus de 500 000 exemplaires vendus2). Ce roman, qui traite de l\'influence des terroristes de l\'ETA dans une petite localité du Pays basque, obtient de nombreux prix dont le Prix national de littérature narrative en octobre 2017. Il écrit régulièrement dans la presse espagnole et ses romans ont été traduits dans plusieurs langues. ');
+        $aramburu->setImage('aramburu.jpg');
+
+        $manager->persist($aramburu);
+        $this->addReference(self::ARAMBURU, $aramburu);
+
+        $avallone = new Auteurs();
+        $avallone->setPrenomAuteur('Silvia');
+        $avallone->setNomAuteur('Avallone');
+        $avallone->setBiographieAuteur('Silvia Avallone est une écrivaine et poétesse italienne contemporaine. Elle est née le 11 avril 1984 à Biella, d\'un père, petit commerçant napolitain établi à Piombino où elle passe une partie de son adolescence, et d\'une mère enseignante en primaire originaire du Piémont. Ses parents divorcent. Enfant unique, Avallone poursuit des études de lettres et de philosophie à Bologne. Elle se marie à un libraire. Ils habitent à Bologne. Son premier recueil de poésie, Il libro dei vent’anni, paraît en 2007. Elle écrit également des nouvelles, éditées dans des revues littéraires3,4. D\'acier (Acciaio), son premier roman, est édité en 2010 par Rizzoli. L\'action se déroule à Piombino, cette ville ouvrière de Toscane où l\'auteure a vécu. Silvia Avallone plonge ses héros dans les chaudrons d\'une aciérie bien réelle de cette ville,l\'aciérie Lucchini, qui employait plus de vingt mille ouvriers dans les années 1960 et qui en emploie deux mille aujourd\'hui. L\'ouvrage se vend à 350 000 exemplaires en Italie et est traduit en plusieurs langues. Il remporte le prix Campiello Opera Prima et est finaliste du prix Strega. En France, traduit chez Liana Levi par Françoise Brun, il reçoit le prix des lecteurs de L\'Express et est élu « meilleur premier roman étranger » par la rédaction du magazine Lire. D\'acier, l\'adaptation cinématographique du roman, est réalisée par Stefano Mordini. En 2012, le film est présenté à la Mostra de Venise. Son second roman, Marina Bellezza (it), paraît en 2013. L\'année suivante, il est traduit en français par Françoise Brun et publié par Liana Levi. En 2018, paraît en France son troisième roman, La vie parfaite, aux éditions Liana Lévi. Elle y narre l\'histoire croisée de deux femmes confrontées à la question de la maternité dans ce qu\'elle appelle l\'Italie périphérique.');
+        $avallone->setImage('avallone.jpg');
+
+        $manager->persist($avallone);
+        $this->addReference(self::AVALLONE, $avallone);
 
         $manager->flush();
     }

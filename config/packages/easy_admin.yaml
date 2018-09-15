@@ -20,26 +20,13 @@ easy_admin:
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
     entities:
        # List the entity class name you want to manage
-        User:
-            class: App\Entity\User
-            disabled_actions: ['new']
-            list:
-                title: admin.user.title
-                fields:
-                    - { property: 'username', label: admin.user.username, type: 'text'}
-                    - { property: 'email', label: admin.user.email, type: 'email' }
-                    - { property: 'roles', label: admin.user.roles}
-                    - { property: 'createdAt', label: admin.user.createdat}
-            edit:
-                fields:
-                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, expanded: true, choices: { 'Utilisateur': 'ROLE_USER', 'Administrateur': 'ROLE_ADMIN'}}}
         livres:
             class: App\Entity\livres
             list:
                 title: admin.livres.title
                 fields:
                     - { property: 'titre', label: admin.livres.titre, type: 'text' }
-                    - { property: 'isbn', label: admin.livres.isbn, type: 'text'}
+                    - { property: 'auteur', label: admin.livres.auteur}
                     - { property: 'date_parution', label: admin.livres.parution}
                     - { property: 'prixHt', label: admin.livres.prixht }
                     - { property: 'est_conseil', label: admin.livres.estconseil}
@@ -74,6 +61,20 @@ easy_admin:
                     - { property: 'active', label: admin.livres.active}
                     - { property: 'resume', label: admin.livres.resume}
                     - { property: 'imageFile', type: 'vich_image', label: admin.livres.image }
+        User:
+            class: App\Entity\User
+            disabled_actions: ['new']
+            list:
+                title: admin.user.title
+                fields:
+                    - { property: 'username', label: admin.user.username, type: 'text'}
+                    - { property: 'email', label: admin.user.email, type: 'email' }
+                    - { property: 'roles', label: admin.user.roles}
+                    - { property: 'createdAt', label: admin.user.createdat}
+            edit:
+                fields:
+                    - { property: 'roles', label: admin.user.roles, type: 'choice', type_options: { multiple: true, expanded: true, choices: { 'Utilisateur': 'ROLE_USER', 'Administrateur': 'ROLE_ADMIN'}}}
+        
         Auteurs:
             class: App\Entity\Auteurs
             list:

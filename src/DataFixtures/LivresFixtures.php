@@ -139,6 +139,54 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $penseauxpierres->setActive(true);
         $manager->persist($penseauxpierres);
 
+        $Asta = new Livres();
+
+        $Asta->setISBN('978-2-246-81593-8');
+        $Asta->setTitre('Asta');
+        $Asta->setNbPages(496);
+        $Asta->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-08-29"));
+        $Asta->setPrixHt(23);
+        $Asta->setEstConseil(1);
+        $Asta->setResume('Reykjavik, au début des années 50. Sigvaldi et Helga décident de nommer leur deuxième fille Ásta, d\'après une grande héroïne de la littérature islandaise. Un prénom signifiant - à une lettre près - amour en islandais qui ne peut que porter chance à leur fille... Des années plus tard, Sigvaldi tombe d\'une échelle et se remémore toute son existence : il n\'a pas été un père à la hauteur, et la vie d\'Ásta n\'a pas tenu cette promesse de bonheur. Jón Kalman Stefánsson enjambe les époques et les pays pour nous raconter l\'urgence autant que l\'impossibilité d\'aimer. À travers l\'histoire de Sigvaldi et d\'Helga puis, une génération plus tard, celle d\'Ásta et de Jósef, il nous offre un superbe roman, lyrique et charnel, sur des sentiments plus grands que nous, et des vies qui s\'enlisent malgré notre inlassable quête du bonheur.');
+        $Asta->setImage('asta.jpg');
+        $Asta->setAuteur($this->getReference(AuteursFixtures::STEFANSSON));
+        $Asta->setEditeur($this->getReference(EditeursFixtures::GRASSET));
+        $Asta->setCategorie($this->getReference(CategoriesFixtures::ROMAN_ETR));
+        $Asta->setActive(true);
+        $manager->persist($Asta);
+
+        $Patria = new Livres();
+
+        $Patria->setISBN('978-2-330-09664-9');
+        $Patria->setTitre('Patria');
+        $Patria->setNbPages(616);
+        $Patria->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-03-07"));
+        $Patria->setPrixHt(25);
+        $Patria->setEstConseil(1);
+        $Patria->setResume('Véritable phénomène de société en Espagne (plus de 600.000 ex. vendus), «Patria» y a été qualifié de "«Guerre et Paix» du Pays basque" par une partie de la presse. Tandis qu\'il a excédé les séparatistes radicaux. À travers l\'histoire de deux familles très unies séparées par le "conflit", Fernando Aramburu explore sur près de quarante ans - des années de plomb du post franquisme jusqu\'en 2011, quand l\'ETA dépose les armes -, la douleur d\'une population prise en otage par l\'Histoire qui transforme potentiellement chacun en traître. Constitué d\'une centaine de courts chapitres qui ressemblent à des contes, le roman possède une chronologie plus émotive que temporelle mais le "chaos" est magistralement ordonné pour que la fiction littéraire puisse aider à comprendre la vérité d\'une époque.');
+        $Patria->setImage('patria.jpg');
+        $Patria->setAuteur($this->getReference(AuteursFixtures::ARAMBURU));
+        $Patria->setEditeur($this->getReference(EditeursFixtures::ACTESSUD));
+        $Patria->setCategorie($this->getReference(CategoriesFixtures::ROMAN_ETR));
+        $Patria->setActive(true);
+        $manager->persist($Patria);
+
+        $lavieparfaite = new Livres();
+
+        $lavieparfaite->setISBN('979-1-034-90016-9');
+        $lavieparfaite->setTitre('La vie parfaite');
+        $lavieparfaite->setNbPages(400);
+        $lavieparfaite->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-04-05"));
+        $lavieparfaite->setPrixHt(22);
+        $lavieparfaite->setEstConseil(0);
+        $lavieparfaite->setResume('Adele monte dans le bus qui relie la cité des Lombriconi au centre de Bologne. Elle vient d’avoir 18 ans et part accoucher, seule. Parce que le père est un voyou égoïste, parce que là où elle vit tout le monde semble « né pour perdre », parce qu’elle veut donner à son enfant la chance d’une vie meilleure, Adele est sur le point de l’abandonner. Dans son grand appartement du centre-ville, Dora, elle, n’est pas seule. Mais après des années de FIV ratées, son désir de maternité s’est transformé en obsession et mine son mariage. Entre ces deux femmes au seuil de choix cruciaux, il y a Zeno : le voisin d’Adele qui tous les soirs l’espionne depuis son balcon ; l’élève appliqué de Dora, qui connaît les frontières invisibles qui séparent la ville et les êtres. Et tous au fond cherchent la même chose. Un refuge, un lieu tranquille d’où l’on pourrait apercevoir, au loin, la vie parfaite. Silvia Avallone sonde ce moment si particulier, mêlé de peur et d’émerveillement, où l’on choisit d’avoir un enfant, de croire en son avenir. Avec une énergie romanesque et une puissance d’écriture incomparables, un sens aigu du portrait et de la mise en scène, elle porte un regard d’une terrible acuité sur sa génération, une jeunesse écartelée entre précarité et utopie.');
+        $lavieparfaite->setImage('lavieparfaite.jpg');
+        $lavieparfaite->setAuteur($this->getReference(AuteursFixtures::AVALLONE));
+        $lavieparfaite->setEditeur($this->getReference(EditeursFixtures::LIANALEVI));
+        $lavieparfaite->setCategorie($this->getReference(CategoriesFixtures::ROMAN_ETR));
+        $lavieparfaite->setActive(true);
+        $manager->persist($lavieparfaite);
+
         $manager->flush();
     }
 
