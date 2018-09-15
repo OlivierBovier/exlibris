@@ -23,7 +23,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $miserables->setImage('les_miserables.jpg');
         $miserables->setAuteur($this->getReference(AuteursFixtures::HUGO));
         $miserables->setEditeur($this->getReference(EditeursFixtures::FLAMMARION));
-        $miserables->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $miserables->setCategorie($this->getReference(CategoriesFixtures::ROMAN_FR));
         $miserables->setActive(true);
         $manager->persist($miserables);
 
@@ -39,7 +39,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $particule->setImage('les_particules_elementaires.jpg');
         $particule->setAuteur($this->getReference(AuteursFixtures::HOUELLEBECQ));
         $particule->setEditeur($this->getReference(EditeursFixtures::FLAMMARION));
-        $particule->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $particule->setCategorie($this->getReference(CategoriesFixtures::ROMAN_FR));
         $particule->setActive(true);
         $manager->persist($particule);
 
@@ -55,7 +55,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $extension->setImage('extension_domaine_lutte.jpg');
         $extension->setAuteur($this->getReference(AuteursFixtures::HOUELLEBECQ));
         $extension->setEditeur($this->getReference(EditeursFixtures::FLAMMARION));
-        $extension->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $extension->setCategorie($this->getReference(CategoriesFixtures::ROMAN_FR));
         $extension->setActive(true);
         $manager->persist($extension);
 
@@ -71,7 +71,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $asonimage->setImage('a_son_image.jpg');
         $asonimage->setAuteur($this->getReference(AuteursFixtures::FERRARI));
         $asonimage->setEditeur($this->getReference(EditeursFixtures::ACTESSUD));
-        $asonimage->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $asonimage->setCategorie($this->getReference(CategoriesFixtures::ROMAN_FR));
         $asonimage->setActive(true);
         $manager->persist($asonimage);
 
@@ -87,7 +87,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $sermon->setImage('sermon_chute_rome.jpg');
         $sermon->setAuteur($this->getReference(AuteursFixtures::FERRARI));
         $sermon->setEditeur($this->getReference(EditeursFixtures::ACTESSUD));
-        $sermon->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $sermon->setCategorie($this->getReference(CategoriesFixtures::ROMAN_FR));
         $sermon->setActive(true);
         $manager->persist($sermon);
 
@@ -103,7 +103,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $passagers->setImage('passagers_du_vent.jpg');
         $passagers->setAuteur($this->getReference(AuteursFixtures::BOURGEON));
         $passagers->setEditeur($this->getReference(EditeursFixtures::GLENAT));
-        $passagers->addCategory($this->getReference(CategoriesFixtures::BD));
+        $passagers->setCategorie($this->getReference(CategoriesFixtures::BD));
         $passagers->setActive(true);
         $manager->persist($passagers);
 
@@ -119,7 +119,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $meilleurmonde->setImage('meilleur_des_mondes.jpg');
         $meilleurmonde->setAuteur($this->getReference(AuteursFixtures::HUXLEY));
         $meilleurmonde->setEditeur($this->getReference(EditeursFixtures::POCKET));
-        $meilleurmonde->addCategory($this->getReference(CategoriesFixtures::ANTICIPATION));
+        $meilleurmonde->setCategorie($this->getReference(CategoriesFixtures::ANTICIPATION));
         $meilleurmonde->setActive(true);
         $manager->persist($meilleurmonde);
 
@@ -135,7 +135,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $penseauxpierres->setImage('pense_aux_pierres.jpg');
         $penseauxpierres->setAuteur($this->getReference(AuteursFixtures::WAUTERS));
         $penseauxpierres->setEditeur($this->getReference(EditeursFixtures::VERDIER));
-        $penseauxpierres->addCategory($this->getReference(CategoriesFixtures::ROMAN));
+        $penseauxpierres->setCategorie($this->getReference(CategoriesFixtures::ROMAN_FR));
         $penseauxpierres->setActive(true);
         $manager->persist($penseauxpierres);
 

@@ -82,11 +82,6 @@ class Livres
     private $editeur;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Categories", inversedBy="livres")
-     */
-    private $categories;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\MouvStock", mappedBy="livre", orphanRemoval=true)
      */
     private $mouvStocks;
@@ -111,10 +106,14 @@ class Livres
      */
     private $active;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categories", inversedBy="livres")
+     */
+    private $categorie;
+
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->mouvStocks = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->lignesCdes = new ArrayCollection();
@@ -268,32 +267,6 @@ class Livres
     }
 
     /**
-     * @return Collection|Categories[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Categories $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categories $category): self
-    {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|MouvStock[]
      */
     public function getMouvStocks(): Collection
@@ -413,6 +386,18 @@ class Livres
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categories
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categories $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

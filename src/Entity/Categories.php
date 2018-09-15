@@ -24,7 +24,7 @@ class Categories
     private $libelle_categorie;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Livres", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="App\Entity\Livres", mappedBy="categorie")
      */
     private $livres;
 
@@ -68,7 +68,7 @@ class Categories
     {
         if (!$this->livres->contains($livre)) {
             $this->livres[] = $livre;
-            $livre->addCategory($this);
+            $livre->setCategorie($this);
         }
 
         return $this;
@@ -78,7 +78,10 @@ class Categories
     {
         if ($this->livres->contains($livre)) {
             $this->livres->removeElement($livre);
-            $livre->removeCategory($this);
+            // set the owning side to null (unless already changed)
+            if ($livre->getCategorie() === $this) {
+                $livre->setCategorie(null);
+            }
         }
 
         return $this;

@@ -16,7 +16,7 @@ admin:
         titre: 'Titre'
         auteur: 'Auteur'
         editeur: 'Editeur'
-        categories: 'Catégories'
+        categorie: 'Catégorie'
         parution: 'Date de parution'
         nbpages: 'Nombre de pages'
         prixht: 'Prix HT'
@@ -30,10 +30,16 @@ admin:
         nom: 'Nom'
         bio: 'Biographie'
         photo: 'Photo'
+        livres: 'Livres'
     editeurs:
         title: 'Editeurs'
+        nom: 'Nom'
+        livres: 'Nombre de livres édités'
     categories:
         title: 'Catégories'
+        libelle: 'Libellé'
+        livres: 'Livres'
+
     avis:
         title: 'Avis'
     commandes:
