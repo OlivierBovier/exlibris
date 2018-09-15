@@ -6,7 +6,7 @@
 
   <div class="row">
 
-        <div class="col-lg-9">
+        <div class="col-lg-7">
 
           <div class="card mt-4">
             
@@ -19,9 +19,9 @@
         </div>
         <!-- /.col-lg-9 -->
 
-        <div class="col-lg-3">
+        <div class="col-lg-5">
           <div class="card-body">
-            <img class="card-img-top img-fluid" src="{{ asset('images/auteurs/' ~ bio.PhotoAuteur ~'') }}" alt="">
+            <img class="card-img-top img-fluid" src="{{ asset('images/auteurs/' ~ bio.image ~'') }}" alt="{{ bio.PrenomAuteur }} {{ bio.NomAuteur }}">
           </div>
         </div>
         <!-- /.col-lg-3 -->

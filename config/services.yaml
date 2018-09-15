@@ -6,6 +6,7 @@
 parameters:
     locale: 'fr'
     app.path.livres_images: /images/livres
+    app.path.auteurs_images: /images/auteurs
 
 services:
     # default configuration for services in *this* file

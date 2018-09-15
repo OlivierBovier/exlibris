@@ -12,9 +12,10 @@
             
             <div class="card-body">
               <h3 class="card-title">{{ infolivre.titre }}</h3>
-              <h6 class="card-subtitle mb-2 text-muted"><a href=" {{ path('front_bio', { 'id': infolivre.auteur.id }) }} ">{{ infolivre.auteur.PrenomAuteur }} {{ infolivre.auteur.NomAuteur }}</a></h6>
-              <h4>$24.99</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+              <h6 class="card-subtitle mb-2 text-muted">{{ infolivre.auteur.PrenomAuteur }} {{ infolivre.auteur.NomAuteur }} <a href=" {{ path('front_bio', { 'id': infolivre.auteur.id }) }} ">(voir sa biographie)</a></h6>
+              <h4>{{ infolivre.PrixHt|number_format(2, ',', ' ') }} €</h4>
+              <h5 class="card-title">Résumé</h5>
+              <p class="card-text">{{ infolivre.resume }}</p>
               <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
               4.0 stars
             </div>
@@ -23,7 +24,7 @@
 
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
-              Product Reviews
+              Avis des lecteurs
             </div>
             <div class="card-body">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
@@ -35,7 +36,7 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
               <small class="text-muted">Posted by Anonymous on 3/1/17</small>
               <hr>
-              <a href="#" class="btn btn-success">Leave a Review</a>
+              <a href="#" class="btn btn-success">Votre avis</a>
             </div>
           </div>
           <!-- /.card -->
@@ -45,7 +46,7 @@
 
         <div class="col-lg-3">
         	<div class="card-body">
-        		<img class="card-img-top img-fluid" src="{{ asset('images/livres/' ~ infolivre.image ~'') }}" alt="">
+        		<img class="card-img-top img-fluid" src="{{ asset('images/livres/' ~ infolivre.image ~'') }}" alt="{{ infolivre.titre }}">
         	</div>
           <h1 class="my-4">Shop Name</h1>
           <div class="list-group">

@@ -77,6 +77,25 @@ easy_admin:
             class: App\Entity\Auteurs
             list:
                 title: admin.auteurs.title
+                fields:
+                    - { property: 'prenomAuteur', label: admin.auteurs.prenom, type: 'text' }
+                    - { property: 'nomAuteur', label: admin.auteurs.nom, type: 'text'}
+                    - { property: 'biographieAuteur', label: admin.auteurs.bio}
+                    - { property: 'image', type: image, label: admin.auteurs.photo, base_path: '%app.path.auteurs_images%' }
+                    - { property: 'livres', label: admin.auteurs.livres, type_options: { by_reference: false} }
+            new:
+                fields:
+                    - { property: 'prenomAuteur', label: admin.auteurs.prenom, type: 'text' }
+                    - { property: 'nomAuteur', label: admin.auteurs.nom, type: 'text'}
+                    - { property: 'biographieAuteur', label: admin.auteurs.bio}
+                    - { property: 'imageFile', type: 'vich_image', label: admin.auteurs.photo }
+            edit:
+                fields:
+                    - { property: 'prenomAuteur', label: admin.auteurs.prenom, type: 'text' }
+                    - { property: 'nomAuteur', label: admin.auteurs.nom, type: 'text'}
+                    - { property: 'biographieAuteur', label: admin.auteurs.bio}
+                    - { property: 'imageFile', type: 'vich_image', label: admin.auteurs.photo }      
+                    
         Editeurs:
             class: App\Entity\Editeurs
             list:

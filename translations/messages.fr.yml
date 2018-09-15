@@ -19,13 +19,17 @@ admin:
         categories: 'Catégories'
         parution: 'Date de parution'
         nbpages: 'Nombre de pages'
-        prixht: 'Prix Hors Taxes'
-        estconseil: 'Livre conseillé'
+        prixht: 'Prix HT'
+        estconseil: 'Conseillé'
         resume: 'Résumé'
         image: 'Image associée au livre'
-        active: 'Livre disponible à la vente'
+        active: 'Disponible à la vente'
     auteurs:
         title: 'Auteurs'
+        prenom: 'Prénom'
+        nom: 'Nom'
+        bio: 'Biographie'
+        photo: 'Photo'
     editeurs:
         title: 'Editeurs'
     categories:
