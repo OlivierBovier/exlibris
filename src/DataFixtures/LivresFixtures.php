@@ -94,7 +94,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $passagers = new Livres();
 
         $passagers->setISBN('978-2-723-40132-4');
-        $passagers->setTitre('Les Passagers du Vent - La Fille sous la dunette');
+        $passagers->setTitre('Les Passagers du Vent - 1. La Fille sous la dunette');
         $passagers->setNbPages(48);
         $passagers->setDateParution(\DateTime::createFromFormat('Y-m-d', "1980-01-01"));
         $passagers->setPrixHt(14.5);
@@ -106,6 +106,22 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $passagers->setCategorie($this->getReference(CategoriesFixtures::BD));
         $passagers->setActive(true);
         $manager->persist($passagers);
+
+        $passagers2 = new Livres();
+
+        $passagers2->setISBN('978-2-723-40164-2');
+        $passagers2->setTitre('Les Passagers du Vent - 2. Le ponton');
+        $passagers2->setNbPages(46);
+        $passagers2->setDateParution(\DateTime::createFromFormat('Y-m-d', "1980-10-01"));
+        $passagers2->setPrixHt(14.5);
+        $passagers2->setEstConseil(1);
+        $passagers2->setResume('Avec ce second volume, Bourgeon continue de tisser autour d\'Isabeau un récit sur la liberté, et en particulier la liberté des femmes. Isabeau est rejointe par un second personnage fort, en la personnage de Mary, jeune anglaise qui s\'oppose au dictat de son père (et n\'oublions pas la mendiante Grenouille). La quête de vengeance d\'Isabeau contre son père n\'est plus d\'actualité. La priorité est de faire évader Hoël, l\'amoureux un peu maladroit, et le médecin de marine Michel de Saint-Quentin. Tous deux sont retenus prisonniers de guerre par les troupes anglaises, dans un ponton (vaisseau désarmé et échoué sur le rivage).');
+        $passagers2->setImage('passagers_du_vent_2.jpg');
+        $passagers2->setAuteur($this->getReference(AuteursFixtures::BOURGEON));
+        $passagers2->setEditeur($this->getReference(EditeursFixtures::GLENAT));
+        $passagers2->setCategorie($this->getReference(CategoriesFixtures::BD));
+        $passagers2->setActive(true);
+        $manager->persist($passagers2);
 
         $meilleurmonde = new Livres();
 

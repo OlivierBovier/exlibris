@@ -55,7 +55,7 @@
 		  <h2 class="text-muted text-right">Le top des nouveautés !</h2>
   		  <div class="row">
             {% for livrerecent in livresrecents %}
-              <div class="col-lg-2 col-md-3 mb-4">
+              <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
                 <div class="card h-100">
                   <a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} "><img class="card-img-top" src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}" alt="{{ livrerecent.titre }}"></a>
                   <div class="card-body">
@@ -87,7 +87,7 @@
           <h2 class="text-muted text-right">Conseils des libraires</h2>
           <div class="row">
             {% for livre_c in livresconseilles %}
-              <div class="col-lg-2 col-md-3 mb-4">
+              <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
                 <div class="card h-100">
                   <a href=" {{ path('front_fiche', { 'id': livre_c.id }) }} "><img class="card-img-top" src="{{ asset('images/livres/' ~ livre_c.image ~'') }}" alt="{{ livre_c.titre }}"></a>
                   <div class="card-body">
