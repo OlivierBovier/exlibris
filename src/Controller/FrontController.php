@@ -20,7 +20,7 @@ class FrontController extends AbstractController
     {
         $livresrecents = $this->getDoctrine()
             ->getRepository(Livres::class)
-            ->findAllRecent();
+            ->findRecent();
 
         if (!$livresrecents) {
             throw $this->createNotFoundException(
@@ -30,7 +30,7 @@ class FrontController extends AbstractController
 
         $livresconseilles = $this->getDoctrine()
             ->getRepository(Livres::class)
-            ->findAllConseil();
+            ->findConseil();
 
         if (!$livresconseilles) {
             throw $this->createNotFoundException(
@@ -51,14 +51,33 @@ class FrontController extends AbstractController
         $formFiltre = $this->createForm(FiltreCatType::class);
         $formFiltre->handleRequest($request);
         
-        $catalog = $this->getDoctrine()
+
+        if ($formFiltre->isSubmitted() && $formFiltre->isValid()) {
+            $filtres = $request->request->get('filtre_cat');
+            $auteur = $filtres['auteur'];
+            $categorie = $filtres['categorie'];
+
+            dump($auteur);
+
+            $catalog = $this->getDoctrine()
+                ->getRepository(Livres::class)
+                ->findWithFilter($auteur, $categorie);
+
+            if (!$catalog) {
+                throw $this->createNotFoundException(
+                    'Aucune réponse pour votre filtre.'
+                );
+            }
+        } else {
+            $catalog = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findAll();
 
-        if (!$catalog) {
-            throw $this->createNotFoundException(
-                'Le catalogue est vide.'
-            );
+            if (!$catalog) {
+                throw $this->createNotFoundException(
+                    'Le catalogue est vide.'
+                );
+            }  
         }
 
         return $this->render('front/catalog.html.twig', ['catalog' => $catalog, 'formFiltre' => $formFiltre->createView()]);

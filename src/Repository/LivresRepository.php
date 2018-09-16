@@ -19,7 +19,7 @@ class LivresRepository extends ServiceEntityRepository
         parent::__construct($registry, Livres::class);
     }
 
-    public function findAllRecent()
+    public function findRecent()
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.date_parution <= :val1')
@@ -32,7 +32,7 @@ class LivresRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findAllConseil()
+    public function findConseil()
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.est_conseil = :val1')
@@ -52,6 +52,18 @@ class LivresRepository extends ServiceEntityRepository
             ->setParameter('val', $id)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    public function findWithFilter($auteur, $categorie)
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.auteur = :val1')
+            ->andWhere('l.categorie = :val2')
+            ->setParameters(array('val1' => $auteur, 'val2' => $categorie))
+            ->orderBy('l.date_parution', 'DESC')
+            ->getQuery()
+            ->getResult()
         ;
     }
 

@@ -13,10 +13,10 @@ class FiltreCatType extends AbstractType
     {
         $builder
             ->add('auteur')
-            ->add('editeur')
+            // ->add('editeur')
             ->add('categorie')
-            ->add('date_parution')
-            ->add('est_conseil')
+            // ->add('date_parution')
+            // ->add('est_conseil')
             // ->add('isbn')
             // ->add('titre')
             // ->add('nb_pages')
