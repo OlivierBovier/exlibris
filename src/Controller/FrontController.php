@@ -2,11 +2,14 @@
 // src/Controller/FrontController.php
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
+use App\Form\FiltreCatType;
 
 class FrontController extends AbstractController
 {
@@ -42,9 +45,23 @@ class FrontController extends AbstractController
     /**
     * @Route("/catalog", name="front_catalog")
     */
-    public function catalog()
+    public function catalog(Request $request, ObjectManager $manager)
     {
-        return $this->render('front/catalog.html.twig');
+
+        $formFiltre = $this->createForm(FiltreCatType::class);
+        $formFiltre->handleRequest($request);
+        
+        $catalog = $this->getDoctrine()
+            ->getRepository(Livres::class)
+            ->findAll();
+
+        if (!$catalog) {
+            throw $this->createNotFoundException(
+                'Le catalogue est vide.'
+            );
+        }
+
+        return $this->render('front/catalog.html.twig', ['catalog' => $catalog, 'formFiltre' => $formFiltre->createView()]);
     }
 
     /**
