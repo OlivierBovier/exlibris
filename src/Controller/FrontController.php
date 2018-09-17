@@ -90,6 +90,10 @@ class FrontController extends AbstractController
     */
     public function fiche($id, Session $session)
     {
+        if (!$session->get('contenu_panier')) {
+            $session->set('contenu_panier', array());
+        }
+
         if (in_array($id, $session->get('contenu_panier'))) {
             $in_panier = true;
         } else {
