@@ -55,12 +55,24 @@ class LivresRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findWithFilter($auteur, $categorie)
+    public function findAllOrderRecent()
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.active = :val1')
+            ->setParameters(array('val1' => true))
+            ->orderBy('l.date_parution', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findWithFilter($auteur, $categorie, $conseil)
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.auteur = :val1')
             ->andWhere('l.categorie = :val2')
-            ->setParameters(array('val1' => $auteur, 'val2' => $categorie))
+            ->andWhere('l.est_conseil = :val3')
+            ->setParameters(array('val1' => $auteur, 'val2' => $categorie, 'val3' => $conseil))
             ->orderBy('l.date_parution', 'DESC')
             ->getQuery()
             ->getResult()

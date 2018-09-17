@@ -7,6 +7,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Session;
+// use Kpn\Component\Pager\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
 use App\Form\FiltreCatType;
@@ -45,42 +48,41 @@ class FrontController extends AbstractController
     /**
     * @Route("/catalog", name="front_catalog")
     */
-    public function catalog(Request $request, ObjectManager $manager)
+    public function catalog(Request $request, ObjectManager $manager, Session $session, PaginatorInterface $paginator)
     {
 
         $formFiltre = $this->createForm(FiltreCatType::class);
-        $formFiltre->handleRequest($request);
-        
+        $formFiltre->handleRequest($request);        
 
         if ($formFiltre->isSubmitted() && $formFiltre->isValid()) {
             $filtres = $request->request->get('filtre_cat');
             $auteur = $filtres['auteur'];
             $categorie = $filtres['categorie'];
-
-            dump($auteur);
-
+            $conseil = $filtres['est_conseil'];
+            
             $catalog = $this->getDoctrine()
                 ->getRepository(Livres::class)
-                ->findWithFilter($auteur, $categorie);
+                ->findWithFilter($auteur, $categorie, $conseil);
 
             if (!$catalog) {
-                throw $this->createNotFoundException(
-                    'Aucune réponse pour votre filtre.'
-                );
+                $session->getFlashBag()->add('notice', 'Aucun livre ne correspond à votre filtre.');
             }
         } else {
             $catalog = $this->getDoctrine()
             ->getRepository(Livres::class)
-            ->findAll();
+            ->findAllOrderRecent();
 
             if (!$catalog) {
-                throw $this->createNotFoundException(
-                    'Le catalogue est vide.'
-                );
+                $session->getFlashBag()->add('notice', 'Le catalogue est vide.');
             }  
         }
 
-        return $this->render('front/catalog.html.twig', ['catalog' => $catalog, 'formFiltre' => $formFiltre->createView()]);
+        $pagination = $paginator->paginate(
+            $catalog, 
+            $request->query->getInt('page', 1)/*page number*/, 8/*limit per page*/
+        );
+
+        return $this->render('front/catalog.html.twig', ['formFiltre' => $formFiltre->createView(), 'pagination' => $pagination]);
     }
 
     /**
