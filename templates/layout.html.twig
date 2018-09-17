@@ -34,6 +34,17 @@
             </li>
           {% endif %}
 
+          {% if app.session.get('contenu_panier') %}
+            <li class="nav-item active">
+              <strong><a class="nav-link" href= '#' >Panier : {{ app.session.get('contenu_panier')|length }} article(s)</a></strong>
+            </li>
+          {% else %}
+            <li class="nav-item active">
+              <strong><a class="nav-link" href= '#' >Votre panier est vide</a></strong>
+            </li>
+          {% endif %}
+
+
         </ul>
         <form class="form-inline mt-2 mt-md-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" aria-label="Search">

@@ -23,6 +23,11 @@
               <h6 class="card-subtitle mb-2 text-muted">Nombre de pages : {{ infolivre.nbPages }} </h6>
               <h6 class="card-subtitle mb-2 text-muted">ISBN : {{ infolivre.isbn }} </h6>
               <h6 class="card-subtitle mb-2 text-muted">Catégorie : {{ infolivre.categorie }} </h6>
+              {% if in_panier %}
+                <a href="#" class="btn btn-info">Ce livre est déjà dans votre panier</a>
+              {% else %}
+                <a href=" {{ path('front_ajoutpanier', { 'id': infolivre.id }) }} " class="btn btn-success">Ajouter au panier</a>
+              {% endif %}
             </div>
           </div>
           <!-- /.card -->

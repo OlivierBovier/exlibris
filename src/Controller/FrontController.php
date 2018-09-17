@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Session;
-// use Kpn\Component\Pager\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
@@ -85,19 +84,42 @@ class FrontController extends AbstractController
         return $this->render('front/catalog.html.twig', ['formFiltre' => $formFiltre->createView(), 'pagination' => $pagination]);
     }
 
+
     /**
     * @Route("/fiche/{id}", name="front_fiche")
     */
-    public function fiche($id)
+    public function fiche($id, Session $session)
     {
+        if (in_array($id, $session->get('contenu_panier'))) {
+            $in_panier = true;
+        } else {
+            $in_panier = false;
+        }
+
         $infolivre = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findOneById($id);
 
-        dump($infolivre);
-
-        return $this->render('front/fiche.html.twig', ['infolivre' => $infolivre]);
+        return $this->render('front/fiche.html.twig', ['infolivre' => $infolivre, 'in_panier' => $in_panier]);
     }
+
+
+    /**
+    * @Route("/ajoutpanier/{id}", name="front_ajoutpanier")
+    */
+    public function ajoutPanier(Request $request, ObjectManager $manager, Session $session)
+    {
+        if (!$session->get('contenu_panier')) {
+            $session->set('contenu_panier', array());
+        }
+
+        $panier = $session->get('contenu_panier');
+        $panier[] = $request->get('id');
+        $session->set('contenu_panier', $panier);
+
+        return $this->redirectToRoute('front_fiche', array('id' => $request->get('id')));
+    }
+
 
     /**
     * @Route("/bio/{id}", name="front_bio")
@@ -113,6 +135,7 @@ class FrontController extends AbstractController
         return $this->render('front/bio.html.twig', ['bio' => $bio]);
     }
 
+
     /**
     * @Route("/mentions", name="front_mentions")
     */
@@ -120,6 +143,7 @@ class FrontController extends AbstractController
     {
         return $this->render('front/mentions.html.twig');
     }
+
 
     /**
     * @Route("/infos-pratiques", name="front_infos_prat")
