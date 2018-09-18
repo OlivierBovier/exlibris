@@ -45,7 +45,7 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/catalog", name="front_catalog")
+    * @Route("/catalog/", name="front_catalog")
     */
     public function catalog(Request $request, ObjectManager $manager, Session $session, PaginatorInterface $paginator)
     {
@@ -124,6 +124,24 @@ class FrontController extends AbstractController
         return $this->redirectToRoute('front_fiche', array('id' => $request->get('id')));
     }
 
+    /**
+     * @Route("/panier/", name="front_panier")
+     */
+    public function panier(Request $request, ObjectManager $manager, Session $session)
+    {
+        if ($session->get('contenu_panier')) {
+            $panier = $session->get('contenu_panier');
+            $em = $this->getDoctrine()->getManager();
+            $articles = $em->getRepository(Livres::class)->findBy(['id' => $panier]);
+
+            return $this->render('front/panier.html.twig', ['articles_panier' => $articles]);
+        } else {
+            $session->getFlashBag()->add('notice', 'Votre panier est vide.');
+
+            return $this->redirectToRoute("front_home");
+        }
+    }
+
 
     /**
     * @Route("/bio/{id}", name="front_bio")
@@ -141,7 +159,7 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/mentions", name="front_mentions")
+    * @Route("/mentions/", name="front_mentions")
     */
     public function mentions()
     {
@@ -150,7 +168,7 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/infos-pratiques", name="front_infos_prat")
+    * @Route("/infos-pratiques/", name="front_infos_prat")
     */
     public function infos_prat()
     {

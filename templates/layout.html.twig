@@ -36,11 +36,17 @@
 
           {% if app.session.get('contenu_panier') %}
             <li class="nav-item active">
-              <strong><a class="nav-link" href= '#' >Panier : {{ app.session.get('contenu_panier')|length }} article(s)</a></strong>
+              <strong><a class="nav-link" href= {{ path('front_panier') }} >
+                      Panier : {% if app.session.get('contenu_panier')|length < 2 %}
+                                  {{ app.session.get('contenu_panier')|length }} article
+                              {% else %}
+                                  {{ app.session.get('contenu_panier')|length }} articles
+                              {% endif %}
+                  </a></strong>
             </li>
           {% else %}
             <li class="nav-item active">
-              <strong><a class="nav-link" href= '#' >Votre panier est vide</a></strong>
+              <strong><a class="nav-link" href= {{ path('front_panier') }} >Votre panier est vide</a></strong>
             </li>
           {% endif %}
 

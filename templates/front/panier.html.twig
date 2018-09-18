@@ -1,0 +1,35 @@
+{% extends "layout.html.twig" %}
+
+{% block title %} Panier {% endblock %}
+
+{% block contenu %}
+
+
+    {% if not app.session.get('contenu_panier') %}
+    <h2 class="text-muted">Votre panier est vide.</h2>
+    {% else %}
+        <h2 class="text-muted">Votre panier</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Titre</th>
+                    <th scope="col" class="text-center">Quantité</th>
+                    <th scope="col" class="text-center">Prix HT</th>
+                    <th scope="col" class="text-center">Prix Total HT</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles_panier %}
+                <tr>
+                    <th scope="row">{{ article.titre }}</th>
+                    <td class="text-center">1</td>
+                    <td class="text-center">{{ article.prixHt }}</td>
+                    <td class="text-center">Prix total</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

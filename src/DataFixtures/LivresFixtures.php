@@ -123,6 +123,22 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $passagers2->setActive(true);
         $manager->persist($passagers2);
 
+        $passagers3 = new Livres();
+
+        $passagers3->setISBN('978-2-723-40215-0');
+        $passagers3->setTitre('Les Passagers du Vent - 3. Le comptoir de Juda');
+        $passagers3->setNbPages(46);
+        $passagers3->setDateParution(\DateTime::createFromFormat('Y-m-d', "1981-05-01"));
+        $passagers3->setPrixHt(14.5);
+        $passagers3->setEstConseil(1);
+        $passagers3->setResume('A bord du négrier La Marie-Caroline, nous suivons une nouvelle fois les pérégrinations de nos quatre protagonistes Isa, Hoel, Mary et John. Mais ne vous y fiez pas, les aventures de ce troisième volet se passeront sur terre et non en mer. Cette terre, c\'est celle, brûlante et sauvage, de l\'Afrique. La Marie-Caroline fait escale au comptoir du Juda que l\'on situe dans l\'actuel Bénin pour faire « le plein » d\'esclaves. Nous sommes au coeur du commerce triangulaire. Logés par les « administrateurs » français du comptoir, nos « passagers du vent » vont connaître la chaleur qui altère la raison sans désaltérer la soif ; la cruauté apparentée à la justice ; la misogynie la plus méprisable (Isa sera l\'enjeu d\'un pari qui dégénèrera en drame) et la noirceur d\'âme des colons à la peau blanche. François Bourgeon, de son trait précis et acéré, sait rendre une fois encore palpable une ambiance oppressante et prégnante. Pour un peu, on sentirait nous aussi la brûlure du soleil immuablement zénithal et on perdrait peu à peu le sens des réalités…');
+        $passagers3->setImage('passagers_du_vent_3.jpg');
+        $passagers3->setAuteur($this->getReference(AuteursFixtures::BOURGEON));
+        $passagers3->setEditeur($this->getReference(EditeursFixtures::GLENAT));
+        $passagers3->setCategorie($this->getReference(CategoriesFixtures::BD));
+        $passagers3->setActive(true);
+        $manager->persist($passagers3);
+
         $meilleurmonde = new Livres();
 
         $meilleurmonde->setISBN('978-2-266-28303-8');
