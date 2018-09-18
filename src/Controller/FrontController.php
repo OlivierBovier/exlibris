@@ -95,7 +95,7 @@ class FrontController extends AbstractController
         }
         dump($session->get('contenu_panier'));
         $panier = $session->get('contenu_panier');
-
+        // Si dans l'array la clé $id existe alors $panier[$id] existe et isset($panier[$id]) renvoie 'true'
         $in_panier = isset($panier[$id]);
 
         $infolivre = $this->getDoctrine()
@@ -115,10 +115,11 @@ class FrontController extends AbstractController
             $session->set('contenu_panier', array());
         }
 
+        // $panier récupère la variable de session qui gère le panier
         $panier = $session->get('contenu_panier');
-//        $panier[] = array($request->get('id'), $request->get('qte'));
-        $panier[$request->get('id')] = $request->get('qte');/*array($request->get('id'), $request->get('qte'));*/
-
+        // Création d'une nouvelle entrée dans la variable $panier de clé 'id' et de value 'qte'
+        $panier[$request->get('id')] = $request->get('qte');
+        // Mise à jour de la variable de session avec les nouvelles valeurs
         $session->set('contenu_panier', $panier);
 
         return $this->redirectToRoute('front_fiche', array('id' => $request->get('id')));
@@ -134,7 +135,8 @@ class FrontController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
             $articles_paniers = $em->getRepository(Livres::class)->findById(array_keys($panier));
-
+            dump($articles_paniers);
+            dump($panier);
             return $this->render('front/panier.html.twig', ['articles_panier' => $articles_paniers]);
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');
