@@ -26,7 +26,7 @@
               {% if in_panier %}
                 <a href="#" class="btn btn-info">Ce livre est déjà dans votre panier</a>
               {% else %}
-                <a href=" {{ path('front_ajoutpanier', { 'id': infolivre.id }) }} " class="btn btn-success">Ajouter au panier</a>
+                <a href=" {{ path('front_ajoutpanier', { 'id': infolivre.id, 'qte': 1 }) }} " class="btn btn-success">Ajouter au panier</a>
               {% endif %}
             </div>
           </div>

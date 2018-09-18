@@ -93,12 +93,10 @@ class FrontController extends AbstractController
         if (!$session->get('contenu_panier')) {
             $session->set('contenu_panier', array());
         }
+        dump($session->get('contenu_panier'));
+        $panier = $session->get('contenu_panier');
 
-        if (in_array($id, $session->get('contenu_panier'))) {
-            $in_panier = true;
-        } else {
-            $in_panier = false;
-        }
+        $in_panier = isset($panier[$id]);
 
         $infolivre = $this->getDoctrine()
             ->getRepository(Livres::class)
@@ -109,7 +107,7 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/ajoutpanier/{id}", name="front_ajoutpanier")
+    * @Route("/ajoutpanier/{id}/{qte}", name="front_ajoutpanier")
     */
     public function ajoutPanier(Request $request, ObjectManager $manager, Session $session)
     {
@@ -118,7 +116,9 @@ class FrontController extends AbstractController
         }
 
         $panier = $session->get('contenu_panier');
-        $panier[] = $request->get('id');
+//        $panier[] = array($request->get('id'), $request->get('qte'));
+        $panier[$request->get('id')] = $request->get('qte');/*array($request->get('id'), $request->get('qte'));*/
+
         $session->set('contenu_panier', $panier);
 
         return $this->redirectToRoute('front_fiche', array('id' => $request->get('id')));
@@ -131,10 +131,11 @@ class FrontController extends AbstractController
     {
         if ($session->get('contenu_panier')) {
             $panier = $session->get('contenu_panier');
-            $em = $this->getDoctrine()->getManager();
-            $articles = $em->getRepository(Livres::class)->findBy(['id' => $panier]);
 
-            return $this->render('front/panier.html.twig', ['articles_panier' => $articles]);
+            $em = $this->getDoctrine()->getManager();
+            $articles_paniers = $em->getRepository(Livres::class)->findById(array_keys($panier));
+
+            return $this->render('front/panier.html.twig', ['articles_panier' => $articles_paniers]);
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');
 
