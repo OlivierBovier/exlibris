@@ -109,7 +109,7 @@ class FrontController extends AbstractController
 
         if ($formAddToCart->isSubmitted() && $formAddToCart->isValid()) {
             $qte_produit = $formAddToCart->getData();
-            $qte_produit = floatval($qte_produit['qte']);
+            $qte_produit = intval($qte_produit['qte']);
             $pxht = $infolivre->getprixHt();
             $prix_total_ht = $qte_produit * $pxht;
             $ajouter_article = ['id' => $id, 'titre' => $infolivre->getTitre(), 'image' => $infolivre->getImage(),'qte' => $qte_produit, 'prixHt' => $pxht, 'prix_total_ht' => $prix_total_ht];
@@ -132,9 +132,23 @@ class FrontController extends AbstractController
     {
         if ($session->get('contenu_panier')) {
             $articles_panier = $session->get('contenu_panier');
-            dump($articles_panier);
 
-            return $this->render('front/panier.html.twig', ['articles_panier' => $articles_panier]);
+            $prix_total_ht_panier = 0;
+            foreach ($articles_panier as $valeurs) {
+                $prix_total_ht = $valeurs['prix_total_ht'];
+                dump($valeurs);
+                $prix_total_ht_panier += $prix_total_ht;
+            }
+
+            $tva = $prix_total_ht_panier * 0.20;
+            $prix_total_ttc = $prix_total_ht_panier + $tva;
+
+            return $this->render('front/panier.html.twig', [
+                'articles_panier' => $articles_panier,
+                'prix_total_ht_panier' => $prix_total_ht_panier,
+                'tva' => $tva,
+                'prix_total_ttc' => $prix_total_ttc
+            ]);
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');
 
