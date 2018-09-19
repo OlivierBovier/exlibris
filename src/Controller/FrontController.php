@@ -2,12 +2,15 @@
 // src/Controller/FrontController.php
 namespace App\Controller;
 
+
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
@@ -88,42 +91,39 @@ class FrontController extends AbstractController
     /**
     * @Route("/fiche/{id}", name="front_fiche")
     */
-    public function fiche($id, Session $session)
+    public function fiche(Request $request, $id, Session $session)
     {
         if (!$session->get('contenu_panier')) {
             $session->set('contenu_panier', array());
         }
-        dump($session->get('contenu_panier'));
-        $panier = $session->get('contenu_panier');
-        // Si dans l'array la clé $id existe alors $panier[$id] existe et isset($panier[$id]) renvoie 'true'
-        $in_panier = isset($panier[$id]);
 
         $infolivre = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findOneById($id);
 
-        return $this->render('front/fiche.html.twig', ['infolivre' => $infolivre, 'in_panier' => $in_panier]);
-    }
+        $formAddToCart = $this->createFormBuilder()
+            ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5 )))
+            ->add('save', SubmitType::class, array('label' => 'Ajouter au panier'))
+            ->getForm();
+        $formAddToCart->handleRequest($request);
 
+        if ($formAddToCart->isSubmitted() && $formAddToCart->isValid()) {
+            $qte_produit = $formAddToCart->getData();
+            $qte_produit = floatval($qte_produit['qte']);
+            $pxht = $infolivre->getprixHt();
+            $prix_total_ht = $qte_produit * $pxht;
+            $ajouter_article = ['id' => $id, 'titre' => $infolivre->getTitre(), 'image' => $infolivre->getImage(),'qte' => $qte_produit, 'prixHt' => $pxht, 'prix_total_ht' => $prix_total_ht];
 
-    /**
-    * @Route("/ajoutpanier/{id}/{qte}", name="front_ajoutpanier")
-    */
-    public function ajoutPanier(Request $request, ObjectManager $manager, Session $session)
-    {
-        if (!$session->get('contenu_panier')) {
-            $session->set('contenu_panier', array());
+            $panier = $session->get('contenu_panier');
+            $panier[$id] = $ajouter_article;
+            $session->set('contenu_panier', $panier);
         }
 
-        // $panier récupère la variable de session qui gère le panier
-        $panier = $session->get('contenu_panier');
-        // Création d'une nouvelle entrée dans la variable $panier de clé 'id' et de value 'qte'
-        $panier[$request->get('id')] = $request->get('qte');
-        // Mise à jour de la variable de session avec les nouvelles valeurs
-        $session->set('contenu_panier', $panier);
+        $in_panier = in_array($id, array_keys($session->get('contenu_panier')));
 
-        return $this->redirectToRoute('front_fiche', array('id' => $request->get('id')));
+        return $this->render('front/fiche.html.twig', ['infolivre' => $infolivre, 'in_panier' => $in_panier, 'formAddToCart' => $formAddToCart->createView()]);
     }
+
 
     /**
      * @Route("/panier/", name="front_panier")
@@ -131,13 +131,10 @@ class FrontController extends AbstractController
     public function panier(Request $request, ObjectManager $manager, Session $session)
     {
         if ($session->get('contenu_panier')) {
-            $panier = $session->get('contenu_panier');
+            $articles_panier = $session->get('contenu_panier');
+            dump($articles_panier);
 
-            $em = $this->getDoctrine()->getManager();
-            $articles_paniers = $em->getRepository(Livres::class)->findById(array_keys($panier));
-            dump($articles_paniers);
-            dump($panier);
-            return $this->render('front/panier.html.twig', ['articles_panier' => $articles_paniers]);
+            return $this->render('front/panier.html.twig', ['articles_panier' => $articles_panier]);
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');
 

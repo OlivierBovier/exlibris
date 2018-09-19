@@ -1,5 +1,7 @@
 {% extends "layout.html.twig" %}
 
+{% form_theme formAddToCart 'bootstrap_4_layout.html.twig' %}
+
 {% block title %} Fiche {% endblock %}
 
 {% block contenu %}
@@ -26,7 +28,15 @@
               {% if in_panier %}
                 <a href="#" class="btn btn-info">Ce livre est déjà dans votre panier</a>
               {% else %}
-                <a href=" {{ path('front_ajoutpanier', { 'id': infolivre.id, 'qte': 1 }) }} " class="btn btn-success">Ajouter au panier</a>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-4">
+                    {{ form_start(formAddToCart) }}
+                    {{ form_row(formAddToCart.qte) }}
+                  </div>
+                  <div class="col-lg-3 align-self-end">
+                    {{ form_end(formAddToCart) }}
+                  </div>
+                </div>
               {% endif %}
             </div>
           </div>
