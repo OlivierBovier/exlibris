@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
     /**
     * @route("/inscription", name="security_registration")
     */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, Session $session) {
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, Session $session, \Swift_Mailer $mailer) {
     	$user = new User();   	
     	$formRegistr = $this->createForm(RegistrationType::class, $user);
     	$formRegistr->handleRequest($request);
@@ -36,6 +36,19 @@ class SecurityController extends AbstractController
     		$manager->flush();
 
             $session->getFlashBag()->add('notice', 'Votre inscription est bien prise en compte. Merci. Vous pouvez maintenant vous connecter.');
+
+            // Envoi d'un email de confirmation d'inscription
+            $message = (new \Swift_Message('Confirmation d\'inscription'))
+                ->setFrom(['exlibris.ifocop@free.fr' => 'ExLibris'])
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/registration.html.twig',
+                        array('name' => $user->getUsername(), 'email' => $user->getEmail())
+                    ),
+                    'text/html'
+                );
+            $mailer->send($message);
 
             return $this->redirectToRoute("security_login");
     	}

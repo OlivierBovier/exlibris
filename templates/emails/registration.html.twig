@@ -1,0 +1,7 @@
+{# templates/emails/registration.html.twig #}
+<h3>Vous êtes maintenant enregistré !</h3>
+<p>Bonjour {{ name }} !</p>
+<p>Pour vous connecter à votre espace client, cliquez <a href="{{ url('security_login') }}">ici</a> en utilisant votre adresse email {{ email }} et votre mot de passe.</p>
+<p>A très bientôt,</p>
+<p>L'équipe ExLibris</p>
+<p><img src="{{ absolute_url(asset('images/logo.jpg')) }}"></p>
