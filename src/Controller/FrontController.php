@@ -174,6 +174,36 @@ class FrontController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/incrementartpanier/{id}", name="front_incrementartpanier")
+     */
+    public function incrementArtPanier(Request $request, $id, ObjectManager $manager, Session $session)
+    {
+        $articles_panier = $session->get('contenu_panier');
+        $qte_a_modif = $articles_panier[$id]['qte'];
+        $qte_a_modif += 1;
+        $articles_panier[$id]['qte'] = $qte_a_modif;
+        $articles_panier[$id]['prix_total_ttc'] = $qte_a_modif * $articles_panier[$id]['prixttc'];
+        $session->set('contenu_panier', $articles_panier);
+
+        return $this->redirectToRoute("front_panier");
+    }
+
+    /**
+     * @Route("/decrementartpanier/{id}", name="front_decrementartpanier")
+     */
+    public function decrementArtPanier(Request $request, $id, ObjectManager $manager, Session $session)
+    {
+        $articles_panier = $session->get('contenu_panier');
+        $qte_a_modif = $articles_panier[$id]['qte'];
+        $qte_a_modif -= 1;
+        $articles_panier[$id]['qte'] = $qte_a_modif;
+        $articles_panier[$id]['prix_total_ttc'] = $qte_a_modif * $articles_panier[$id]['prixttc'];
+        $session->set('contenu_panier', $articles_panier);
+
+        return $this->redirectToRoute("front_panier");
+    }
+
 
     /**
     * @Route("/bio/{id}", name="front_bio")
