@@ -28,7 +28,7 @@ easy_admin:
                     - { property: 'titre', label: admin.livres.titre, type: 'text' }
                     - { property: 'auteur', label: admin.livres.auteur}
                     - { property: 'date_parution', label: admin.livres.parution}
-                    - { property: 'prixHt', label: admin.livres.prixht }
+                    - { property: 'prixTtc', label: admin.livres.prixttc }
                     - { property: 'est_conseil', label: admin.livres.estconseil}
                     - { property: 'active', label: admin.livres.active}
                     - { property: 'image', type: image, label: admin.livres.image, base_path: '%app.path.livres_images%' }
@@ -41,7 +41,7 @@ easy_admin:
                     # - { property: 'categorie', label: admin.livres.categorie, type_options: { by_reference: false} }
                     - { property: 'categorie', label: admin.livres.categorie }
                     - { property: 'nbPages', label: admin.livres.nbpages, type: 'integer' }
-                    - { property: 'prixHt', label: admin.livres.prixht, type: 'number' }
+                    - { property: 'prixTtc', label: admin.livres.prixttc, type: 'number' }
                     - { property: 'date_parution', label: admin.livres.parution, type: 'date'}
                     - { property: 'est_conseil', label: admin.livres.estconseil}
                     - { property: 'active', label: admin.livres.active}
@@ -55,7 +55,7 @@ easy_admin:
                     - { property: 'editeur', label: admin.livres.editeur}
                     - { property: 'categorie', label: admin.livres.categorie }
                     - { property: 'nbPages', label: admin.livres.nbpages, type: 'integer' }
-                    - { property: 'prixHt', label: admin.livres.prixht, type: 'number' }
+                    - { property: 'prixTtc', label: admin.livres.prixttc, type: 'number' }
                     - { property: 'date_parution', label: admin.livres.parution, type: 'date'}
                     - { property: 'est_conseil', label: admin.livres.estconseil}
                     - { property: 'active', label: admin.livres.active}
