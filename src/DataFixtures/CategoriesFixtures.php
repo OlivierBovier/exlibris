@@ -8,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class CategoriesFixtures extends Fixture
 {
-    public const ROMAN = 'roman';
     public const ROMAN_FR = 'roman_fr';
     public const ROMAN_ETR = 'roman_etr';
     public const BD = 'bd';
@@ -17,12 +16,6 @@ class CategoriesFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         
-        $roman = new Categories();
-        $roman->setLibelleCategorie('Roman');
-
-        $manager->persist($roman);
-        $this->addReference(self::ROMAN, $roman);
-
         $romanfr = new Categories();
         $romanfr->setLibelleCategorie('Roman français');
 

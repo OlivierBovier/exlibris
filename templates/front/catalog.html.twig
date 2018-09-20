@@ -1,6 +1,7 @@
 {% extends "layout.html.twig" %}
 
-{% form_theme formFiltre 'bootstrap_4_layout.html.twig' %}
+{% form_theme formFiltreAuteur 'bootstrap_4_layout.html.twig' %}
+{% form_theme formFiltreCategorie 'bootstrap_4_layout.html.twig' %}
 
 {% block title %} Catalogue {% endblock %}
 
@@ -10,18 +11,39 @@
 	<div class="row">
 
 		<div class="col-sm-2">
-			{{ form_start(formFiltre) }}
-			{{ form_row(formFiltre.auteur, {'label': 'Auteur'}) }}
-{# 			{{ form_row(formFiltre.editeur) }} #}
-			{{ form_row(formFiltre.categorie, {'label': 'Catégorie'}) }}
-{# 			{{ form_row(formFiltre.date_parution) }} #}
-			{{ form_row(formFiltre.est_conseil, {'label': 'Conseillé par la librairie'}) }}
-			<button type="submit" class="btn btn-success">Appliquez les filtres</button>
-			{{ form_end(formFiltre) }}
-		</div>
+      <div class="card">            
+        <div class="card-body">
+      
+            <p><a href="javascript:visibilite('auteur');"><button type="button" class="btn btn-info btn-sm">Filtre par auteur</button></a></p>
+              
+            <p><a href="javascript:visibilite('categorie');"><button type="button" class="btn btn-info btn-sm">Filtre par catégorie</button></a></p>
 
-		<div class="col-sm-10">      
-		  <h2 class="text-muted">Le catalogue</h2>
+            <div id="auteur" style="display:none;">         
+              {{ form_start(formFiltreAuteur) }}
+              {{ form_row(formFiltreAuteur.auteur, {'label': 'Auteur'}) }}
+              <button type="submit" class="btn btn-success btn-sm">Appliquez le filtre</button>
+              {{ form_end(formFiltreAuteur) }}
+            </div> 
+                   
+            <div id="categorie" style="display:none;">
+             {{ form_start(formFiltreCategorie) }}
+              {{ form_row(formFiltreCategorie.categorie, {'label': 'Catégorie'}) }}
+              <button type="submit" class="btn btn-success btn-sm">Appliquez le filtre</button>
+              {{ form_end(formFiltreCategorie) }}
+            </div>
+
+        </div>
+      </div>
+		</div>
+ 
+
+		<div class="col-sm-10">
+      {% if nbrLivres > 1 %}
+        <h2 class="text-muted">{{ nbrLivres }} livres dans votre sélection</h2>
+      {% else %}
+        <h2 class="text-muted">{{ nbrLivres }} livre dans votre sélection</h2>
+      {% endif %}      
+		  
       {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-warning">{{flashMessage}}</div>
       {% endfor %}
@@ -51,5 +73,20 @@
 		</div>
 
 	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var divPrecedent=document.getElementById('auteur');
+        function visibilite(divId)
+        {
+            divPrecedent.style.display='none';
+            divPrecedent=document.getElementById(divId);
+            divPrecedent.style.display='';
+        }
+    </script>
 
 {% endblock %}

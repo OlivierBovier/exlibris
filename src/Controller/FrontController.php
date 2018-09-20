@@ -14,7 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
-use App\Form\FiltreCatType;
+use App\Form\FiltreAuteurType;
+use App\Form\FiltreCategorieType;
 
 class FrontController extends AbstractController
 {
@@ -53,22 +54,35 @@ class FrontController extends AbstractController
     public function catalog(Request $request, ObjectManager $manager, Session $session, PaginatorInterface $paginator)
     {
 
-        $formFiltre = $this->createForm(FiltreCatType::class);
-        $formFiltre->handleRequest($request);        
+        $formFiltreAuteur = $this->createForm(FiltreAuteurType::class);
+        $formFiltreAuteur->handleRequest($request);
+        $formFiltreCategorie = $this->createForm(FiltreCategorieType::class);
+        $formFiltreCategorie->handleRequest($request);        
 
-        if ($formFiltre->isSubmitted() && $formFiltre->isValid()) {
-            $filtres = $request->request->get('filtre_cat');
+        if ($formFiltreAuteur->isSubmitted() && $formFiltreAuteur->isValid()) {
+            $filtres = $request->request->get('filtre_auteur');
             $auteur = $filtres['auteur'];
-            $categorie = $filtres['categorie'];
-            $conseil = $filtres['est_conseil'];
             
             $catalog = $this->getDoctrine()
                 ->getRepository(Livres::class)
-                ->findWithFilter($auteur, $categorie, $conseil);
+                ->findBy(['auteur' => $auteur], ['date_parution' => 'DESC']);
 
             if (!$catalog) {
                 $session->getFlashBag()->add('notice', 'Aucun livre ne correspond à votre filtre.');
             }
+
+        } elseif ($formFiltreCategorie->isSubmitted() && $formFiltreCategorie->isValid()) {
+            $filtres = $request->request->get('filtre_categorie');
+            $categorie = $filtres['categorie'];
+            
+            $catalog = $this->getDoctrine()
+                ->getRepository(Livres::class)
+                ->findBy(['categorie' => $categorie], ['date_parution' => 'DESC']);
+
+            if (!$catalog) {
+                $session->getFlashBag()->add('notice', 'Aucun livre ne correspond à votre filtre.');
+            }
+        
         } else {
             $catalog = $this->getDoctrine()
             ->getRepository(Livres::class)
@@ -79,12 +93,19 @@ class FrontController extends AbstractController
             }  
         }
 
+        $nbrLivres = count($catalog);
+
         $pagination = $paginator->paginate(
             $catalog, 
             $request->query->getInt('page', 1)/*page number*/, 8/*limit per page*/
         );
 
-        return $this->render('front/catalog.html.twig', ['formFiltre' => $formFiltre->createView(), 'pagination' => $pagination]);
+        return $this->render('front/catalog.html.twig', [
+            'formFiltreAuteur' => $formFiltreAuteur->createView(),
+            'formFiltreCategorie' => $formFiltreCategorie->createView(),
+            'pagination' => $pagination,
+            'nbrLivres' => $nbrLivres
+        ]);
     }
 
 
