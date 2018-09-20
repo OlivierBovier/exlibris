@@ -137,13 +137,23 @@ class FrontController extends AbstractController
      */
     public function panier(Request $request, ObjectManager $manager, Session $session)
     {
+        $formEraseCart = $this->createFormBuilder()
+            ->add('save', SubmitType::class, array('label' => 'Supprimer votre panier', 'attr' => array('class' => 'btn btn-secondary')))
+            ->getForm();
+        $formEraseCart->handleRequest($request);
+
+        if ($formEraseCart->isSubmitted() && $formEraseCart->isValid()) {
+            $session->remove('contenu_panier');
+        }
+
         if ($session->get('contenu_panier')) {
+
+
             $articles_panier = $session->get('contenu_panier');
 
             $prix_total_ttc_panier = 0;
             foreach ($articles_panier as $valeurs) {
                 $prix_total_ttc = $valeurs['prix_total_ttc'];
-                dump($valeurs);
                 $prix_total_ttc_panier += $prix_total_ttc;
             }
 
@@ -154,7 +164,8 @@ class FrontController extends AbstractController
                 'articles_panier' => $articles_panier,
                 'prix_total_ttc_panier' => $prix_total_ttc_panier,
                 'tva' => $tva,
-                'prix_total_ht_panier' => $prix_total_ht_panier
+                'prix_total_ht_panier' => $prix_total_ht_panier,
+                'formEraseCart' => $formEraseCart->createView()
             ]);
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');

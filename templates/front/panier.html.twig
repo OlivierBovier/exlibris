@@ -1,5 +1,7 @@
 {% extends "layout.html.twig" %}
 
+{% form_theme formEraseCart 'bootstrap_4_layout.html.twig' %}
+
 {% block title %} Panier {% endblock %}
 
 {% block contenu %}
@@ -49,6 +51,12 @@
                 </tr>
             </tfoot>
         </table>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                {{ form_start(formEraseCart) }}
+                {{ form_end(formEraseCart) }}
+            </div>
+        </div>
     {% endif %}
 
 {% endblock %}
