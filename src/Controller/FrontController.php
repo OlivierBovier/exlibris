@@ -103,16 +103,23 @@ class FrontController extends AbstractController
 
         $formAddToCart = $this->createFormBuilder()
             ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5 )))
-            ->add('save', SubmitType::class, array('label' => 'Ajouter au panier'))
+            ->add('save', SubmitType::class, array('label' => 'Ajouter au panier', 'attr' => array('class' => 'btn btn-success')))
             ->getForm();
         $formAddToCart->handleRequest($request);
 
         if ($formAddToCart->isSubmitted() && $formAddToCart->isValid()) {
             $qte_produit = $formAddToCart->getData();
             $qte_produit = intval($qte_produit['qte']);
-            $pxht = $infolivre->getprixHt();
-            $prix_total_ht = $qte_produit * $pxht;
-            $ajouter_article = ['id' => $id, 'titre' => $infolivre->getTitre(), 'image' => $infolivre->getImage(),'qte' => $qte_produit, 'prixHt' => $pxht, 'prix_total_ht' => $prix_total_ht];
+            $pxttc = $infolivre->getprixTtc();
+            $prix_total_ttc = $qte_produit * $pxttc;
+            $ajouter_article = [
+                'id' => $id,
+                'titre' => $infolivre->getTitre(),
+                'image' => $infolivre->getImage(),
+                'qte' => $qte_produit,
+                'prixttc' => $pxttc,
+                'prix_total_ttc' => $prix_total_ttc
+            ];
 
             $panier = $session->get('contenu_panier');
             $panier[$id] = $ajouter_article;
@@ -133,21 +140,21 @@ class FrontController extends AbstractController
         if ($session->get('contenu_panier')) {
             $articles_panier = $session->get('contenu_panier');
 
-            $prix_total_ht_panier = 0;
+            $prix_total_ttc_panier = 0;
             foreach ($articles_panier as $valeurs) {
-                $prix_total_ht = $valeurs['prix_total_ht'];
+                $prix_total_ttc = $valeurs['prix_total_ttc'];
                 dump($valeurs);
-                $prix_total_ht_panier += $prix_total_ht;
+                $prix_total_ttc_panier += $prix_total_ttc;
             }
 
-            $tva = $prix_total_ht_panier * 0.20;
-            $prix_total_ttc = $prix_total_ht_panier + $tva;
+            $prix_total_ht_panier = $prix_total_ttc_panier / 1.20;
+            $tva = $prix_total_ttc_panier - $prix_total_ht_panier;
 
             return $this->render('front/panier.html.twig', [
                 'articles_panier' => $articles_panier,
-                'prix_total_ht_panier' => $prix_total_ht_panier,
+                'prix_total_ttc_panier' => $prix_total_ttc_panier,
                 'tva' => $tva,
-                'prix_total_ttc' => $prix_total_ttc
+                'prix_total_ht_panier' => $prix_total_ht_panier
             ]);
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');

@@ -45,7 +45,7 @@ class Livres
     /**
      * @ORM\Column(type="float")
      */
-    private $prix_ht;
+    private $prix_ttc;
 
     /**
      * @ORM\Column(type="boolean")
@@ -178,14 +178,14 @@ class Livres
         return $this;
     }
 
-    public function getPrixHt(): ?float
+    public function getPrixTtc(): ?float
     {
-        return $this->prix_ht;
+        return $this->prix_ttc;
     }
 
-    public function setPrixHt(float $prix_ht): self
+    public function setPrixTtc(float $prix_ttc): self
     {
-        $this->prix_ht = $prix_ht;
+        $this->prix_ttc = $prix_ttc;
 
         return $this;
     }

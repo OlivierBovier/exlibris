@@ -33,7 +33,7 @@
                   <div class="card-body">
                     <h5 class="card-title"><a href=" {{ path('front_fiche', { 'id': livre.id }) }} ">{{ livre.titre }}</a></h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ livre.auteur.PrenomAuteur }} {{ livre.auteur.NomAuteur }}</h6>
-                    <h6>{{ livre.PrixHt|number_format(2, ',', ' ') }} €</h6>
+                    <h6>{{ livre.PrixTtc|number_format(2, ',', ' ') }} €</h6>
                     <p class="card-text">{{ livre.Resume|truncate(70, true) }}</p>
                     <p class="card-subtitle mb-2 text-muted">Parution le {{ livre.dateParution|date("d/m/Y") }}</p>
                   </div>

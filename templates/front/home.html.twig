@@ -66,7 +66,7 @@
                   <div class="card-body">
                     <h5 class="card-title"><a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">{{ livrerecent.titre }}</a></h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ livrerecent.auteur.PrenomAuteur }} {{ livrerecent.auteur.NomAuteur }}</h6>
-                    <h6>{{ livrerecent.PrixHt|number_format(2, ',', ' ') }} €</h6>
+                    <h6>{{ livrerecent.PrixTtc|number_format(2, ',', ' ') }} €</h6>
                     <p class="card-text">{{ livrerecent.Resume|truncate(70, true) }}</p>
                     <p class="card-subtitle mb-2 text-muted">Parution le {{ livrerecent.dateParution|date("d/m/Y") }}</p>
                   </div>
@@ -98,7 +98,7 @@
                   <div class="card-body">
                     <h5 class="card-title"><a href=" {{ path('front_fiche', { 'id': livre_c.id }) }} ">{{ livre_c.titre }}</a></h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ livre_c.auteur.PrenomAuteur }} {{ livre_c.auteur.NomAuteur }}</h6>
-                    <h6>{{ livre_c.PrixHt|number_format(2, ',', ' ') }} €</h6>
+                    <h6>{{ livre_c.PrixTtc|number_format(2, ',', ' ') }} €</h6>
                     <p class="card-text">{{ livre_c.Resume|truncate(70, true) }}</p>
                     <p class="card-subtitle mb-2 text-muted">Parution le {{ livre_c.dateParution|date("d/m/Y") }}</p>
                   </div>

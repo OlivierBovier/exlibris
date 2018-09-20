@@ -12,8 +12,6 @@
 	{{ form_row(formRegistr.ville, {'attr': {'placeholder': 'votre ville ici...'}}) }}
 	{{ form_row(formRegistr.password.first) }}
     {{ form_row(formRegistr.password.second) }}
-	{#{{ form_row(formRegistr.password, {'label': 'mot de passe', 'attr': {'placeholder': 'votre mot de passe ici...'}}) }}#}
-	{#{{ form_row(formRegistr.confirmPassword, {'label': 'mot de passe','attr': {'placeholder': 'confirmez votre mot de passe...'}}) }}#}
 	<button type="submit" class="btn btn-success">Inscription</button>
 	{{ form_end(formRegistr) }}
 {% endblock %}

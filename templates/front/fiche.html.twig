@@ -15,16 +15,11 @@
             <div class="card-body">
               <h3 class="card-title">{{ infolivre.titre }}</h3>
               <h6 class="card-subtitle mb-2 text-muted">{{ infolivre.auteur.PrenomAuteur }} {{ infolivre.auteur.NomAuteur }} <a href=" {{ path('front_bio', { 'id': infolivre.auteur.id }) }} ">(voir sa biographie)</a></h6>
-              <h4>{{ infolivre.PrixHt|number_format(2, ',', ' ') }} €</h4>
+              <h4>{{ infolivre.PrixTtc|number_format(2, ',', ' ') }} €</h4>
               <h5 class="card-title">Résumé</h5>
               <p class="card-text">{{ infolivre.resume }}</p>
               <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
               <p>4.0 stars</p>
-              <h6 class="card-subtitle mb-2 text-muted">Editeur : {{ infolivre.editeur }} </h6>
-              <h6 class="card-subtitle mb-2 text-muted">Date de parution : {{ infolivre.dateParution|date("d/m/Y", "Europe/Paris") }} </h6>
-              <h6 class="card-subtitle mb-2 text-muted">Nombre de pages : {{ infolivre.nbPages }} </h6>
-              <h6 class="card-subtitle mb-2 text-muted">ISBN : {{ infolivre.isbn }} </h6>
-              <h6 class="card-subtitle mb-2 text-muted">Catégorie : {{ infolivre.categorie }} </h6>
               {% if in_panier %}
                 <a href="#" class="btn btn-info">Ce livre est déjà dans votre panier</a>
               {% else %}
@@ -68,12 +63,13 @@
         	<div class="card-body">
         		<img class="card-img-top img-fluid" src="{{ asset('images/livres/' ~ infolivre.image ~'') }}" alt="{{ infolivre.titre }}">
         	</div>
-          <h1 class="my-4">Shop Name</h1>
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
-          </div>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">Catégorie : {{ infolivre.categorie }} </h6>
+              <h6 class="card-subtitle mb-2 text-muted">Editeur : {{ infolivre.editeur }} </h6>
+              <h6 class="card-subtitle mb-2 text-muted">Date de parution : {{ infolivre.dateParution|date("d/m/Y", "Europe/Paris") }} </h6>
+              <h6 class="card-subtitle mb-2 text-muted">Nombre de pages : {{ infolivre.nbPages }} </h6>
+              <h6 class="card-subtitle mb-2 text-muted">ISBN : {{ infolivre.isbn }} </h6>
+            </div>
         </div>
         <!-- /.col-lg-3 -->
     </div>
