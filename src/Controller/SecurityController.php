@@ -69,6 +69,10 @@ class SecurityController extends AbstractController
     /**
     * @route("/deconnexion", name="security_logout")
     */
-    public function logout() {}
+    public function logout(Session $session) {
+        $session->getFlashBag()->add('success', 'Votre déconnexion est effective.');
+
+        return $this->redirectToRoute("front_home");
+    }
 
 }

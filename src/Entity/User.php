@@ -89,6 +89,12 @@ class User implements UserInterface, \Serializable
         $this->commandes = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        // to show the title of the book in the select
+        return $this->username;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

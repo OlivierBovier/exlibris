@@ -33,6 +33,13 @@ class LignesCde
      */
     private $livre;
 
+    public function __toString()
+    {
+        $id_string = $this->id;
+        $setIdToString = settype($id_string, "string");
+        return $id_string;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
