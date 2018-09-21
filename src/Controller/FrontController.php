@@ -17,6 +17,7 @@ use App\Entity\Auteurs;
 use App\Entity\Avis;
 use App\Form\FiltreAuteurType;
 use App\Form\FiltreCategorieType;
+use App\Form\AvisType;
 
 class FrontController extends AbstractController
 {
@@ -155,11 +156,20 @@ class FrontController extends AbstractController
             ->findByLivres($id);
         dump($liste_avis);
 
+        $formAvis = $this->createForm(AvisType::class);
+        $formAvis->handleRequest($request);
+
+        if ($formAvis->isSubmitted() && $formAvis->isValid()) {
+            dump($formAvis);
+        }
+
+
         return $this->render('front/fiche.html.twig', [
             'infolivre' => $infolivre,
             'in_panier' => $in_panier,
             'liste_avis' => $liste_avis,
-            'formAddToCart' => $formAddToCart->createView()
+            'formAddToCart' => $formAddToCart->createView(),
+            'formAvis' => $formAvis->createView()
         ]);
     }
 

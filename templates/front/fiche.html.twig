@@ -1,6 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% form_theme formAddToCart 'bootstrap_4_layout.html.twig' %}
+{% form_theme formAvis 'bootstrap_4_layout.html.twig' %}
 
 {% block title %} Fiche {% endblock %}
 
@@ -50,10 +51,22 @@
                       <hr>
                     {% endfor %}
                 {% else %}
-                    <p>Aucun avis posté pour ce livre. Soyez le premier à laisser un commentaire !</p>
+                    <p>Aucun avis posté pour ce livre. Soyez le premier !</p>
                 {% endif %}
 
-              <a href="#" class="btn btn-success">Votre avis</a>
+                {% if not app.user %}
+                    <p>Vous devez vous connecter pour déposer un avis.</p>
+                {% else %}
+                    <a id="boutonAvis" href="javascript:visibilite();" class="btn btn-success btn-sm">Avis</a>
+                    <div id="deposerAvis" style="display:none;">
+                        {{ form_start(formAvis) }}
+                        {{ form_row(formAvis.commentaire, {'label': 'Votre commentaire'}) }}
+                        {{ form_row(formAvis.note, {'label': 'Une note de 1 à 5 (5 étant la meilleure)'}) }}
+                        <button type="submit" class="btn btn-success btn-sm">Envoyez votre avis</button>
+                        {{ form_end(formAvis) }}
+                    </div>
+                {% endif %}
+
             </div>
           </div>
           <!-- /.card -->
@@ -75,5 +88,20 @@
         </div>
         <!-- /.col-lg-3 -->
     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var divboutonAvis=document.getElementById('boutonAvis');
+        var divdeposerAvis=document.getElementById('deposerAvis');
+        function visibilite()
+        {
+            divboutonAvis.style.display='none';
+            divdeposerAvis.style.display='';
+        }
+    </script>
 
 {% endblock %}
