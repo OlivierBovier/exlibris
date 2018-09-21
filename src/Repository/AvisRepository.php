@@ -19,6 +19,21 @@ class AvisRepository extends ServiceEntityRepository
         parent::__construct($registry, Avis::class);
     }
 
+    /**
+     * @return Avis[] Returns an array of Avis objects
+     */
+    public function findByLivres($id)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.livre = :val')
+            ->setParameter('val', $id)
+            ->orderBy('a.date_avis', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Avis[] Returns an array of Avis objects
 //     */

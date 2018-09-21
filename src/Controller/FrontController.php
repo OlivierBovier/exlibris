@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
+use App\Entity\Avis;
 use App\Form\FiltreAuteurType;
 use App\Form\FiltreCategorieType;
 
@@ -149,7 +150,17 @@ class FrontController extends AbstractController
 
         $in_panier = in_array($id, array_keys($session->get('contenu_panier')));
 
-        return $this->render('front/fiche.html.twig', ['infolivre' => $infolivre, 'in_panier' => $in_panier, 'formAddToCart' => $formAddToCart->createView()]);
+        $liste_avis = $this->getDoctrine()
+            ->getRepository(Avis::class)
+            ->findByLivres($id);
+        dump($liste_avis);
+
+        return $this->render('front/fiche.html.twig', [
+            'infolivre' => $infolivre,
+            'in_panier' => $in_panier,
+            'liste_avis' => $liste_avis,
+            'formAddToCart' => $formAddToCart->createView()
+        ]);
     }
 
 
