@@ -25,7 +25,7 @@
             <tbody>
                 {% for article in articles_panier %}
                 <tr>
-                    <td class="text-left align-middle">{{ article.titre }}</td>
+                    <td class="text-left align-middle"><a href="{{ path('front_fiche', {'id': article.id}) }}"> {{ article.titre }} </a></td>
                     <td class="text-center"><img class="img-fluid rounded" src="{{ asset('images/livres/' ~ article.image ~ '') }}" alt="{{ article.titre }}" height="85" width="50"></td>
                     <td class="text-center align-middle">
                         <a href="{{ path('front_decrementartpanier', {'id': article.id}) }}" class="btn btn-secondary btn-sm">-</a>
