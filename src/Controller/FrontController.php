@@ -114,7 +114,7 @@ class FrontController extends AbstractController
     /**
     * @Route("/fiche/{id}", name="front_fiche")
     */
-    public function fiche(Request $request, $id, Session $session)
+    public function fiche(Request $request, $id, Session $session, ObjectManager $manager)
     {
         if (!$session->get('contenu_panier')) {
             $session->set('contenu_panier', array());
@@ -154,13 +154,23 @@ class FrontController extends AbstractController
         $liste_avis = $this->getDoctrine()
             ->getRepository(Avis::class)
             ->findByLivres($id);
-        dump($liste_avis);
 
         $formAvis = $this->createForm(AvisType::class);
         $formAvis->handleRequest($request);
 
         if ($formAvis->isSubmitted() && $formAvis->isValid()) {
-            dump($formAvis);
+            $formAvisData = $formAvis->getData();
+            $avis = new Avis();
+            $avis->setCommentaire($formAvisData->getCommentaire());
+            $avis->setNote($formAvisData->getNote());
+            $avis->setDateAvis(new \DateTime());
+            $avis->setLivre($infolivre);
+            $avis->setUser($this->getUser());
+
+            $manager->persist($avis);
+            $manager->flush();
+
+            return $this->redirectToRoute("front_fiche", ['id' => $id]);
         }
 
 

@@ -55,7 +55,7 @@
                 {% endif %}
 
                 {% if not app.user %}
-                    <p>Vous devez vous connecter pour déposer un avis.</p>
+                    <a href="{{ path('security_login') }}" class="btn btn-success btn-sm">Connectez-vous pour déposer un avis.</a>
                 {% else %}
                     <a id="boutonAvis" href="javascript:visibilite();" class="btn btn-success btn-sm">Avis</a>
                     <div id="deposerAvis" style="display:none;">
