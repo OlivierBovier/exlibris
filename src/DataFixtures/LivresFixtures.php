@@ -139,6 +139,22 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $passagers3->setActive(true);
         $manager->persist($passagers3);
 
+        $passagers4 = new Livres();
+
+        $passagers4->setISBN('978-2-723-40290-8');
+        $passagers4->setTitre('Les Passagers du Vent - 4. L\'heure du serpent');
+        $passagers4->setNbPages(46);
+        $passagers4->setDateParution(\DateTime::createFromFormat('Y-m-d', "1982-04-01"));
+        $passagers4->setPrixTtc(14.5);
+        $passagers4->setEstConseil(1);
+        $passagers4->setResume('"L\'heure du serpent" semble avoir moins bonne réputation que ces prédécesseurs auprès des thuriféraires des "Passagers du vent", alors qu\'il me paraît quant à moi légèrement supérieur au "Comptoir de Juda" avec lequel il constitue une sorte diptyque : c\'est dans ce quatrième tome que se concluent en effet toutes les intrigues ouvertes dans le précédent, certaines de manière un peu "légère" il est vrai (la guérison de Hoel, qui était au départ l\'enjeu majeur du livre, survient sans guère d\'explications...). Il y a dans ce livre gorgé jusqu\'à la saturation de péripéties toutes plus violentes les unes que les autres, deux vrais temps forts : d\'abord la visite au roi, chargée de menaces et lourde de conséquence, et ensuite la réapparition d\'un Smolett fou à lier qui s’achèvera de manière dramatique dans les marais. On peut d\'ailleurs considérer que ces scènes de poursuite et de folie nocturne sont ce que "les Passagers du Vent" nous ont offert de mieux jusqu\'à présent.');
+        $passagers4->setImage('passagers_du_vent_4.jpg');
+        $passagers4->setAuteur($this->getReference(AuteursFixtures::BOURGEON));
+        $passagers4->setEditeur($this->getReference(EditeursFixtures::GLENAT));
+        $passagers4->setCategorie($this->getReference(CategoriesFixtures::BD));
+        $passagers4->setActive(true);
+        $manager->persist($passagers4);
+
         $meilleurmonde = new Livres();
 
         $meilleurmonde->setISBN('978-2-266-28303-8');

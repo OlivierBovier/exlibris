@@ -4,7 +4,7 @@
  
 <header class="container"> 
 	<nav class="navbar navbar-expand-md navbar-light fixed-top bg-warning">
-      <a class="navbar-brand" href= {{ path('front_home') }} ><img class="logo" src={{ asset('images/logo.jpg') }} height="90"></a>
+      <a class="navbar-brand" href= {{ path('front_home') }} ><img class="logo" src="{{ asset('images/logo.jpg') }}" height="90" alt="Logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -60,7 +60,7 @@
   </nav>
 </header>
 
-<main role="main" class="container">
+<main class="container">
 {% block contenu %}
 
 {% endblock %}
