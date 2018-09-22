@@ -34,7 +34,7 @@ class AvisRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findBy(array($livre => 'livre', $user => 'user')): ?Avis
+    public function findBy($livre, $user): ?Avis
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.livre = :val1')
