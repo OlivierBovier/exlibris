@@ -157,7 +157,7 @@ class FrontController extends AbstractController
 
         $cherche_avis_existant = $this->getDoctrine()
             ->getRepository(Livres::class)
-            ->findBy($infolivre, $this->getUser());
+            ->findBy(array('livre' => $infolivre, 'user' => $this->getUser()));
         dump($cherche_avis_existant);
 
         $formAvis = $this->createForm(AvisType::class);
