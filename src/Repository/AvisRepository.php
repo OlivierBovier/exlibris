@@ -34,19 +34,6 @@ class AvisRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findBy($livre, $user): ?Avis
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.livre = :val1')
-            ->andWhere('a.user = :val2')
-            ->setParameter('val1', $livre)
-            ->setParameter('val2', $user)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-
 
 //    /**
 //     * @return Avis[] Returns an array of Avis objects

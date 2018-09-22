@@ -155,11 +155,11 @@ class FrontController extends AbstractController
             ->getRepository(Avis::class)
             ->findByLivres($id);
 
-        $cherche_avis_existant = $this->getDoctrine()
+        $avis_existant = $this->getDoctrine()
             ->getRepository(Avis::class)
             ->findBy(['livre' => $infolivre, 'user' => $this->getUser()]);
-        dump($cherche_avis_existant);
-
+        dump($avis_existant);
+        
         $formAvis = $this->createForm(AvisType::class);
         $formAvis->handleRequest($request);
 
@@ -184,7 +184,8 @@ class FrontController extends AbstractController
             'in_panier' => $in_panier,
             'liste_avis' => $liste_avis,
             'formAddToCart' => $formAddToCart->createView(),
-            'formAvis' => $formAvis->createView()
+            'formAvis' => $formAvis->createView(),
+            'avis_existant' => $avis_existant
         ]);
     }
 

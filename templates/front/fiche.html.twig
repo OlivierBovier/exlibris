@@ -56,8 +56,8 @@
 
                 {% if not app.user %}
                     <a href="{{ path('security_login') }}" class="btn btn-success btn-sm">Connectez-vous pour déposer un avis.</a>
-                {% elseif avis_effectue %}
-                  <p>Vous avez déjà posté un avis sur ce livre.</p>
+                {% elseif avis_existant|length > 0 %}
+                  <p>Vous avez déjà posté un avis sur ce livre le {{ avis_existant.0.dateavis|date("d/m/Y") }}.</p>
                 {% else %}
                     <a id="boutonAvis" href="javascript:visibilite();" class="btn btn-success btn-sm">Avis</a>
                     <div id="deposerAvis" style="display:none;">
