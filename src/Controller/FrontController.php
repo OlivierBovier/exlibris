@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Livres;
@@ -218,14 +219,33 @@ class FrontController extends AbstractController
             $prix_total_ht_panier = $prix_total_ttc_panier / 1.20;
             $tva = $prix_total_ttc_panier - $prix_total_ht_panier;
 
-            
+            $formChangeAdresse = $this->createFormBuilder()
+                ->add('destinataire', TextType::class, array('required' => false))
+                ->add('adresse', TextType::class, array('required' => false))
+                ->add('codepostal', TextType::class, array('required' => false))
+                ->add('ville', TextType::class, array('required' => false))    
+                ->add('ValidCommand', SubmitType::class, array('label' => 'Valider votre commande', 'attr' => array('class' => 'btn btn-success')))
+                ->getForm();
+            $formChangeAdresse->handleRequest($request);
+
+            if ($formChangeAdresse->isSubmitted() && $formChangeAdresse->isValid()) {
+                $changeAdresse = $formChangeAdresse->getData();
+                dump($changeAdresse);
+                dump($session->get('contenu_panier'));
+                dump($prix_total_ht_panier);
+                dump($tva);
+                dump($prix_total_ttc_panier);
+                die();
+                return $this->redirectToRoute("front_home");
+            }
 
             return $this->render('front/panier.html.twig', [
                 'articles_panier' => $articles_panier,
                 'prix_total_ttc_panier' => $prix_total_ttc_panier,
                 'tva' => $tva,
                 'prix_total_ht_panier' => $prix_total_ht_panier,
-                'formEraseCart' => $formEraseCart->createView()
+                'formEraseCart' => $formEraseCart->createView(),
+                'formChangeAdresse' => $formChangeAdresse->createView()
             ]);
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');

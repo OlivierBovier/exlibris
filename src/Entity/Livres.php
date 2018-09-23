@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LivresRepository")
@@ -24,6 +25,10 @@ class Livres
 
     /**
      * @ORM\Column(type="string", length=17)
+     * @Assert\Isbn(
+     *     type = "isbn13",
+     *     message = "Ce n'est pas un code Isbn valide."
+     * )
      */
     private $isbn;
 

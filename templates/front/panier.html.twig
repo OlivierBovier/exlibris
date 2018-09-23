@@ -1,7 +1,5 @@
 {% extends "layout.html.twig" %}
 
-{% form_theme formEraseCart 'bootstrap_4_layout.html.twig' %}
-
 {% block title %} Panier {% endblock %}
 
 {% block contenu %}
@@ -64,22 +62,36 @@
                 <a id="boutonSuiteCommande" href="javascript:visibilite();" class="btn btn-success">Suite commande</a>
             </div>
         </div>
-        <div id="suiteCommande" style="display:none;">
+        <div class="row" id="suiteCommande" style="display:none;">
+
             {% if not app.user %}
                     <a href="{{ path('security_login') }}" class="btn btn-warning btn-sm">Connectez-vous pour poursuivre votre commande.</a>
             {% else %}
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h5 class="card-title">Votre adresse</h5>
-                    <br>
-                    <p class="card-text">{{ app.user.username }}<br>{{ app.user.adresse }}<br>{{ app.user.codepostal }} {{ app.user.ville }}</p>
-                  </div>
-                  <div class="card-footer">
-                    <p>Voulez-vous indiquer une autre adresse pour cette livraison ?</p>
-                  </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <h5 class="card-title">Votre adresse</h5>
+                        <br>
+                        <p class="card-text">{{ app.user.username }}<br>{{ app.user.adresse }}<br>{{ app.user.codepostal }} {{ app.user.ville }}</p>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <div class="card-title">
+                            <p>Voulez-vous indiquer une autre adresse pour cette livraison ?</p>
+                            {{ form_start(formChangeAdresse) }}
+                            {{ form_row(formChangeAdresse.destinataire, {'label': 'Destinataire', 'attr': {'placeholder': 'Destinataire (facultatif)'}}) }}
+                            {{ form_row(formChangeAdresse.adresse, {'attr': {'placeholder': 'votre adresse (facultative)'}}) }}
+                            {{ form_row(formChangeAdresse.codepostal, {'attr': {'placeholder': 'votre code postal (facultatif)'}}) }}
+                            {{ form_row(formChangeAdresse.ville, {'attr': {'placeholder': 'votre ville (facultative)'}}) }}
+                            {{ form_end(formChangeAdresse) }}
+                        </div>
+                      </div>
+                    </div>
                 </div>
             {% endif %}
-
 
         </div>
 
