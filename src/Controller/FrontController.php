@@ -218,6 +218,8 @@ class FrontController extends AbstractController
             $prix_total_ht_panier = $prix_total_ttc_panier / 1.20;
             $tva = $prix_total_ttc_panier - $prix_total_ht_panier;
 
+            
+
             return $this->render('front/panier.html.twig', [
                 'articles_panier' => $articles_panier,
                 'prix_total_ttc_panier' => $prix_total_ttc_panier,

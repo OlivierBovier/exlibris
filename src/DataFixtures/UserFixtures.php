@@ -35,7 +35,7 @@ class UserFixtures extends Fixture
         $this->addReference(self::ADMIN, $admin);
 
         $Anne_Laure = new User();
-        $Anne_Laure->setUsername('Anne-Laure');
+        $Anne_Laure->setUsername('Anne-Laure Dupont');
         $Anne_Laure->setEmail('anne_laure@free.fr');
         $Anne_Laure->setAdresse('1 rue des Fleurs');
         $Anne_Laure->setCodePostal('92000');
@@ -49,7 +49,7 @@ class UserFixtures extends Fixture
         $this->addReference(self::ANNE_LAURE, $Anne_Laure);
 
         $Olivier = new User();
-        $Olivier->setUsername('Olivier');
+        $Olivier->setUsername('Olivier Legrand');
         $Olivier->setEmail('olivier.bovier@free.fr');
         $Olivier->setAdresse('1 Square Vivaldi');
         $Olivier->setCodePostal('78150');

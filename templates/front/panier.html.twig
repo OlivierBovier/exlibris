@@ -55,12 +55,51 @@
                 </tr>
             </tfoot>
         </table>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="row justify-content-between">
+            <div id="boutonEraseCart" class="col-lg-2 col-md-4 col-sm-4">
                 {{ form_start(formEraseCart) }}
                 {{ form_end(formEraseCart) }}
             </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 float-right offset-lg-6">
+                <a id="boutonSuiteCommande" href="javascript:visibilite();" class="btn btn-success">Suite commande</a>
+            </div>
         </div>
+        <div id="suiteCommande" style="display:none;">
+            {% if not app.user %}
+                    <a href="{{ path('security_login') }}" class="btn btn-warning btn-sm">Connectez-vous pour poursuivre votre commande.</a>
+            {% else %}
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Votre adresse</h5>
+                    <br>
+                    <p class="card-text">{{ app.user.username }}<br>{{ app.user.adresse }}<br>{{ app.user.codepostal }} {{ app.user.ville }}</p>
+                  </div>
+                  <div class="card-footer">
+                    <p>Voulez-vous indiquer une autre adresse pour cette livraison ?</p>
+                  </div>
+                </div>
+            {% endif %}
+
+
+        </div>
+
     {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var divboutonSuiteCommande=document.getElementById('boutonSuiteCommande');
+        var divsuiteCommande=document.getElementById('suiteCommande');
+        var divboutonEraseCart=document.getElementById('boutonEraseCart');
+        function visibilite()
+        {
+            divboutonSuiteCommande.style.display='none';
+            divboutonEraseCart.style.display='none';
+            divsuiteCommande.style.display='';
+        }
+    </script>
 
 {% endblock %}
