@@ -230,6 +230,18 @@ class FrontController extends AbstractController
 
             if ($formChangeAdresse->isSubmitted() && $formChangeAdresse->isValid()) {
                 $changeAdresse = $formChangeAdresse->getData();
+                if ($changeAdresse['destinataire'] || $changeAdresse['adresse'] || $changeAdresse['codepostal'] || $changeAdresse['ville']) {
+                    $user = $session->get('User');
+                    dump($user);
+                    $user->setDestLiv($changeAdresse['destinataire']);
+                    $manager->persist($user);
+                    $manager->flush();
+                    dump($changeAdresse['destinataire']);
+                    die();
+                }
+
+
+
                 dump($changeAdresse);
                 dump($session->get('contenu_panier'));
                 dump($prix_total_ht_panier);
@@ -247,6 +259,7 @@ class FrontController extends AbstractController
                 'formEraseCart' => $formEraseCart->createView(),
                 'formChangeAdresse' => $formChangeAdresse->createView()
             ]);
+        
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');
 

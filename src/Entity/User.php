@@ -82,6 +82,26 @@ class User implements UserInterface, \Serializable
      */
     private $roles = array();
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adresse_liv;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $codepostal_liv;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ville_liv;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $dest_liv;
+
 
     public function __construct()
     {
@@ -315,5 +335,53 @@ class User implements UserInterface, \Serializable
     function addRole($role)
     {
         $this->roles[] = $role;
+    }
+
+    public function getAdresseLiv(): ?string
+    {
+        return $this->adresse_liv;
+    }
+
+    public function setAdresseLiv(?string $adresse_liv): self
+    {
+        $this->adresse_liv = $adresse_liv;
+
+        return $this;
+    }
+
+    public function getCodepostalLiv(): ?string
+    {
+        return $this->codepostal_liv;
+    }
+
+    public function setCodepostalLiv(?string $codepostal_liv): self
+    {
+        $this->codepostal_liv = $codepostal_liv;
+
+        return $this;
+    }
+
+    public function getVilleLiv(): ?string
+    {
+        return $this->ville_liv;
+    }
+
+    public function setVilleLiv(?string $ville_liv): self
+    {
+        $this->ville_liv = $ville_liv;
+
+        return $this;
+    }
+
+    public function getDestLiv(): ?string
+    {
+        return $this->dest_liv;
+    }
+
+    public function setDestLiv(?string $dest_liv): self
+    {
+        $this->dest_liv = $dest_liv;
+
+        return $this;
     }
 }
