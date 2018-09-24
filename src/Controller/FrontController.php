@@ -50,18 +50,22 @@ class FrontController extends AbstractController
             );
         }
 
-        $venteParLivre = $this->getDoctrine()
+        $venteparlivre = $this->getDoctrine()
             ->getRepository(LignesCde::class)
             ->venteParLivre();
-        dump($venteParLivre);
+        dump($venteparlivre);
 
-        if (!$venteParLivre) {
+        if (!$venteparlivre) {
             throw $this->createNotFoundException(
                 'Pas de vente sur le site.'
             );
         }
 
-        return $this->render('front/home.html.twig', ['livresrecents' => $livresrecents, 'livresconseilles' => $livresconseilles]);
+        return $this->render('front/home.html.twig', [
+            'livresrecents' => $livresrecents,
+            'livresconseilles' => $livresconseilles,
+            'venteparlivre' => $venteparlivre
+        ]);
     }
 
 

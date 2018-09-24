@@ -24,10 +24,14 @@ class LignesCdeRepository extends ServiceEntityRepository
      */
     public function venteParLivre()
     {
-        return $this->createQueryBuilder('l')
-            ->select('SUM(l.qte_ligne_cde)')
-            ->groupBy('l.livre')
-            ->orderBy('SUM(l.qte_ligne_cde)', 'DESC')
+        return $this->createQueryBuilder('lig')
+            ->select('(lig.livre)', '(SUM(lig.qte_ligne_cde))') // Les parenthèses entourant les champs sont nécessaires en cas de Composite Keys
+            ->leftJoin('lig.livre', 'liv')
+            ->addSelect('liv.id', 'liv.titre', 'liv.image', 'liv.resume', 'liv.prix_ttc', 'liv.date_parution')
+            ->leftJoin('liv.auteur', 'aut')
+            ->addSelect('aut.prenom_auteur', 'aut.nom_auteur')
+            ->groupBy('lig.livre')
+            ->orderBy('SUM(lig.qte_ligne_cde)', 'DESC')
             ->setMaxResults(8)
             ->getQuery()
             ->getResult()
