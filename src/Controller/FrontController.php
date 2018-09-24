@@ -34,32 +34,13 @@ class FrontController extends AbstractController
             ->getRepository(Livres::class)
             ->findRecent();
 
-        if (!$livresrecents) {
-            throw $this->createNotFoundException(
-                'Pas de livres récents dans notre base.'
-            );
-        }
-
         $livresconseilles = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findConseil();
 
-        if (!$livresconseilles) {
-            throw $this->createNotFoundException(
-                'Pas de conseil de lecture en ce moment.'
-            );
-        }
-
         $venteparlivre = $this->getDoctrine()
             ->getRepository(LignesCde::class)
             ->venteParLivre();
-        dump($venteparlivre);
-
-        if (!$venteparlivre) {
-            throw $this->createNotFoundException(
-                'Pas de vente sur le site.'
-            );
-        }
 
         return $this->render('front/home.html.twig', [
             'livresrecents' => $livresrecents,
@@ -247,7 +228,10 @@ class FrontController extends AbstractController
             $formChangeAdresse->handleRequest($request);
 
             if ($formChangeAdresse->isSubmitted() && $formChangeAdresse->isValid()) {
+
                 $changeAdresse = $formChangeAdresse->getData();
+                $session->set('chgt_addresse_livr', false);
+
                 if ($changeAdresse['destinataire'] || $changeAdresse['adresse'] || $changeAdresse['codepostal'] || $changeAdresse['ville']) {
                     $user = $this->getUser();
                     dump($user);
@@ -257,42 +241,43 @@ class FrontController extends AbstractController
                     $user->setVilleLiv($changeAdresse['ville']);
                     $manager->persist($user);
 
+                    $session->set('chgt_addresse_livr', true);
                 }
 
-            $commande = new Commandes();
-            $commande->setUser($this->getUser());
-            $commande->setDateCde(new \DateTime());
-            $commande->setTotalHtCde($prix_total_ht_panier);
-            $commande->setTvaCde($tva);
-            $commande->setTotalTtcCde($prix_total_ttc_panier);
-            $manager->persist($commande);
+                $commande = new Commandes();
+                $commande->setUser($this->getUser());
+                $commande->setDateCde(new \DateTime());
+                $commande->setTotalHtCde($prix_total_ht_panier);
+                $commande->setTvaCde($tva);
+                $commande->setTotalTtcCde($prix_total_ttc_panier);
+                $manager->persist($commande);
 
-            foreach($session->get('contenu_panier') as $lignepanier) {
-                $lignecde = new LignesCde();
-                $livre = $this->getDoctrine()
-                    ->getRepository(Livres::class)
-                    ->find($lignepanier['id']);
-                $lignecde->setLivre($livre);
-                $lignecde->setCommande($commande);
-                $lignecde->setQteLigneCde($lignepanier['qte']);
-                $manager->persist($lignecde);
+                foreach($session->get('contenu_panier') as $lignepanier) {
+                    $lignecde = new LignesCde();
+                    $livre = $this->getDoctrine()
+                        ->getRepository(Livres::class)
+                        ->find($lignepanier['id']);
+                    $lignecde->setLivre($livre);
+                    $lignecde->setCommande($commande);
+                    $lignecde->setQteLigneCde($lignepanier['qte']);
+                    $manager->persist($lignecde);
 
-                $mvStock = new MouvStock();
-                $mvStock->setLivre($livre);
-                $mvStock->setQteMouv($lignepanier['qte'] * -1);
-                $mvStock->setDateMouv(new \DateTime());
-                $manager->persist($mvStock);
-            }
+                    $mvStock = new MouvStock();
+                    $mvStock->setLivre($livre);
+                    $mvStock->setQteMouv($lignepanier['qte'] * -1);
+                    $mvStock->setDateMouv(new \DateTime());
+                    $manager->persist($mvStock);
+                }
 
-            $manager->flush();
+                $manager->flush();
 
-                dump($changeAdresse);
-                dump($session->get('contenu_panier'));
-                dump($prix_total_ht_panier);
-                dump($tva);
-                dump($prix_total_ttc_panier);
-                die();
-                return $this->redirectToRoute("front_home");
+                    dump($changeAdresse);
+                    dump($session->get('contenu_panier'));
+                    dump($prix_total_ht_panier);
+                    dump($tva);
+                    dump($prix_total_ttc_panier);
+                    dump($commande->getId());
+                    return $this->redirectToRoute("front_facture", array('id' => $commande->getId()));
             }
 
             return $this->render('front/panier.html.twig', [
@@ -310,6 +295,17 @@ class FrontController extends AbstractController
             return $this->redirectToRoute("front_home");
         }
     }
+
+    /**
+     * @Route("/facture/{id}", name="front_facture")
+     */
+    public function facture($id, Session $session)
+    {
+        dump($session->get('chgt_addresse_livr'));
+
+        return $this->render('front/facture.html.twig');
+    }
+
 
     /**
      * @Route("/incrementartpanier/{id}", name="front_incrementartpanier")

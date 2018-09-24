@@ -56,17 +56,18 @@
         </div>
     </div>
 
+    {% if livresrecents|length > 0 %}
     <div class="row">
         <div class="col-sm-12">
-            <h2 class="text-muted text-right">Le top des nouveautés !</h2>
+            <h2 class="text-muted">Le top des nouveautés !</h2>
             <div class="row">
                 {% for livrerecent in livresrecents %}
                     <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
                         <div class="card h-100">
                             <a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">
                                 <img class="card-img-top"
-                                     src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}"
-                                     alt="{{ livrerecent.titre }}">
+                                src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}"
+                                alt="{{ livrerecent.titre }}">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title"><a
@@ -88,7 +89,9 @@
             <!-- /.row -->
         </div>
     </div>
-
+    {% endif %}
+    
+    {% if venteparlivre|length > 0 %}
     <div class="row">
         <div class="col-sm-12">
             <h2 class="text-muted">Nos meilleures ventes</h2>
@@ -96,9 +99,11 @@
                 {% for livre_v in venteparlivre %}
                     <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
                         <div class="card h-100">
-                            <a href=" {{ path('front_fiche', { 'id': livre_v.id }) }} "><img class="card-img-top"
-                                                                                             src="{{ asset('images/livres/' ~ livre_v.image ~'') }}"
-                                                                                             alt="{{ livre_v.titre }}"></a>
+                            <a href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">
+                                <img class="card-img-top"
+                                src="{{ asset('images/livres/' ~ livre_v.image ~'') }}"
+                                alt="{{ livre_v.titre }}">
+                            </a>
                             <div class="card-body">
                                 <h5 class="card-title"><a
                                             href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">{{ livre_v.titre }}</a>
@@ -120,17 +125,21 @@
             <!-- /.row -->
         </div>
     </div>
-
+    {% endif %}
+    
+    {% if livresconseilles|length > 0 %}
     <div class="row">
         <div class="col-sm-12">
-            <h2 class="text-muted text-right">Conseils des libraires</h2>
+            <h2 class="text-muted">Conseils des libraires</h2>
             <div class="row">
                 {% for livre_c in livresconseilles %}
                     <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
                         <div class="card h-100">
-                            <a href=" {{ path('front_fiche', { 'id': livre_c.id }) }} "><img class="card-img-top"
-                                                                                             src="{{ asset('images/livres/' ~ livre_c.image ~'') }}"
-                                                                                             alt="{{ livre_c.titre }}"></a>
+                            <a href=" {{ path('front_fiche', { 'id': livre_c.id }) }} ">
+                                <img class="card-img-top"
+                                    src="{{ asset('images/livres/' ~ livre_c.image ~'') }}"
+                                    alt="{{ livre_c.titre }}">
+                            </a>
                             <div class="card-body">
                                 <h5 class="card-title"><a
                                             href=" {{ path('front_fiche', { 'id': livre_c.id }) }} ">{{ livre_c.titre }}</a>
@@ -151,13 +160,6 @@
             <!-- /.row -->
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <h2 class="text-muted">Derniers avis des lecteurs</h2>
-        </div>
-    </div>
-
-
+    {% endif %}
 
 {% endblock %}
