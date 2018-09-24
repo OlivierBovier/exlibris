@@ -3,15 +3,15 @@
 {% form_theme formRegistr 'bootstrap_4_layout.html.twig' %}
 
 {% block contenu %}
-	<h2>Inscrivez-vous ici</h2>
-	{{ form_start(formRegistr) }}
-	{{ form_row(formRegistr.username, {'label': 'Nom d\'utilisateur', 'attr': {'placeholder': 'votre nom d\'utilisateur ici...'}}) }}
-	{{ form_row(formRegistr.email, {'attr': {'placeholder': 'votre mail ici...'}}) }}
-	{{ form_row(formRegistr.adresse, {'attr': {'placeholder': 'votre adresse ici...'}}) }}
-	{{ form_row(formRegistr.codePostal, {'attr': {'placeholder': 'votre code postal ici...'}}) }}
-	{{ form_row(formRegistr.ville, {'attr': {'placeholder': 'votre ville ici...'}}) }}
-	{{ form_row(formRegistr.password.first) }}
+    <h2>Inscrivez-vous ici</h2>
+    {{ form_start(formRegistr) }}
+    {{ form_row(formRegistr.username, {'label': 'Nom d\'utilisateur', 'attr': {'placeholder': 'votre nom d\'utilisateur ici...'}}) }}
+    {{ form_row(formRegistr.email, {'attr': {'placeholder': 'votre mail ici...'}}) }}
+    {{ form_row(formRegistr.adresse, {'attr': {'placeholder': 'votre adresse ici...'}}) }}
+    {{ form_row(formRegistr.codePostal, {'attr': {'placeholder': 'votre code postal ici...'}}) }}
+    {{ form_row(formRegistr.ville, {'attr': {'placeholder': 'votre ville ici...'}}) }}
+    {{ form_row(formRegistr.password.first) }}
     {{ form_row(formRegistr.password.second) }}
-	<button type="submit" class="btn btn-success">Inscription</button>
-	{{ form_end(formRegistr) }}
+    <button type="submit" class="btn btn-success">Inscription</button>
+    {{ form_end(formRegistr) }}
 {% endblock %}

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %}{% endblock %} - ExLibris</title>
-        {% block stylesheets %}
-        	<link href={{ asset('build/app.css') }} rel="stylesheet">
-            <link href={{ asset('build/sticky-footer-navbar.css') }} rel="stylesheet">
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-			<script src={{ asset('build/app.js') }}></script>
-        {% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %} - ExLibris</title>
+    {% block stylesheets %}
+        <link href={{ asset('build/app.css') }} rel="stylesheet">
+        <link href={{ asset('build/sticky-footer-navbar.css') }} rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+{% block body %}{% endblock %}
+{% block javascripts %}
+    <script src={{ asset('build/app.js') }}></script>
+{% endblock %}
+</body>
 </html>

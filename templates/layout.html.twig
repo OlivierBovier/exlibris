@@ -1,77 +1,84 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
- 
-<header class="container"> 
-	<nav class="navbar navbar-expand-md navbar-light fixed-top bg-warning">
-      <a class="navbar-brand" href= {{ path('front_home') }} ><img class="logo" src="{{ asset('images/logo.jpg') }}" height="90" alt="Logo"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href= {{ path('front_home') }} >Accueil</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href= {{ path('front_catalog') }} >Catalogue</a>
-          </li>
-          {% if not app.user %}
-              <li class="nav-item active">
-                  <a class="nav-link" href= {{ path('security_registration') }} >Inscription</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href= {{ path('security_login') }} >Connexion</a>
-              </li>
-          {% else %}
-              <li class="nav-item active">
-                <a class="nav-link" href= {{ path('security_logout') }} >Déconnexion ({{ app.user.username }})</a>
-              </li>
-          {% endif %}
-          {% if is_granted('ROLE_ADMIN') %}
-            <li class="nav-item active">
-              <a class="nav-link" href= {{ path('admin') }} target="_blank" >Espace d'Administration</a>
-            </li>
-          {% endif %}
 
-          {% if app.session.get('contenu_panier') %}
-            <li class="nav-item active">
-              <strong><a class="nav-link" href= {{ path('front_panier') }} >
-                      Panier : {% if app.session.get('contenu_panier')|length < 2 %}
-                                  {{ app.session.get('contenu_panier')|length }} article
-                              {% else %}
-                                  {{ app.session.get('contenu_panier')|length }} articles
-                              {% endif %}
-                  </a></strong>
-            </li>
-          {% else %}
-            <li class="nav-item active">
-              <strong><a class="nav-link" href= {{ path('front_panier') }} >Votre panier est vide</a></strong>
-            </li>
-          {% endif %}
+    <header class="container">
+        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-warning">
+            <a class="navbar-brand" href= {{ path('front_home') }}>
+                <img class="logo"
+                     src="{{ asset('images/logo.jpg') }}" height="90"
+                     alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href= {{ path('front_home') }}>Accueil</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href= {{ path('front_catalog') }}>Catalogue</a>
+                    </li>
+                    {% if not app.user %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href= {{ path('security_registration') }}>Inscription</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href= {{ path('security_login') }}>Connexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href= {{ path('security_logout') }}>Déconnexion ({{ app.user.username }}
+                                )</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href= {{ path('admin') }} target="_blank">Espace d'Administration</a>
+                        </li>
+                    {% endif %}
 
-
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-        </form>
-      </div>
-  </nav>
-</header>
-
-<main class="container">
-{% block contenu %}
-
-{% endblock %}
-</main>
+                    {% if app.session.get('contenu_panier') %}
+                        <li class="nav-item active">
+                            <strong><a class="nav-link" href= {{ path('front_panier') }}>
+                                    Panier : {% if app.session.get('contenu_panier')|length < 2 %}
+                                        {{ app.session.get('contenu_panier')|length }} article
+                                    {% else %}
+                                        {{ app.session.get('contenu_panier')|length }} articles
+                                    {% endif %}
+                                </a></strong>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active">
+                            <strong><a class="nav-link" href= {{ path('front_panier') }}>Votre panier est
+                                    vide</a></strong>
+                        </li>
+                    {% endif %}
 
 
-<footer class="container">
-    <span class="text-muted">Copyright &copy; ExLibris 2018</span> - 
-    <a class="text-muted" href= {{ path('front_mentions') }} >Mentions légales</a> - 
-    <a class="text-muted" href= {{ path('front_infos_prat') }} >Info pratiques</a>
-</footer>		
+                </ul>
+                <form class="form-inline mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block contenu %}
+
+        {% endblock %}
+    </main>
+
+
+    <footer class="container">
+        <span class="text-muted">Copyright &copy; ExLibris 2018</span> -
+        <a class="text-muted" href= {{ path('front_mentions') }}>Mentions légales</a> -
+        <a class="text-muted" href= {{ path('front_infos_prat') }}>Info pratiques</a>
+    </footer>
 
 {% endblock %}
 

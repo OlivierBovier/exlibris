@@ -18,22 +18,23 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class SecurityController extends AbstractController
 {
     /**
-    * @route("/inscription", name="security_registration")
-    */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, Session $session, \Swift_Mailer $mailer) {
-    	$user = new User();   	
-    	$formRegistr = $this->createForm(RegistrationType::class, $user);
-    	$formRegistr->handleRequest($request);
+     * @route("/inscription", name="security_registration")
+     */
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, Session $session, \Swift_Mailer $mailer)
+    {
+        $user = new User();
+        $formRegistr = $this->createForm(RegistrationType::class, $user);
+        $formRegistr->handleRequest($request);
 
-    	if ($formRegistr->isSubmitted() && $formRegistr->isValid()) {
-    	    $hash = $encoder->encodePassword($user, $user->getPassword());
-    		$user->setPassword($hash);
+        if ($formRegistr->isSubmitted() && $formRegistr->isValid()) {
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
 
             $user->addRole('ROLE_USER');
             //$user->addRole('ROLE_ADMIN');
 
-    		$manager->persist($user);
-    		$manager->flush();
+            $manager->persist($user);
+            $manager->flush();
 
             $session->getFlashBag()->add('notice', 'Votre inscription est bien prise en compte. Merci. Vous pouvez maintenant vous connecter.');
 
@@ -51,25 +52,27 @@ class SecurityController extends AbstractController
             $mailer->send($message);
 
             return $this->redirectToRoute("security_login");
-    	}
+        }
 
-    	return $this->render("security/registration.html.twig", [
-    		'formRegistr' => $formRegistr->createView()
-    	]);
+        return $this->render("security/registration.html.twig", [
+            'formRegistr' => $formRegistr->createView()
+        ]);
     }
 
     /**
-    * @route("/connexion", name="security_login")
-    */
-    public function login(Request $request, Session $session) {
+     * @route("/connexion", name="security_login")
+     */
+    public function login(Request $request, Session $session)
+    {
 
         return $this->render("security/login.html.twig");
     }
 
     /**
-    * @route("/deconnexion", name="security_logout")
-    */
-    public function logout(Session $session) {
+     * @route("/deconnexion", name="security_logout")
+     */
+    public function logout(Session $session)
+    {
         $session->getFlashBag()->add('success', 'Votre déconnexion est effective.');
 
         return $this->redirectToRoute("front_home");

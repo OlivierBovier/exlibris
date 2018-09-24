@@ -6,51 +6,56 @@
 
 
     {% if not app.session.get('contenu_panier') %}
-    <h2 class="text-muted">Votre panier est vide.</h2>
+        <h2 class="text-muted">Votre panier est vide.</h2>
     {% else %}
         <h2 class="text-muted">Votre panier</h2>
 
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th scope="col" class="text-center">Titre</th>
-                    <th scope="col" class="text-center"></th>
-                    <th scope="col" class="text-center">Quantité</th>
-                    <th scope="col" class="text-right">Prix unitaire</th>
-                    <th scope="col" class="text-right">Prix</th>
-                </tr>
+            <tr>
+                <th scope="col" class="text-center">Titre</th>
+                <th scope="col" class="text-center"></th>
+                <th scope="col" class="text-center">Quantité</th>
+                <th scope="col" class="text-right">Prix unitaire</th>
+                <th scope="col" class="text-right">Prix</th>
+            </tr>
             </thead>
             <tbody>
-                {% for article in articles_panier %}
+            {% for article in articles_panier %}
                 <tr>
-                    <td class="text-left align-middle"><a href="{{ path('front_fiche', {'id': article.id}) }}"> {{ article.titre }} </a></td>
-                    <td class="text-center"><img class="img-fluid rounded" src="{{ asset('images/livres/' ~ article.image ~ '') }}" alt="{{ article.titre }}" height="85" width="50"></td>
+                    <td class="text-left align-middle"><a
+                                href="{{ path('front_fiche', {'id': article.id}) }}"> {{ article.titre }} </a></td>
+                    <td class="text-center"><img class="img-fluid rounded"
+                                                 src="{{ asset('images/livres/' ~ article.image ~ '') }}"
+                                                 alt="{{ article.titre }}" height="85" width="50"></td>
                     <td class="text-center align-middle">
-                        <a href="{{ path('front_decrementartpanier', {'id': article.id}) }}" class="btn btn-secondary btn-sm">-</a>
+                        <a href="{{ path('front_decrementartpanier', {'id': article.id}) }}"
+                           class="btn btn-secondary btn-sm">-</a>
                         {{ article.qte }}
-                        <a href="{{ path('front_incrementartpanier', {'id': article.id}) }}" class="btn btn-info btn-sm">+</a>
+                        <a href="{{ path('front_incrementartpanier', {'id': article.id}) }}"
+                           class="btn btn-info btn-sm">+</a>
                     </td>
                     <td class="text-right align-middle">{{ article.prixttc|number_format(2, ',', ' ') }} €</td>
                     <td class="text-right align-middle">{{ article.prix_total_ttc|number_format(2, ',', ' ') }} €</td>
                 </tr>
-                {% endfor %}
+            {% endfor %}
             </tbody>
             <tfoot>
-                <tr>
-                    <td colspan="3"></td>
-                    <td class="text-right">Prix total HT</td>
-                    <td class="text-right">{{ prix_total_ht_panier|number_format(2, ',', ' ') }} €</td>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                    <td class="text-right">TVA</td>
-                    <td class="text-right">{{ tva|number_format(2, ',', ' ') }} €</td>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                    <td class="text-right">Prix total TTC</td>
-                    <td class="text-right">{{ prix_total_ttc_panier|number_format(2, ',', ' ') }} €</td>
-                </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="text-right">Prix total HT</td>
+                <td class="text-right">{{ prix_total_ht_panier|number_format(2, ',', ' ') }} €</td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="text-right">TVA</td>
+                <td class="text-right">{{ tva|number_format(2, ',', ' ') }} €</td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="text-right">Prix total TTC</td>
+                <td class="text-right">{{ prix_total_ttc_panier|number_format(2, ',', ' ') }} €</td>
+            </tr>
             </tfoot>
         </table>
         <div class="row justify-content-between">
@@ -65,30 +70,32 @@
         <div class="row" id="suiteCommande" style="display:none;">
 
             {% if not app.user %}
-                    <a href="{{ path('security_login') }}" class="btn btn-warning btn-sm">Connectez-vous pour poursuivre votre commande.</a>
+                <a href="{{ path('security_login') }}" class="btn btn-warning btn-sm">Connectez-vous pour poursuivre
+                    votre commande.</a>
             {% else %}
                 <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                     <div class="card h-100">
-                      <div class="card-body">
-                        <h5 class="card-title">Votre adresse</h5>
-                        <br>
-                        <p class="card-text">{{ app.user.username }}<br>{{ app.user.adresse }}<br>{{ app.user.codepostal }} {{ app.user.ville }}</p>
-                      </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Votre adresse</h5>
+                            <br>
+                            <p class="card-text">{{ app.user.username }}<br>{{ app.user.adresse }}
+                                <br>{{ app.user.codepostal }} {{ app.user.ville }}</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-3 col-sm-6 mb-4">
                     <div class="card h-100">
-                      <div class="card-body">
-                        <div class="card-title">
-                            <p>Voulez-vous indiquer une autre adresse pour cette livraison ?</p>
-                            {{ form_start(formChangeAdresse) }}
-                            {{ form_row(formChangeAdresse.destinataire, {'label': 'Destinataire', 'attr': {'placeholder': 'Destinataire (facultatif)'}}) }}
-                            {{ form_row(formChangeAdresse.adresse, {'attr': {'placeholder': 'votre adresse (facultative)'}}) }}
-                            {{ form_row(formChangeAdresse.codepostal, {'attr': {'placeholder': 'votre code postal (facultatif)'}}) }}
-                            {{ form_row(formChangeAdresse.ville, {'attr': {'placeholder': 'votre ville (facultative)'}}) }}
-                            {{ form_end(formChangeAdresse) }}
+                        <div class="card-body">
+                            <div class="card-title">
+                                <p>Voulez-vous indiquer une autre adresse pour cette livraison ?</p>
+                                {{ form_start(formChangeAdresse) }}
+                                {{ form_row(formChangeAdresse.destinataire, {'label': 'Destinataire', 'attr': {'placeholder': 'Destinataire (facultatif)'}}) }}
+                                {{ form_row(formChangeAdresse.adresse, {'attr': {'placeholder': 'votre adresse (facultative)'}}) }}
+                                {{ form_row(formChangeAdresse.codepostal, {'attr': {'placeholder': 'votre code postal (facultatif)'}}) }}
+                                {{ form_row(formChangeAdresse.ville, {'attr': {'placeholder': 'votre ville (facultative)'}}) }}
+                                {{ form_end(formChangeAdresse) }}
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
             {% endif %}
@@ -103,14 +110,14 @@
     {{ parent() }}
 
     <script>
-        var divboutonSuiteCommande=document.getElementById('boutonSuiteCommande');
-        var divsuiteCommande=document.getElementById('suiteCommande');
-        var divboutonEraseCart=document.getElementById('boutonEraseCart');
-        function visibilite()
-        {
-            divboutonSuiteCommande.style.display='none';
-            divboutonEraseCart.style.display='none';
-            divsuiteCommande.style.display='';
+        var divboutonSuiteCommande = document.getElementById('boutonSuiteCommande');
+        var divsuiteCommande = document.getElementById('suiteCommande');
+        var divboutonEraseCart = document.getElementById('boutonEraseCart');
+
+        function visibilite() {
+            divboutonSuiteCommande.style.display = 'none';
+            divboutonEraseCart.style.display = 'none';
+            divsuiteCommande.style.display = '';
         }
     </script>
 

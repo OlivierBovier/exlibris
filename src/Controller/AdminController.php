@@ -15,8 +15,8 @@ class AdminController extends AbstractController
     public function index(AuthorizationCheckerInterface $authChecker)
     {
         if (false === $authChecker->isGranted('ROLE_ADMIN')) {
-        	throw new AccessDeniedException('Vous n\'etes pas autorisés à accéder à cette page !');
-    	}
+            throw new AccessDeniedException('Vous n\'etes pas autorisés à accéder à cette page !');
+        }
 
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',

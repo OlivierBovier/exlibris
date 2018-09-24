@@ -4,25 +4,26 @@
 
 {% block contenu %}
 
-  <div class="row">
+    <div class="row">
 
         <div class="col-lg-7">
 
-          <div class="card mt-4">
-            
-            <div class="card-body">
-              <h3 class="card-title">Biographie de {{ bio.PrenomAuteur }} {{ bio.NomAuteur }}</h3>
-              <p class="card-text">{{ bio.BiographieAuteur }}</p>
+            <div class="card mt-4">
+
+                <div class="card-body">
+                    <h3 class="card-title">Biographie de {{ bio.PrenomAuteur }} {{ bio.NomAuteur }}</h3>
+                    <p class="card-text">{{ bio.BiographieAuteur }}</p>
+                </div>
             </div>
-          </div>
-          <!-- /.card -->
+            <!-- /.card -->
         </div>
         <!-- /.col-lg-9 -->
 
         <div class="col-lg-5">
-          <div class="card-body">
-            <img class="card-img-top img-fluid" src="{{ asset('images/auteurs/' ~ bio.image ~'') }}" alt="{{ bio.PrenomAuteur }} {{ bio.NomAuteur }}">
-          </div>
+            <div class="card-body">
+                <img class="card-img-top img-fluid" src="{{ asset('images/auteurs/' ~ bio.image ~'') }}"
+                     alt="{{ bio.PrenomAuteur }} {{ bio.NomAuteur }}">
+            </div>
         </div>
         <!-- /.col-lg-3 -->
     </div>

@@ -16,6 +16,9 @@ use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
 use App\Entity\Avis;
+use App\Entity\Commandes;
+use App\Entity\LignesCde;
+use App\Entity\MouvStock;
 use App\Form\FiltreAuteurType;
 use App\Form\FiltreCategorieType;
 use App\Form\AvisType;
@@ -23,8 +26,8 @@ use App\Form\AvisType;
 class FrontController extends AbstractController
 {
     /**
-    * @Route("/", name="front_home")
-    */
+     * @Route("/", name="front_home")
+     */
     public function home()
     {
         $livresrecents = $this->getDoctrine()
@@ -52,20 +55,20 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/catalog/", name="front_catalog")
-    */
+     * @Route("/catalog/", name="front_catalog")
+     */
     public function catalog(Request $request, ObjectManager $manager, Session $session, PaginatorInterface $paginator)
     {
 
         $formFiltreAuteur = $this->createForm(FiltreAuteurType::class);
         $formFiltreAuteur->handleRequest($request);
         $formFiltreCategorie = $this->createForm(FiltreCategorieType::class);
-        $formFiltreCategorie->handleRequest($request);        
+        $formFiltreCategorie->handleRequest($request);
 
         if ($formFiltreAuteur->isSubmitted() && $formFiltreAuteur->isValid()) {
             $filtres = $request->request->get('filtre_auteur');
             $auteur = $filtres['auteur'];
-            
+
             $catalog = $this->getDoctrine()
                 ->getRepository(Livres::class)
                 ->findBy(['auteur' => $auteur], ['date_parution' => 'DESC']);
@@ -77,7 +80,7 @@ class FrontController extends AbstractController
         } elseif ($formFiltreCategorie->isSubmitted() && $formFiltreCategorie->isValid()) {
             $filtres = $request->request->get('filtre_categorie');
             $categorie = $filtres['categorie'];
-            
+
             $catalog = $this->getDoctrine()
                 ->getRepository(Livres::class)
                 ->findBy(['categorie' => $categorie], ['date_parution' => 'DESC']);
@@ -85,21 +88,21 @@ class FrontController extends AbstractController
             if (!$catalog) {
                 $session->getFlashBag()->add('notice', 'Aucun livre ne correspond à votre filtre.');
             }
-        
+
         } else {
             $catalog = $this->getDoctrine()
-            ->getRepository(Livres::class)
-            ->findAllOrderRecent();
+                ->getRepository(Livres::class)
+                ->findAllOrderRecent();
 
             if (!$catalog) {
                 $session->getFlashBag()->add('notice', 'Le catalogue est vide.');
-            }  
+            }
         }
 
         $nbrLivres = count($catalog);
 
         $pagination = $paginator->paginate(
-            $catalog, 
+            $catalog,
             $request->query->getInt('page', 1)/*page number*/, 8/*limit per page*/
         );
 
@@ -113,8 +116,8 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/fiche/{id}", name="front_fiche")
-    */
+     * @Route("/fiche/{id}", name="front_fiche")
+     */
     public function fiche(Request $request, $id, Session $session, ObjectManager $manager)
     {
         if (!$session->get('contenu_panier')) {
@@ -126,7 +129,7 @@ class FrontController extends AbstractController
             ->findOneById($id);
 
         $formAddToCart = $this->createFormBuilder()
-            ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5 )))
+            ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5)))
             ->add('save', SubmitType::class, array('label' => 'Ajouter au panier', 'attr' => array('class' => 'btn btn-success')))
             ->getForm();
         $formAddToCart->handleRequest($request);
@@ -160,7 +163,7 @@ class FrontController extends AbstractController
             ->getRepository(Avis::class)
             ->findBy(['livre' => $infolivre, 'user' => $this->getUser()]);
         dump($avis_existant);
-        
+
         $formAvis = $this->createForm(AvisType::class);
         $formAvis->handleRequest($request);
 
@@ -223,7 +226,7 @@ class FrontController extends AbstractController
                 ->add('destinataire', TextType::class, array('required' => false))
                 ->add('adresse', TextType::class, array('required' => false))
                 ->add('codepostal', TextType::class, array('required' => false))
-                ->add('ville', TextType::class, array('required' => false))    
+                ->add('ville', TextType::class, array('required' => false))
                 ->add('ValidCommand', SubmitType::class, array('label' => 'Valider votre commande', 'attr' => array('class' => 'btn btn-success')))
                 ->getForm();
             $formChangeAdresse->handleRequest($request);
@@ -231,16 +234,42 @@ class FrontController extends AbstractController
             if ($formChangeAdresse->isSubmitted() && $formChangeAdresse->isValid()) {
                 $changeAdresse = $formChangeAdresse->getData();
                 if ($changeAdresse['destinataire'] || $changeAdresse['adresse'] || $changeAdresse['codepostal'] || $changeAdresse['ville']) {
-                    $user = $session->get('User');
+                    $user = $this->getUser();
                     dump($user);
                     $user->setDestLiv($changeAdresse['destinataire']);
+                    $user->setAdresseLiv($changeAdresse['adresse']);
+                    $user->setCodepostalLiv($changeAdresse['codepostal']);
+                    $user->setVilleLiv($changeAdresse['ville']);
                     $manager->persist($user);
-                    $manager->flush();
-                    dump($changeAdresse['destinataire']);
-                    die();
+
                 }
 
+            $commande = new Commandes();
+            $commande->setUser($this->getUser());
+            $commande->setDateCde(new \DateTime());
+            $commande->setTotalHtCde($prix_total_ht_panier);
+            $commande->setTvaCde($tva);
+            $commande->setTotalTtcCde($prix_total_ttc_panier);
+            $manager->persist($commande);
 
+            foreach($session->get('contenu_panier') as $lignepanier) {
+                $lignecde = new LignesCde();
+                $livre = $this->getDoctrine()
+                    ->getRepository(Livres::class)
+                    ->find($lignepanier['id']);
+                $lignecde->setLivre($livre);
+                $lignecde->setCommande($commande);
+                $lignecde->setQteLigneCde($lignepanier['qte']);
+                $manager->persist($lignecde);
+
+                $mvStock = new MouvStock();
+                $mvStock->setLivre($livre);
+                $mvStock->setQteMouv($lignepanier['qte'] * -1);
+                $mvStock->setDateMouv(new \DateTime());
+                $manager->persist($mvStock);
+            }
+
+            $manager->flush();
 
                 dump($changeAdresse);
                 dump($session->get('contenu_panier'));
@@ -259,7 +288,7 @@ class FrontController extends AbstractController
                 'formEraseCart' => $formEraseCart->createView(),
                 'formChangeAdresse' => $formChangeAdresse->createView()
             ]);
-        
+
         } else {
             $session->getFlashBag()->add('notice', 'Votre panier est vide.');
 
@@ -299,8 +328,8 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/bio/{id}", name="front_bio")
-    */
+     * @Route("/bio/{id}", name="front_bio")
+     */
     public function bio($id)
     {
         $bio = $this->getDoctrine()
@@ -314,8 +343,8 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/mentions/", name="front_mentions")
-    */
+     * @Route("/mentions/", name="front_mentions")
+     */
     public function mentions()
     {
         return $this->render('front/mentions.html.twig');
@@ -323,8 +352,8 @@ class FrontController extends AbstractController
 
 
     /**
-    * @Route("/infos-pratiques/", name="front_infos_prat")
-    */
+     * @Route("/infos-pratiques/", name="front_infos_prat")
+     */
     public function infos_prat()
     {
         return $this->render('front/infos_prat.html.twig');
