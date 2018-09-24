@@ -50,6 +50,17 @@ class FrontController extends AbstractController
             );
         }
 
+        $venteParLivre = $this->getDoctrine()
+            ->getRepository(LignesCde::class)
+            ->venteParLivre();
+        dump($venteParLivre);
+
+        if (!$venteParLivre) {
+            throw $this->createNotFoundException(
+                'Pas de vente sur le site.'
+            );
+        }
+
         return $this->render('front/home.html.twig', ['livresrecents' => $livresrecents, 'livresconseilles' => $livresconseilles]);
     }
 
@@ -57,7 +68,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/catalog/", name="front_catalog")
      */
-    public function catalog(Request $request, ObjectManager $manager, Session $session, PaginatorInterface $paginator)
+    public function catalog(Request $request, Session $session, PaginatorInterface $paginator)
     {
 
         $formFiltreAuteur = $this->createForm(FiltreAuteurType::class);

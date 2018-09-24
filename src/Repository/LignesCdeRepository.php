@@ -19,6 +19,21 @@ class LignesCdeRepository extends ServiceEntityRepository
         parent::__construct($registry, LignesCde::class);
     }
 
+    /**
+     * @return LignesCde[] Returns an array of LignesCde objects
+     */
+    public function venteParLivre()
+    {
+        return $this->createQueryBuilder('l')
+            ->select('SUM(l.qte_ligne_cde)')
+            ->groupBy('l.livre')
+            ->orderBy('SUM(l.qte_ligne_cde)', 'DESC')
+            ->setMaxResults(8)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return LignesCde[] Returns an array of LignesCde objects
 //     */
