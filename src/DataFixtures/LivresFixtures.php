@@ -171,6 +171,38 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $meilleurmonde->setActive(true);
         $manager->persist($meilleurmonde);
 
+        $mille984 = new Livres();
+
+        $mille984->setISBN('978-2-070-36822-8');
+        $mille984->setTitre('1984');
+        $mille984->setNbPages(438);
+        $mille984->setDateParution(\DateTime::createFromFormat('Y-m-d', "1949-01-01"));
+        $mille984->setPrixTtc(8.9);
+        $mille984->setEstConseil(1);
+        $mille984->setResume('Souriez, vous êtes filmés. Londres, 1984. Voici Winston Smith, employé au Ministère de la Vérité, chargé de réécrire l\'histoire afin qu\'elle s\'accorde avec la version officielle. Voici les télécrans qui diffusent en permanence les messages de propagande et espionnent sans relâche chaque individu. Voici Julia, rencontrée lors des Deux Minutes de la Haine quotidiennes et obligatoires où l\'on conspue le Traître Emmanuel Goldstein, qui aura maille à partir, comme Winston, avec la Police de la Pensée. Voici la novlangue qui dépouille le langage de ses inflexions subversives, qui le réduit à un rôle informatif. Et surtout, voici Big Brother, aujourd\'hui passé au stade de figure mythique, symbole de la surveillance et de l\'oppression totalitaire. 1984, une machine monstrueuse si habilement huilée, qui broie l\'homme et les pensées, et que plus rien ne semble pouvoir enrayer. Nous n\'en avons pas rêvé, Orwell l\'a fait. Espérons qu\'il sera le seul.');
+        $mille984->setImage('1984.jpg');
+        $mille984->setAuteur($this->getReference(AuteursFixtures::ORWELL));
+        $mille984->setEditeur($this->getReference(EditeursFixtures::GALLIMARD));
+        $mille984->setCategorie($this->getReference(CategoriesFixtures::ANTICIPATION));
+        $mille984->setActive(true);
+        $manager->persist($mille984);
+
+        $un_bonheur_insoutenable = new Livres();
+
+        $un_bonheur_insoutenable->setISBN('978-2-290-33285-6');
+        $un_bonheur_insoutenable->setTitre('Un Bonheur Insoutenable');
+        $un_bonheur_insoutenable->setNbPages(372);
+        $un_bonheur_insoutenable->setDateParution(\DateTime::createFromFormat('Y-m-d', "1970-01-01"));
+        $un_bonheur_insoutenable->setPrixTtc(10.2);
+        $un_bonheur_insoutenable->setEstConseil(1);
+        $un_bonheur_insoutenable->setResume('Un bonheur insoutenable (titre original This Perfect Day) est un roman d\'anticipation contre-utopique américain d\'Ira Levin, publié en 1970. Il est considéré comme un des grands romans dystopiques de la science-fiction du XXe siècle, avec 1984 et Le Meilleur des mondes. L\'action se situe dans l\'avenir, après l\'année 2000. L\'humanité (désignée sous le nom de Famille) est unifiée, et il n\'y a plus qu\'une seule langue parlée. Son destin dépend d\'un ordinateur caché sous les Alpes : UniOrd ou Uni. Uni contrôle tout : il éduque, oriente, autorise ou non les mariages et la procréation. Violence et égoïsme ont disparu de la surface de la Terre. Hommes et femmes reçoivent un traitement médicamenteux mensuel — dans les médicentres — chargé de les rendre dociles et maîtriser leur reproduction. Les prénoms ont été remplacés par des identifiants alphanumériques, chacun devant s\'identifier en permanence devant des scanners. Seul le bonheur des membres de la Famille compte et Uni y pourvoit. Dans ce monde idéal, où la pluie ne semble pas exister, toute volonté humaine semble avoir disparu. Cependant certains membres de la Famille sont des révoltés : ils refusent de voir leur existence contrôlée par une machine. Copeau, héros du roman, vient à haïr ce monde où le bonheur est imposé. Avec Lilas, il souhaite rejoindre les « incurables » qui se sont réfugiés sur des îles ne figurant pas sur les cartes de ce monde. Il décide d\'organiser une expédition pour faire exploser UniOrd (l\'ordinateur central). Cette expédition va-t-elle réussir ?');
+        $un_bonheur_insoutenable->setImage('un_bonheur_insoutenable.jpg');
+        $un_bonheur_insoutenable->setAuteur($this->getReference(AuteursFixtures::LEVIN));
+        $un_bonheur_insoutenable->setEditeur($this->getReference(EditeursFixtures::JAILU));
+        $un_bonheur_insoutenable->setCategorie($this->getReference(CategoriesFixtures::ANTICIPATION));
+        $un_bonheur_insoutenable->setActive(true);
+        $manager->persist($un_bonheur_insoutenable);
+
         $penseauxpierres = new Livres();
 
         $penseauxpierres->setISBN('978-2-864-32987-9');

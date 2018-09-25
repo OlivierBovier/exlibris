@@ -14,6 +14,8 @@ class AuteursFixtures extends Fixture
     public const FERRARI = 'ferrari';
     public const BOURGEON = 'bourgeon';
     public const HUXLEY = 'huxley';
+    public const ORWELL = 'orwell';
+    public const LEVIN = 'levin';
     public const WAUTERS = 'wauters';
     public const STEFANSSON = 'stefansson';
     public const ARAMBURU = 'aramburu';
@@ -66,6 +68,24 @@ class AuteursFixtures extends Fixture
 
         $manager->persist($huxley);
         $this->addReference(self::HUXLEY, $huxley);
+
+        $orwell = new Auteurs();
+        $orwell->setPrenomAuteur('Georges');
+        $orwell->setNomAuteur('Orwell');
+        $orwell->setBiographieAuteur('George Orwell, nom de plume d’Eric Arthur Blair, né le 25 juin 1903 à Motihari (Inde) pendant la période du Raj britannique et mort le 21 janvier 1950 à Londres, est un écrivain, essayiste et journaliste britannique. Son œuvre porte la marque de ses engagements, qui trouvent eux-mêmes pour une large part leur source dans l\'expérience personnelle de l\'auteur : contre l\'impérialisme britannique, après son engagement de jeunesse comme représentant des forces de l\'ordre colonial en Birmanie ; pour la justice sociale et le socialisme démocratique, après avoir observé et partagé les conditions d\'existence des classes laborieuses à Londres et à Paris ; contre les totalitarismes nazi et soviétique, après sa participation à la guerre d\'Espagne. Parfois qualifié d\'« anarchiste conservateur », il est souvent comparé à la philosophe Simone Weil, en raison de ses prises de positions originales pour un socialiste. Témoin de son époque, Orwell est dans les années 1930 et 1940 chroniqueur, critique littéraire et romancier. De cette production variée, les deux œuvres au succès le plus durable sont deux textes publiés après la Seconde Guerre mondiale : La Ferme des animaux et surtout 1984, roman dans lequel il crée le concept de Big Brother, depuis passé dans le langage courant de la critique des techniques modernes de surveillance et de contrôle des individus. L\'adjectif « orwellien » est également fréquemment utilisé en référence à l\'univers totalitaire imaginé par cet écrivain anglais. ');
+        $orwell->setImage('orwell.jpg');
+
+        $manager->persist($orwell);
+        $this->addReference(self::ORWELL, $orwell);
+
+        $levin = new Auteurs();
+        $levin->setPrenomAuteur('Ira');
+        $levin->setNomAuteur('Levin');
+        $levin->setBiographieAuteur('Ira Levin, né le 27 août 1929 à New York et mort le 12 novembre 2007 (à 78 ans) dans la même ville, est un écrivain américain, auteur de pièces de théâtre et de romans touchant les genres du fantastique, de la science-fiction, du policier et du thriller. Il étudie à l\'université Drake à Des Moines dans l\'Iowa, puis s\'inscrit à l\'université de New York et obtient son diplôme en littérature anglaise et philosophie en 1950. Il entreprend une carrière de scénariste à la télévision, mais le succès rencontré par La Couronne de cuivre, un roman policier inspiré d\'Une tragédie américaine de Dreiser, est suivi de la publication de plusieurs best-sellers touchant divers genres romanesques qui sont écrits en prévision d\'adaptations cinématographiques, les droits étant achetés avant même la publication des textes, exception faite du roman d\'anticipation Un bonheur insoutenable. Mais sa production romanesque possède de réelles qualités : Un bébé pour Rosemary, par exemple, devient un classique du roman fantastique avant même la célèbre adaptation qu\'en fait Roman Polanski avec Mia Farrow et John Cassavetes. Ira Levin est aussi un dramaturge estimé. Ses pièces, jouées à Londres et New York, sont ensuite montées partout dans le monde. Piège mortel (Deathtrap), pièce jouée sans interruption entre 1978 et 1982, détient encore le record de longévité sur Broadway pour une comédie policière avec près de 1800 représentations.');
+        $levin->setImage('levin.jpg');
+
+        $manager->persist($levin);
+        $this->addReference(self::LEVIN, $levin);
 
         $wauters = new Auteurs();
         $wauters->setPrenomAuteur('Antoine');

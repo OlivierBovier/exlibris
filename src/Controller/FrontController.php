@@ -116,20 +116,24 @@ class FrontController extends AbstractController
      */
     public function fiche(Request $request, $id, Session $session, ObjectManager $manager)
     {
+        // Si pas de panier en session, on le crée (vide)
         if (!$session->get('contenu_panier')) {
             $session->set('contenu_panier', array());
         }
 
+        // On récupère le livre par son id
         $infolivre = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findOneById($id);
 
+        // Formulaire d'ajout au panier
         $formAddToCart = $this->createFormBuilder()
             ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5)))
             ->add('save', SubmitType::class, array('label' => 'Ajouter au panier', 'attr' => array('class' => 'btn btn-success')))
             ->getForm();
         $formAddToCart->handleRequest($request);
 
+        // Si le formulaire d'ajout au panier est posté...
         if ($formAddToCart->isSubmitted() && $formAddToCart->isValid()) {
             $qte_produit = $formAddToCart->getData();
             $qte_produit = intval($qte_produit['qte']);
@@ -144,17 +148,23 @@ class FrontController extends AbstractController
                 'prix_total_ttc' => $prix_total_ttc
             ];
 
+            // On récupère le contenu du panier en session
             $panier = $session->get('contenu_panier');
+            // On y rajoute une entrée (le nouveau livre)
             $panier[$id] = $ajouter_article;
+            // Et on le réenregistre en session
             $session->set('contenu_panier', $panier);
         }
 
+        // Booléen : panier existe ou non
         $in_panier = in_array($id, array_keys($session->get('contenu_panier')));
 
+        // Récupération des avis existants concernant le livre
         $liste_avis = $this->getDoctrine()
             ->getRepository(Avis::class)
             ->findByLivres($id);
 
+        // Permet de savoir si l'utilisateur loggé à déjà posté un avis pour ce livre
         $avis_existant = $this->getDoctrine()
             ->getRepository(Avis::class)
             ->findBy(['livre' => $infolivre, 'user' => $this->getUser()]);
@@ -177,6 +187,10 @@ class FrontController extends AbstractController
             return $this->redirectToRoute("front_fiche", ['id' => $id]);
         }
 
+        $suggestion_livres = $this->getDoctrine()
+            ->getRepository(Livres::class)
+            ->findSuggestion($id, $infolivre->getCategorie());
+        dump($suggestion_livres);
 
         return $this->render('front/fiche.html.twig', [
             'infolivre' => $infolivre,
@@ -184,7 +198,8 @@ class FrontController extends AbstractController
             'liste_avis' => $liste_avis,
             'formAddToCart' => $formAddToCart->createView(),
             'formAvis' => $formAvis->createView(),
-            'avis_existant' => $avis_existant
+            'avis_existant' => $avis_existant,
+            'suggestion_livres' => $suggestion_livres
         ]);
     }
 

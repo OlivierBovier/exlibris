@@ -76,6 +76,43 @@
                 </div>
             </div>
             <!-- /.card -->
+            <div class="card card-outline-secondary my-4">
+                <div class="card-header">
+                    Ces autres livres pourraient vous intéresser
+                </div>
+                <div class="card-body">
+                  
+                    <div class="row">
+                        {% for livre in suggestion_livres %}
+                            <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+                                <div class="card h-100">
+                                    <a href=" {{ path('front_fiche', { 'id': livre.id }) }} ">
+                                        <img class="card-img-top"
+                                            src="{{ asset('images/livres/' ~ livre.image ~'') }}"
+                                            alt="{{ livre.titre }}">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a
+                                                    href=" {{ path('front_fiche', { 'id': livre.id }) }} ">{{ livre.titre }}</a>
+                                        </h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ livre.auteur.PrenomAuteur }} {{ livre.auteur.NomAuteur }}</h6>
+                                        <h6>{{ livre.PrixTtc|number_format(2, ',', ' ') }} €</h6>
+                                        <p class="card-text">{{ livre.Resume|truncate(70, true) }}</p>
+                                        <p class="card-subtitle mb-2 text-muted">Parution
+                                            le {{ livre.dateParution|date("d/m/Y") }}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- /.row -->
+                  
+                </div>
+            </div>
+            <!-- /.card -->
 
         </div>
         <!-- /.col-lg-9 -->

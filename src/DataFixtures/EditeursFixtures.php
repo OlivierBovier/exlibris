@@ -9,12 +9,14 @@ use Doctrine\Common\Persistence\ObjectManager;
 class EditeursFixtures extends Fixture
 {
     public const FLAMMARION = 'flammarion';
+    public const GALLIMARD = 'gallimard';
     public const ACTESSUD = 'actessud';
     public const GLENAT = 'glenat';
     public const POCKET = 'pocket';
     public const VERDIER = 'verdier';
     public const GRASSET = 'grasset';
     public const LIANALEVI = 'lianalevi';
+    public const JAILU = 'jailu';
 
     public function load(ObjectManager $manager)
     {
@@ -24,6 +26,13 @@ class EditeursFixtures extends Fixture
 
         $manager->persist($flammarion);
         $this->addReference(self::FLAMMARION, $flammarion);
+
+
+        $gallimard = new Editeurs();
+        $gallimard->setNomEditeur('Gallimard');
+
+        $manager->persist($gallimard);
+        $this->addReference(self::GALLIMARD, $gallimard);
 
         $actessud = new Editeurs();
         $actessud->setNomEditeur('Actes Sud');
@@ -60,6 +69,12 @@ class EditeursFixtures extends Fixture
 
         $manager->persist($lianalevi);
         $this->addReference(self::LIANALEVI, $lianalevi);
+
+        $jailu = new Editeurs();
+        $jailu->setNomEditeur('J\'ai Lu');
+
+        $manager->persist($jailu);
+        $this->addReference(self::JAILU, $jailu);
 
         $manager->flush();
     }

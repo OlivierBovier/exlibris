@@ -39,7 +39,7 @@ class LivresRepository extends ServiceEntityRepository
             ->andWhere('l.active = :val2')
             ->setParameters(array('val1' => true, 'val2' => true))
             ->orderBy('l.date_parution', 'DESC')
-            ->setMaxResults(50)
+            ->setMaxResults(8)
             ->getQuery()
             ->getResult()
         ;
@@ -74,6 +74,19 @@ class LivresRepository extends ServiceEntityRepository
             ->andWhere('l.est_conseil = :val3')
             ->setParameters(array('val1' => $auteur, 'val2' => $categorie, 'val3' => $conseil))
             ->orderBy('l.date_parution', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findSuggestion($id, $categorie)
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.id != :val1')
+            ->andWhere('l.categorie = :val2')
+            ->setParameters(array('val1' => $id, 'val2' => $categorie))
+            ->orderBy('l.date_parution', 'DESC')
+            ->setMaxResults(4)
             ->getQuery()
             ->getResult()
         ;
