@@ -32,6 +32,7 @@ class UserFixtures extends Fixture
         $admin->setPassword($hash);
         $admin->addRole('ROLE_USER');
         $admin->addRole('ROLE_ADMIN');
+        $admin->addRole('ROLE_SUPER_ADMIN');
         $admin->setCreatedAt(new \DateTime());
 
         $manager->persist($admin);

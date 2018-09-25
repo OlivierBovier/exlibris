@@ -45,12 +45,62 @@
                         {{ commande.user.codepostalliv }} {{ commande.user.villeliv }}
                     </p>
                     {% else %}
-                    <p class="card-text">{{ commande.user.username }}<br>
+                    <p class="card-text mb-2 text-muted">{{ commande.user.username }}<br>
                         {{ commande.user.adresse }}<br>
                         {{ commande.user.codePostal }} {{ commande.user.ville }}
                     </p>
                     {% endif %}
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-11 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Titre</th>
+                            <th scope="col" class="text-center">Quantité</th>
+                            <th scope="col" class="text-right">Prix unitaire</th>
+                            <th scope="col" class="text-right">Prix</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for lignecde in lignesCde %}
+                            <tr>
+                                <td class="text-left align-middle"><a
+                                            href="{{ path('front_fiche', {'id': lignecde.0.id}) }}"> {{ lignecde.titre }} </a></td>
+                                <td class="text-center align-middle">
+
+                                    {{ lignecde.0.qtelignecde }}
+                                </td>
+                                <td class="text-right align-middle">{{ lignecde.prix_ttc|number_format(2, ',', ' ') }} €</td>
+                                <td class="text-right align-middle">{{ lignecde.0.prixParQte|number_format(2, ',', ' ') }} €</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="text-right">Prix total HT</td>
+                            <td class="text-right">{{ commande.totalhtcde|number_format(2, ',', ' ') }} €</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="border-0"></td>
+                            <td class="text-right">TVA</td>
+                            <td class="text-right">{{ commande.tvacde|number_format(2, ',', ' ') }} €</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="border-0"></td>
+                            <td class="text-right">Prix total TTC</td>
+                            <td class="text-right">{{ commande.totalttccde|number_format(2, ',', ' ') }} €</td>
+                        </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>

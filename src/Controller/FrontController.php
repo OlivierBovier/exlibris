@@ -158,7 +158,6 @@ class FrontController extends AbstractController
         $avis_existant = $this->getDoctrine()
             ->getRepository(Avis::class)
             ->findBy(['livre' => $infolivre, 'user' => $this->getUser()]);
-        dump($avis_existant);
 
         $formAvis = $this->createForm(AvisType::class);
         $formAvis->handleRequest($request);
@@ -257,9 +256,12 @@ class FrontController extends AbstractController
                     $livre = $this->getDoctrine()
                         ->getRepository(Livres::class)
                         ->find($lignepanier['id']);
+                    $prixparqte = $lignepanier['qte'] * $livre->getPrixTtc();
+
                     $lignecde->setLivre($livre);
                     $lignecde->setCommande($commande);
                     $lignecde->setQteLigneCde($lignepanier['qte']);
+                    $lignecde->setPrixParQte($prixparqte);
                     $manager->persist($lignecde);
 
                     $mvStock = new MouvStock();
@@ -301,23 +303,20 @@ class FrontController extends AbstractController
      */
     public function facture($id, Session $session)
     {
-
         $commande = $this->getDoctrine()
             ->getRepository(Commandes::class)
             ->findOneById($id);
-        dump($commande);
-        dump($session->get('chgt_addresse_livr'));
 
-        if ($session->get('chgt_addresse_livr')) {
+        $lignesCde = $this->getDoctrine()
+            ->getRepository(LignesCde::class)
+            ->findByCommande($id);
 
-        } else {
-
-
-        }
+        $session->remove('contenu_panier');
 
         return $this->render('front/facture.html.twig', [
             'commande' => $commande,
-            'chgt_addresse_livr' => $session->get('chgt_addresse_livr')
+            'chgt_addresse_livr' => $session->get('chgt_addresse_livr'),
+            'lignesCde' => $lignesCde
         ]);
     }
 

@@ -33,6 +33,11 @@ class LignesCde
      */
     private $livre;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prixParQte;
+
     public function __toString()
     {
         $id_string = $this->id;
@@ -77,6 +82,18 @@ class LignesCde
     public function setLivre(?Livres $livre): self
     {
         $this->livre = $livre;
+
+        return $this;
+    }
+
+    public function getPrixParQte(): ?float
+    {
+        return $this->prixParQte;
+    }
+
+    public function setPrixParQte(float $prixParQte): self
+    {
+        $this->prixParQte = $prixParQte;
 
         return $this;
     }

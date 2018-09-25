@@ -38,6 +38,21 @@ class LignesCdeRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return LignesCde[] Returns an array of LignesCde objects
+     */
+    public function findByCommande($id)
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.commande = :val')
+            ->setParameter('val', $id)
+            ->leftJoin('l.livre', 'liv')
+            ->addSelect('liv.titre', 'liv.prix_ttc')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return LignesCde[] Returns an array of LignesCde objects
 //     */
