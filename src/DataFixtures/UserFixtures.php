@@ -25,6 +25,9 @@ class UserFixtures extends Fixture
         $admin = new User();
         $admin->setUsername('Admin');
         $admin->setEmail('admin@exlibris.fr');
+        $admin->setAdresse('18 avenue Foch');
+        $admin->setCodePostal('75000');
+        $admin->setVille('Paris');
         $hash = $this->encoder->encodePassword($admin, 'a1b2c3d4');
         $admin->setPassword($hash);
         $admin->addRole('ROLE_USER');

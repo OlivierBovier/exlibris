@@ -301,9 +301,24 @@ class FrontController extends AbstractController
      */
     public function facture($id, Session $session)
     {
+
+        $commande = $this->getDoctrine()
+            ->getRepository(Commandes::class)
+            ->findOneById($id);
+        dump($commande);
         dump($session->get('chgt_addresse_livr'));
 
-        return $this->render('front/facture.html.twig');
+        if ($session->get('chgt_addresse_livr')) {
+
+        } else {
+
+
+        }
+
+        return $this->render('front/facture.html.twig', [
+            'commande' => $commande,
+            'chgt_addresse_livr' => $session->get('chgt_addresse_livr')
+        ]);
     }
 
 
