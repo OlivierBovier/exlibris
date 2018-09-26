@@ -29,6 +29,20 @@ class CommandesRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * @return Commandes[] Returns an array of Commandes objects
+     */
+    public function findByUser($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.user = :val')
+            ->setParameter('val', $id)
+            ->orderBy('c.date_cde', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Commandes[] Returns an array of Commandes objects
 //     */

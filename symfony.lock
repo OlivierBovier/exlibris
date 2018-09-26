@@ -107,6 +107,9 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "h4cc/wkhtmltopdf-i386": {
+        "version": "0.12.4"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },

@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "easycorp/easyadmin-bundle": "^1.17",
+        "h4cc/wkhtmltopdf-i386": "0.12.4",
         "knplabs/knp-paginator-bundle": "^2.8",
         "knplabs/knp-snappy-bundle": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",

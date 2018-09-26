@@ -1,0 +1,38 @@
+{% extends "layout.html.twig" %}
+
+{% block title %} Espace Client {% endblock %}
+
+{% block contenu %}
+    <main role="main" class="container">
+        {% if bad_url %}
+            <h2 class="text-muted">Vous n'avez pas accès à cet URL !</h2>
+        {% else %}
+            <h2 class="text-muted">Votre espace client</h2>
+
+            <p>{{ app.user.username }}, vous avez {{ commandes|length }} commande(s) dans votre historique.</p>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" class="text-center">N° Cde</th>
+                    <th scope="col" class="text-center">Date commande</th>
+                    <th scope="col" class="text-center">Montant TTC</th>
+                    <th scope="col" class="text-center">Voir le détail</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for commande in commandes %}
+                    <tr>
+                        <td class="text-center align-middle">{{ commande.id }}</td>
+                        <td class="text-center align-middle">{{ commande.datecde|date("d/m/Y") }}</td>
+                        <td class="text-center align-middle">{{ commande.totalttccde|number_format(2, ',', ' ') }} €</td>
+                        <td class="text-center align-middle">Détail</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </main>
+
+
+{% endblock %}

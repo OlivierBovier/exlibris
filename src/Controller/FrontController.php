@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
 use App\Entity\Avis;
@@ -381,12 +382,35 @@ class FrontController extends AbstractController
         return $this->render('front/bio.html.twig', ['bio' => $bio]);
     }
 
+    /**
+     * @Route("/espaceclient/{id}", name="front_espaceclient")
+     */
+    public function espaceclient($id)
+    {
+        $user = $this->getUser();
+        if ($id == $user->getId()) {
+            $bad_url = false;
+            $commandes = $this->getDoctrine()
+                ->getRepository(Commandes::class)
+                ->findByUser($id);
+        } else {
+            $bad_url = true;
+            $commandes = false;
+        }
+
+        return $this->render('front/espaceclient.html.twig', [
+            'commandes' => $commandes,
+            'bad_url' => $bad_url
+            ]);
+    }
 
     /**
      * @Route("/mentions/", name="front_mentions")
      */
     public function mentions()
     {
+
+
         return $this->render('front/mentions.html.twig');
     }
 
