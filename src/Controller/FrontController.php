@@ -392,11 +392,27 @@ class FrontController extends AbstractController
 
 
     /**
-     * @Route("/infos-pratiques/", name="front_infos_prat")
+     * @Route("/contact/", name="front_contact")
      */
-    public function infos_prat()
+    public function contact()
     {
-        return $this->render('front/infos_prat.html.twig');
+        return $this->render('front/contact.html.twig');
+    }
+
+    /**
+    * @Route("/cgv/", name="front_cgv")
+    */
+    public function cgv()
+    {
+        return $this->render('front/cgv.html.twig');
+    }
+
+    /**
+     * @Route("/qui/", name="front_qui")
+     */
+    public function qui()
+    {
+        return $this->render('front/qui.html.twig');
     }
 
 

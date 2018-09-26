@@ -32,7 +32,7 @@ class LignesCdeRepository extends ServiceEntityRepository
             ->addSelect('aut.prenom_auteur', 'aut.nom_auteur')
             ->groupBy('lig.livre')
             ->orderBy('SUM(lig.qte_ligne_cde)', 'DESC')
-            ->setMaxResults(8)
+            ->setMaxResults(12)
             ->getQuery()
             ->getResult()
         ;
