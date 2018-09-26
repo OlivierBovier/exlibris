@@ -1,7 +1,12 @@
-body {
-    background-color: lightgray;
+.logo {
+    border-radius: 8px;
 }
 
-.logo {
-	border-radius: 8px;
+.footer-container {
+    position: fixed;
+    bottom: 0px;
+    padding: 20px 15px 0;
+    background-color: #ffc133;
+    left: 0px;
+    right: 0px;
 }
