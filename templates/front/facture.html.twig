@@ -72,12 +72,8 @@
                         <tbody>
                         {% for lignecde in lignesCde %}
                             <tr>
-                                <td class="text-left align-middle"><a
-                                            href="{{ path('front_fiche', {'id': lignecde.0.id}) }}"> {{ lignecde.titre }} </a></td>
-                                <td class="text-center align-middle">
-
-                                    {{ lignecde.0.qtelignecde }}
-                                </td>
+                                <td class="text-left align-middle">{{ lignecde.titre }}</td>
+                                <td class="text-center align-middle">{{ lignecde.0.qtelignecde }}</td>
                                 <td class="text-right align-middle">{{ lignecde.prix_ttc|number_format(2, ',', ' ') }} €</td>
                                 <td class="text-right align-middle">{{ lignecde.0.prixParQte|number_format(2, ',', ' ') }} €</td>
                             </tr>

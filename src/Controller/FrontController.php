@@ -191,7 +191,7 @@ class FrontController extends AbstractController
         $suggestion_livres = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findSuggestion($id, $infolivre->getCategorie());
-        dump($suggestion_livres);
+
 
         return $this->render('front/fiche.html.twig', [
             'infolivre' => $infolivre,
