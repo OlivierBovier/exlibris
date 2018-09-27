@@ -9,7 +9,7 @@
     {% endfor %}
 
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-8">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -22,14 +22,14 @@
                         {% if loop.first %}
                             <div class="carousel-item active">
                         {% else %}
-                             <div class="carousel-item">
+                            <div class="carousel-item">
                         {% endif %}
-                            <img class="d-block w-100" src= {{ asset('images/actu/' ~ actu.image ~'') }} alt="slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>{{ actu.titre }}</h5>
-                                <p>{{ actu.accroche }}</p>
+                                <img class="d-block w-100" src= {{ asset('images/actu/' ~ actu.image ~'') }} alt="slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5><a href=" {{ path('front_actu') }} " class="badge badge-light">{{ actu.titre }}</a></h5>
+                                    <p><a href=" {{ path('front_actu') }} " class="badge badge-light">{{ actu.accroche }}</a></p>
+                                </div>
                             </div>
-                        </div>
                     {% endfor %}
 
                 </div>
@@ -43,7 +43,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <p>Actualités</p>
             Créer pour cela une entité pour gérer les actualités (titre, catégorie, contenu, image)
         </div>

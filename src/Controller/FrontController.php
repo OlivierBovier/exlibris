@@ -35,7 +35,7 @@ class FrontController extends AbstractController
         $actus = $this->getDoctrine()
             ->getRepository(Actu::class)
             ->findRecent();
-        dump($actus);
+
         $livresrecents = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findRecent();
@@ -54,6 +54,14 @@ class FrontController extends AbstractController
             'livresconseilles' => $livresconseilles,
             'venteparlivre' => $venteparlivre
         ]);
+    }
+
+    /**
+     * @Route("/actu/", name="front_actu")
+     */
+    public function actu()
+    {
+        return $this->render('front/actu.html.twig');
     }
 
 
