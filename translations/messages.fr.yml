@@ -48,4 +48,13 @@ admin:
         title: 'Lignes de commande'
     mouvstock:
         title: 'Mouvements de stock'
+    actu:
+        title: 'Actualités'
+        titre: 'Titre'
+        accroche: 'Accroche'
+        contenu: 'Contenu éditorial'
+        image: 'Image'
+        createdat: 'Date de parution'
+        updatedat: 'Date de modification'
+
 #End ADMIN

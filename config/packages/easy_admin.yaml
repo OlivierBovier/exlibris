@@ -17,6 +17,7 @@ easy_admin:
             - { entity: 'Commandes', icon: 'envelope' }
             - { entity: 'LignesCde', label: 'Lignes de commande', icon: 'copy' }
             - { entity: 'MouvStock', label: 'Mouvements de stock', icon: 'tag' }
+            - { entity: 'Actu', label: 'Actualités', icon: 'book' }
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
     entities:
        # List the entity class name you want to manage
@@ -141,3 +142,25 @@ easy_admin:
             class: App\Entity\MouvStock
             list:
                 title: admin.mouvstock.title
+        Actu:
+            class: App\Entity\Actu
+            list:
+                title: admin.actu.title
+                fields:
+                    - { property: 'titre', label: admin.actu.titre, type: 'text' }
+                    - { property: 'accroche', label: admin.actu.accroche, type: 'text'}
+                    - { property: 'image', type: image, label: admin.actu.image, base_path: '%app.path.actu_images%' }
+                    - { property: 'createdAt', label: admin.actu.createdat}
+                    - { property: 'updatedAt', label: admin.actu.updatedat}
+            new:
+                fields:
+                    - { property: 'titre', label: admin.actu.titre, type: 'text' }
+                    - { property: 'accroche', label: admin.actu.accroche, type: 'text'}
+                    - { property: 'contenu', label: admin.actu.contenu, type: 'textarea'}
+                    - { property: 'imageFile', type: 'vich_image', label: admin.actu.image }
+            edit:
+                fields:
+                    - { property: 'titre', label: admin.actu.titre, type: 'text' }
+                    - { property: 'accroche', label: admin.actu.accroche, type: 'text'}
+                    - { property: 'contenu', label: admin.actu.contenu, type: 'textarea'}
+                    - { property: 'imageFile', type: 'vich_image', label: admin.actu.image }
