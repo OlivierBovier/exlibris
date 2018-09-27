@@ -35,6 +35,7 @@ class FrontController extends AbstractController
         $actus = $this->getDoctrine()
             ->getRepository(Actu::class)
             ->findRecent();
+        dump($actus);
 
         $livresrecents = $this->getDoctrine()
             ->getRepository(Livres::class)

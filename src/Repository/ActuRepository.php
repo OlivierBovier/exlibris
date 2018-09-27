@@ -25,10 +25,10 @@ class ActuRepository extends ServiceEntityRepository
     public function findRecent()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.createdAt <= :val')
+            ->andWhere('a.updatedAt <= :val')
             ->setParameter('val', new \DateTime('now'))
-            ->orderBy('a.createdAt', 'DESC')
-            ->setMaxResults(3)
+            ->orderBy('a.updatedAt', 'DESC')
+            ->setMaxResults(4)
             ->getQuery()
             ->getResult()
             ;

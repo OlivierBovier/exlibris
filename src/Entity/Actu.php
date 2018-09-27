@@ -119,6 +119,8 @@ class Actu
     public function onPrePersist()
     {
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface

@@ -31,6 +31,13 @@ class ActuFixtures extends Fixture
         $actu3->setImage('echelle.jpg');
         $manager->persist($actu3);
 
+        $actu4 = new Actu();
+        $actu4->setTitre('Séance de dédicace');
+        $actu4->setAccroche('Jérôme Philibert viendra signer son dernier roman !');
+        $actu4->setContenu('Séance de dédicace');
+        $actu4->setImage('dedicace.jpg');
+        $manager->persist($actu4);
+
         $manager->flush();
     }
 }
