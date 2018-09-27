@@ -19,6 +19,21 @@ class ActuRepository extends ServiceEntityRepository
         parent::__construct($registry, Actu::class);
     }
 
+    /**
+     * @return Actu[] Returns an array of Actu objects
+     */
+    public function findRecent()
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.createdAt <= :val')
+            ->setParameter('val', new \DateTime('now'))
+            ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 //    /**
 //     * @return Actu[] Returns an array of Actu objects
 //     */

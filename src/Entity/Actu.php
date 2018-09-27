@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActuRepository")
+ * @ORM\Table(name="actu")
+ * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
 class Actu

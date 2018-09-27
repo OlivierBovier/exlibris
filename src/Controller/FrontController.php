@@ -20,6 +20,7 @@ use App\Entity\Avis;
 use App\Entity\Commandes;
 use App\Entity\LignesCde;
 use App\Entity\MouvStock;
+use App\Entity\Actu;
 use App\Form\FiltreAuteurType;
 use App\Form\FiltreCategorieType;
 use App\Form\AvisType;
@@ -31,6 +32,10 @@ class FrontController extends AbstractController
      */
     public function home()
     {
+        $actus = $this->getDoctrine()
+            ->getRepository(Actu::class)
+            ->findRecent();
+        dump($actus);
         $livresrecents = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findRecent();
@@ -44,6 +49,7 @@ class FrontController extends AbstractController
             ->venteParLivre();
 
         return $this->render('front/home.html.twig', [
+            'actus' => $actus,
             'livresrecents' => $livresrecents,
             'livresconseilles' => $livresconseilles,
             'venteparlivre' => $venteparlivre
