@@ -35,7 +35,6 @@ class FrontController extends AbstractController
         $actus = $this->getDoctrine()
             ->getRepository(Actu::class)
             ->findRecent();
-        dump($actus);
 
         $livresrecents = $this->getDoctrine()
             ->getRepository(Livres::class)
@@ -245,7 +244,7 @@ class FrontController extends AbstractController
                 $prix_total_ttc_panier += $prix_total_ttc;
             }
 
-            $prix_total_ht_panier = $prix_total_ttc_panier / 1.20;
+            $prix_total_ht_panier = $prix_total_ttc_panier / 1.055;
             $tva = $prix_total_ttc_panier - $prix_total_ht_panier;
 
             $formChangeAdresse = $this->createFormBuilder()

@@ -25,7 +25,7 @@
                         {% else %}
                             <div class="carousel-item">
                         {% endif %}
-                                <img class="d-block w-100" src= {{ asset('images/actu/' ~ actu.image ~'') }} alt="slide">
+                                <img class="d-block w-100 rounded" src= {{ asset('images/actu/' ~ actu.image ~'') }} alt="slide">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5><a href=" {{ path('front_actu') }} " class="badge badge-light">{{ actu.titre }}</a></h5>
                                     <p><a href=" {{ path('front_actu') }} " class="badge badge-light">{{ actu.accroche }}</a></p>
