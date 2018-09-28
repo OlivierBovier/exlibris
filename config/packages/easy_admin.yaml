@@ -9,7 +9,7 @@ easy_admin:
         color_scheme: 'light'
         brand_color: '#f19f26'
         menu:            
-            - { entity: 'livres', icon: 'book' }
+            - { entity: 'Livres', icon: 'book' }
             - { entity: 'Auteurs', icon: 'user-circle' }
             - { entity: 'Editeurs', icon: 'address-book' }
             - { entity: 'Categories', label: 'Catégories', icon: 'address-card' }
@@ -21,8 +21,8 @@ easy_admin:
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
     entities:
        # List the entity class name you want to manage
-        livres:
-            class: App\Entity\livres
+        Livres:
+            class: App\Entity\Livres
             list:
                 title: admin.livres.title
                 fields:
