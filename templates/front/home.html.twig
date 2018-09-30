@@ -25,10 +25,10 @@
                         {% else %}
                             <div class="carousel-item">
                         {% endif %}
-                                <img class="d-block w-100 rounded" src= {{ asset('images/actu/' ~ actu.image ~'') }} alt="slide">
+                                <a href=" {{ path('front_actu', { 'id': actu.id }) }} "><img class="d-block w-100 rounded" src= {{ asset('images/actu/' ~ actu.image ~'') }} alt="slide"></a>
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5><a href=" {{ path('front_actu') }} " class="badge badge-light">{{ actu.titre }}</a></h5>
-                                    <p><a href=" {{ path('front_actu') }} " class="badge badge-light">{{ actu.accroche }}</a></p>
+                                    <h5><a href=" {{ path('front_actu', { 'id': actu.id }) }} " class="badge badge-light">{{ actu.titre }}</a></h5>
+                                    <p><a href=" {{ path('front_actu', { 'id': actu.id }) }} " class="badge badge-light">{{ actu.accroche }}</a></p>
                                 </div>
                             </div>
                     {% endfor %}

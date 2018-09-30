@@ -57,11 +57,17 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/actu/", name="front_actu")
+     * @Route("/actu/{id}", name="front_actu")
      */
-    public function actu()
+    public function actu($id)
     {
-        return $this->render('front/actu.html.twig');
+        $actu = $this->getDoctrine()
+            ->getRepository(Actu::class)
+            ->findOneById($id);
+        dump($actu);
+        return $this->render('front/actu.html.twig', [
+            'actu' => $actu
+        ]);
     }
 
 

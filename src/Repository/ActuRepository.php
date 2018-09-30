@@ -34,6 +34,16 @@ class ActuRepository extends ServiceEntityRepository
             ;
     }
 
+        public function findOneById($id): ?Actu
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 //    /**
 //     * @return Actu[] Returns an array of Actu objects
 //     */

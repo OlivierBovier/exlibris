@@ -4,6 +4,30 @@
 
 {% block contenu %}
 
-    <p>Page actu</p>
+    <div class="row">
+
+        <div class="col-lg-7">
+
+            <div class="card mt-4">
+				<div class="card-header">
+                    <h2 class="card-title">{{ actu.titre }}</h2>
+                    <h5 class="card-subtitle text-muted">{{ actu.accroche }}</h5>
+            	</div>
+                <div class="card-body">                	
+                    <p class="card-text">{{ actu.contenu }}</p>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col-lg-9 -->
+
+        <div class="col-lg-5">
+            <div class="card-body">
+                <img class="card-img-top img-fluid rounded" src="{{ asset('images/actu/' ~ actu.image ~'') }}"
+                     alt="{{ actu.titre }}">
+            </div>
+        </div>
+        <!-- /.col-lg-3 -->
+    </div>
 
 {% endblock %}
