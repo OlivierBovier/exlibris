@@ -24,7 +24,12 @@ class MouvStock
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_mouv;
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Livres", inversedBy="mouvStocks")
@@ -49,15 +54,46 @@ class MouvStock
         return $this;
     }
 
-    public function getDateMouv(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->date_mouv;
+        return $this->createdAt;
     }
 
-    public function setDateMouv(\DateTimeInterface $date_mouv): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->date_mouv = $date_mouv;
+        $this->createdAt = $createdAt;
 
+        return $this;
+    }
+
+    /**
+     * Gets triggered only on insert
+     *
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \Datetime());
+    }
+
+    public function setUpdatedAt(\Datetime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 

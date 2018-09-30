@@ -297,7 +297,7 @@ class FrontController extends AbstractController
                     $mvStock = new MouvStock();
                     $mvStock->setLivre($livre);
                     $mvStock->setQteMouv($lignepanier['qte'] * -1);
-                    $mvStock->setDateMouv(new \DateTime());
+                    $mvStock->setCreatedAt(new \DateTime());
                     $manager->persist($mvStock);
                 }
 

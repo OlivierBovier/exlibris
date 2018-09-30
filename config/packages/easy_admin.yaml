@@ -68,6 +68,7 @@ easy_admin:
             disabled_actions: ['new']
             list:
                 title: admin.user.title
+                actions: ['show']
                 fields:
                     - { property: 'username', label: admin.user.username, type: 'text'}
                     - { property: 'email', label: admin.user.email, type: 'email' }
@@ -81,6 +82,7 @@ easy_admin:
             class: App\Entity\Auteurs
             list:
                 title: admin.auteurs.title
+                actions: ['show']
                 fields:
                     - { property: 'prenomAuteur', label: admin.auteurs.prenom, type: 'text' }
                     - { property: 'nomAuteur', label: admin.auteurs.nom, type: 'text'}
@@ -104,6 +106,7 @@ easy_admin:
             class: App\Entity\Editeurs
             list:
                 title: admin.editeurs.title
+                actions: ['show']
                 fields:
                     - { property: 'nomEditeur', label: admin.editeurs.nom, type: 'text' }
                     - { property: 'livres', label: admin.editeurs.livres, type_options: { by_reference: false} }
@@ -114,9 +117,10 @@ easy_admin:
                 fields:
                     - { property: 'nomEditeur', label: admin.editeurs.nom, type: 'text' }
         Categories:
-            class: App\Entity\Categories
+            class: App\Entity\Categories         
             list:
                 title: admin.categories.title
+                actions: ['show']
                 fields:
                     - { property: 'LibelleCategorie', label: admin.categories.libelle, type: 'text' }
                     - { property: 'livres', label: admin.categories.livres, type_options: { by_reference: false} }
@@ -131,6 +135,7 @@ easy_admin:
             class: App\Entity\Avis
             list:
                 title: admin.avis.title
+                actions: ['show']
         Commandes:
             class: App\Entity\Commandes
             disabled_actions: ['new']
@@ -169,10 +174,12 @@ easy_admin:
             class: App\Entity\MouvStock
             list:
                 title: admin.mouvstock.title
+                actions: ['show']
         Actu:
             class: App\Entity\Actu
             list:
                 title: admin.actu.title
+                actions: ['show']
                 fields:
                     - { property: 'titre', label: admin.actu.titre, type: 'text' }
                     - { property: 'accroche', label: admin.actu.accroche, type: 'text'}
