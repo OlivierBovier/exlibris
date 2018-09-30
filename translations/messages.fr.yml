@@ -44,6 +44,12 @@ admin:
         title: 'Avis'
     commandes:
         title: 'Commandes'
+        datecde: 'Date de commande'
+        totalhtcde: 'Total HT'
+        tvacde: 'TVA'
+        totalttccde: 'Total TTC'
+        user: 'Client'
+        lignescde: 'Livres commandés'
     lignescde:
         title: 'Lignes de commande'
     mouvstock:

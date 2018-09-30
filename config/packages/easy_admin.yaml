@@ -25,6 +25,7 @@ easy_admin:
             class: App\Entity\Livres
             list:
                 title: admin.livres.title
+                actions: ['show']
                 fields:
                     - { property: 'titre', label: admin.livres.titre, type: 'text' }
                     - { property: 'auteur', label: admin.livres.auteur}
@@ -42,7 +43,7 @@ easy_admin:
                     # - { property: 'categorie', label: admin.livres.categorie, type_options: { by_reference: false} }
                     - { property: 'categorie', label: admin.livres.categorie }
                     - { property: 'nbPages', label: admin.livres.nbpages, type: 'integer' }
-                    - { property: 'prixTtc', label: admin.livres.prixttc, type: 'number' }
+                    - { property: 'prixTtc', label: admin.livres.prixttc, type: 'money', type_options: { currency: 'EUR' } }
                     - { property: 'date_parution', label: admin.livres.parution, type: 'date'}
                     - { property: 'est_conseil', label: admin.livres.estconseil}
                     - { property: 'active', label: admin.livres.active}
@@ -56,7 +57,7 @@ easy_admin:
                     - { property: 'editeur', label: admin.livres.editeur}
                     - { property: 'categorie', label: admin.livres.categorie }
                     - { property: 'nbPages', label: admin.livres.nbpages, type: 'integer' }
-                    - { property: 'prixTtc', label: admin.livres.prixttc, type: 'number' }
+                    - { property: 'prixTtc', label: admin.livres.prixttc, type: 'money', type_options: { currency: 'EUR' } }
                     - { property: 'date_parution', label: admin.livres.parution, type: 'date'}
                     - { property: 'est_conseil', label: admin.livres.estconseil}
                     - { property: 'active', label: admin.livres.active}
@@ -132,8 +133,34 @@ easy_admin:
                 title: admin.avis.title
         Commandes:
             class: App\Entity\Commandes
+            disabled_actions: ['new']
             list:
                 title: admin.commandes.title
+                actions: ['show']
+                fields:
+                    - { property: 'user', label: admin.commandes.user }
+                    - { property: 'datecde', label: admin.commandes.datecde, type: 'date' }
+                    - { property: 'totalttccde', label: admin.commandes.totalttccde }                    
+                    # - { property: 'lignescdes', type_options: { by_reference: false} }
+            show:
+                fields:
+                    - { property: 'datecde', label: admin.commandes.datecde, type: 'date' }
+                    - { property: 'totalhtcde', label: admin.commandes.totalhtcde }
+                    - { property: 'tvacde', label: admin.commandes.tvacde }
+                    - { property: 'totalttccde', label: admin.commandes.totalttccde }
+                    - { property: 'user', label: admin.commandes.user }
+                    - { property: 'lignescdes',label: admin.commandes.lignescde, type: 'collection', type_options: { entry_type: 'App\Form\LignesCdeType', by_reference: false } }
+
+            edit:
+                actions: ['show', '-delete']
+                fields:
+                    - { property: 'datecde', label: admin.commandes.datecde, type: 'date' }
+                    - { property: 'totalhtcde', label: admin.commandes.totalhtcde, type: 'money', type_options: { currency: 'EUR' } }
+                    - { property: 'tvacde', label: admin.commandes.tvacde, type: 'money', type_options: { currency: 'EUR' } }
+                    - { property: 'totalttccde', label: admin.commandes.totalttccde, type: 'money', type_options: { currency: 'EUR' } }
+                    - { property: 'user', label: admin.commandes.user }
+                    - { property: 'lignescdes',label: admin.commandes.lignescde, type: 'collection', type_options: { entry_type: 'App\Form\LignesCdeType', by_reference: false } }
+
         LignesCde:
             class: App\Entity\LignesCde
             list:
