@@ -39,9 +39,13 @@ admin:
         title: 'Catégories'
         libelle: 'Libellé'
         livres: 'Livres'
-
     avis:
         title: 'Avis'
+        user: 'Membre'
+        livre: 'Livre'
+        dateavis: 'Date du commentaire'
+        commentaire: 'Commentaire'
+        note: 'Note'
     commandes:
         title: 'Commandes'
         datecde: 'Date de commande'

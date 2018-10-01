@@ -15,7 +15,7 @@ easy_admin:
             - { entity: 'Categories', label: 'Catégories', icon: 'address-card' }
             - { entity: 'Avis', icon: 'comment' }
             - { entity: 'Commandes', icon: 'envelope' }
-            - { entity: 'LignesCde', label: 'Lignes de commande', icon: 'copy' }
+#            - { entity: 'LignesCde', label: 'Lignes de commande', icon: 'copy' }
             - { entity: 'MouvStock', label: 'Mouvements de stock', icon: 'tag' }
             - { entity: 'Actu', label: 'Actualités', icon: 'book' }
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
@@ -133,9 +133,31 @@ easy_admin:
             
         Avis:
             class: App\Entity\Avis
+            disabled_actions: ['new']
             list:
                 title: admin.avis.title
                 actions: ['show']
+                fields:
+                    - { property: 'user', label: admin.avis.user }
+                    - { property: 'livre', label: admin.avis.livre }
+                    - { property: 'dateavis', label: admin.avis.dateavis, type: 'date' }
+                    - { property: 'note', label: admin.avis.note }
+            show:
+                fields:
+                    - { property: 'user', label: admin.avis.user }
+                    - { property: 'livre', label: admin.avis.livre }
+                    - { property: 'dateavis', label: admin.avis.dateavis, type: 'date' }
+                    - { property: 'commentaire', label: admin.avis.commentaire }
+                    - { property: 'note', label: admin.avis.note }
+            edit:
+                fields:
+                    - { property: 'user', label: admin.avis.user }
+                    - { property: 'livre', label: admin.avis.livre }
+                    - { property: 'dateavis', label: admin.avis.dateavis, type: 'date' }
+                    - { property: 'commentaire', label: admin.avis.commentaire }
+                    - { property: 'note', label: admin.avis.note }
+
+
         Commandes:
             class: App\Entity\Commandes
             disabled_actions: ['new']
@@ -186,6 +208,14 @@ easy_admin:
                     - { property: 'image', type: image, label: admin.actu.image, base_path: '%app.path.actu_images%' }
                     - { property: 'createdAt', label: admin.actu.createdat}
                     - { property: 'updatedAt', label: admin.actu.updatedat}
+            show:
+                title: admin.actu.title
+                fields:
+                    - { property: 'titre', label: admin.actu.titre, type: 'text' }
+                    - { property: 'accroche', label: admin.actu.accroche, type: 'text'}
+                    - { property: 'contenu', label: admin.actu.contenu }
+                    - { property: 'image', type: image, label: admin.actu.image, base_path: '%app.path.actu_images%' }
+                    - { property: 'createdAt', label: admin.actu.createdat}
             new:
                 fields:
                     - { property: 'titre', label: admin.actu.titre, type: 'text' }
