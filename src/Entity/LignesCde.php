@@ -22,7 +22,7 @@ class LignesCde
     private $qte_ligne_cde;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commandes", inversedBy="lignesCdes", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commandes", inversedBy="lignesCdes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $commande;

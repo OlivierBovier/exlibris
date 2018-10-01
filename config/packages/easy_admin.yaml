@@ -15,7 +15,7 @@ easy_admin:
             - { entity: 'Categories', label: 'Catégories', icon: 'address-card' }
             - { entity: 'Avis', icon: 'comment' }
             - { entity: 'Commandes', icon: 'envelope' }
-#            - { entity: 'LignesCde', label: 'Lignes de commande', icon: 'copy' }
+            # - { entity: 'LignesCde', label: 'Lignes de commande', icon: 'copy' }
             - { entity: 'MouvStock', label: 'Mouvements de stock', icon: 'tag' }
             - { entity: 'Actu', label: 'Actualités', icon: 'book' }
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
@@ -166,22 +166,22 @@ easy_admin:
                 actions: ['show']
                 fields:
                     - { property: 'user', label: admin.commandes.user }
-                    - { property: 'datecde', label: admin.commandes.datecde, type: 'date' }
+                    - { property: 'datecde', label: admin.commandes.datecde, type: 'datetime' }
                     - { property: 'totalttccde', label: admin.commandes.totalttccde }                    
                     # - { property: 'lignescdes', type_options: { by_reference: false} }
             show:
                 fields:
-                    - { property: 'datecde', label: admin.commandes.datecde, type: 'date' }
-                    - { property: 'totalhtcde', label: admin.commandes.totalhtcde }
-                    - { property: 'tvacde', label: admin.commandes.tvacde }
-                    - { property: 'totalttccde', label: admin.commandes.totalttccde }
+                    - { property: 'datecde', label: admin.commandes.datecde, type: 'datetime' }
+                    - { property: 'totalhtcde', label: admin.commandes.totalhtcde, format: '%01.2f' }
+                    - { property: 'tvacde', label: admin.commandes.tvacde, format: '%01.2f' }
+                    - { property: 'totalttccde', label: admin.commandes.totalttccde, format: '%01.2f' }
                     - { property: 'user', label: admin.commandes.user }
                     - { property: 'lignescdes',label: admin.commandes.lignescde, type: 'collection', type_options: { entry_type: 'App\Form\LignesCdeType', by_reference: false } }
 
             edit:
                 actions: ['show', '-delete']
                 fields:
-                    - { property: 'datecde', label: admin.commandes.datecde, type: 'date' }
+                    - { property: 'datecde', label: admin.commandes.datecde, type: 'datetime' }
                     - { property: 'totalhtcde', label: admin.commandes.totalhtcde, type: 'money', type_options: { currency: 'EUR' } }
                     - { property: 'tvacde', label: admin.commandes.tvacde, type: 'money', type_options: { currency: 'EUR' } }
                     - { property: 'totalttccde', label: admin.commandes.totalttccde, type: 'money', type_options: { currency: 'EUR' } }

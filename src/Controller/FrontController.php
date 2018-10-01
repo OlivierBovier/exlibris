@@ -64,7 +64,7 @@ class FrontController extends AbstractController
         $actu = $this->getDoctrine()
             ->getRepository(Actu::class)
             ->findOneById($id);
-        dump($actu);
+
         return $this->render('front/actu.html.twig', [
             'actu' => $actu
         ]);

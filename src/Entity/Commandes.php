@@ -45,7 +45,7 @@ class Commandes
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\LignesCde", mappedBy="commande")
+     * @ORM\OneToMany(targetEntity="App\Entity\LignesCde", mappedBy="commande", cascade={"persist", "remove"})
      */
     private $lignesCdes;
 
