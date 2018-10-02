@@ -24,6 +24,7 @@ use App\Entity\Actu;
 use App\Form\FiltreAuteurType;
 use App\Form\FiltreCategorieType;
 use App\Form\AvisType;
+use App\Form\ContactType;
 
 class FrontController extends AbstractController
 {
@@ -438,9 +439,38 @@ class FrontController extends AbstractController
     /**
      * @Route("/contact/", name="front_contact")
      */
-    public function contact()
+    public function contact(Request $request, Session $session, \Swift_Mailer $mailer)
     {
-        return $this->render('front/contact.html.twig');
+        
+        $formContact = $this->createForm(ContactType::class);
+        $formContact->handleRequest($request);
+
+        if ($formContact->isSubmitted() && $formContact->isValid()) {
+            
+            $contenu_form = $formContact->getData();
+
+            // Envoi de l'email de contact à l'administrateur du site
+            $message = (new \Swift_Message('Contact depuis le site ExLibris'))
+                ->setFrom(['exlibris.ifocop@free.fr' => 'ExLibris'])
+                ->setTo('olivier.bovier@free.fr')
+                ->setBody(
+                    $this->renderView(
+                        'emails/contact.html.twig',
+                        array('nom' => $contenu_form['nom'], 'email' => $contenu_form['email'], 'objet' => $contenu_form['objet'], 'contenu' => $contenu_form['contenu'])
+                    ),
+                    'text/html'
+                );
+            $mailer->send($message);
+
+            $session->getFlashBag()->add('notice', 'Votre demande est bien prise en compte. Merci.');
+
+            return $this->redirectToRoute("front_home");
+
+        }
+
+        return $this->render('front/contact.html.twig', [
+            'formContact' => $formContact->createView()
+        ]);
     }
 
     /**

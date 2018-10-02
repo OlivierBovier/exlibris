@@ -1,10 +1,36 @@
 {% extends "layout.html.twig" %}
 
+{% form_theme formContact 'bootstrap_4_layout.html.twig' %}
+
 {% block title %} Contact {% endblock %}
 
 {% block contenu %}
 <main role="main" class="container">
+
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">{{ flashMessage }}</div>
+    {% endfor %}
+
 	<p>Formulaire de contact et Googlemaps</p>
+    <div class="row">
+	    <div class="col-lg-7">
+		    {{ form_start(formContact) }}
+		    {{ form_row(formContact.nom, {'label': 'Votre nom', 'attr': {'placeholder': 'votre nom ...'}}) }}
+		    {{ form_row(formContact.email, {'label': 'Votre email','attr': {'placeholder': 'votre mail pour vous répondre ...'}}) }}
+		    {{ form_row(formContact.objet, {'attr': {'placeholder': 'Objet de votre demande ...'}}) }}
+		    {{ form_row(formContact.contenu, {'attr': {'placeholder': 'Contenu de votre demande ...'}}) }}
+		    <button type="submit" class="btn btn-success">Envoyer votre demande</button>
+		    {{ form_end(formContact) }}
+	    </div>
+	    <!-- /.col-lg-7 -->
+
+	    <div class="col-lg-5">
+	        <div class="card-body">
+	            <p>Googlemaps</p>
+	        </div>
+	    </div>
+	    <!-- /.col-lg-5 -->
+    </div>
 	
 </main>
 
