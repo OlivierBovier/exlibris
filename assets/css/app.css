@@ -2,15 +2,22 @@
     border-radius: 8px;
 }
 
+.navbar {
+    padding: 0.1rem 1rem !important;
+}
+
 .footer-container {
     position: fixed;
     bottom: 0px;
-    padding: 20px 15px 0;
+    padding: 11px 15px 0;
     background-color: #ffc133;
     left: 0px;
     right: 0px;
 }
 
+.footer-container > div > a {
+    padding-bottom: 1rem !important;
+}
 .carousel-caption {
     color: #000000;
 }
