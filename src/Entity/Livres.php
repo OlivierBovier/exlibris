@@ -116,12 +116,18 @@ class Livres
      */
     private $categorie;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $note_moyenne;
+
 
     public function __construct()
     {
         $this->mouvStocks = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->lignesCdes = new ArrayCollection();
+        $this->note_moyenne = 0;
     }
 
     public function __toString()
@@ -403,6 +409,18 @@ class Livres
     public function setCategorie(?Categories $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getNoteMoyenne(): ?float
+    {
+        return $this->note_moyenne;
+    }
+
+    public function setNoteMoyenne(?float $note_moyenne): self
+    {
+        $this->note_moyenne = $note_moyenne;
 
         return $this;
     }

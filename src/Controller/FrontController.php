@@ -147,7 +147,7 @@ class FrontController extends AbstractController
         $infolivre = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findOneById($id);
-
+        dump($infolivre);
         // Formulaire d'ajout au panier
         $formAddToCart = $this->createFormBuilder()
             ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5)))
@@ -190,20 +190,37 @@ class FrontController extends AbstractController
         $avis_existant = $this->getDoctrine()
             ->getRepository(Avis::class)
             ->findBy(['livre' => $infolivre, 'user' => $this->getUser()]);
+        
 
         $formAvis = $this->createForm(AvisType::class);
         $formAvis->handleRequest($request);
 
         if ($formAvis->isSubmitted() && $formAvis->isValid()) {
-            $formAvisData = $formAvis->getData();
-            $avis = new Avis();
-            $avis->setCommentaire($formAvisData->getCommentaire());
-            $avis->setNote($formAvisData->getNote());
-            $avis->setDateAvis(new \DateTime());
-            $avis->setLivre($infolivre);
-            $avis->setUser($this->getUser());
+            // Enregistrement de l'avis en base
+                $formAvisData = $formAvis->getData();
+                $avis = new Avis();
+                $avis->setCommentaire($formAvisData->getCommentaire());
+                $avis->setNote($formAvisData->getNote());
+                $avis->setDateAvis(new \DateTime());
+                $avis->setLivre($infolivre);
+                $avis->setUser($this->getUser());
 
-            $manager->persist($avis);
+                $manager->persist($avis);
+
+            // Calcul de la note moyenne des avis (ceux déjà postés et le nouveau)
+                $sommeNotes = 0;
+                foreach ($liste_avis as $value) {
+                    $sommeNotes += $value->getNote();
+                }
+                if ($liste_avis) {
+                    $noteMoyenne = $sommeNotes / count($liste_avis);
+                } else {
+                    $noteMoyenne = 0;
+                }
+            // Enregistrement de la note moyenne des avis dans l'entité livre correspondant
+                $infolivre->setNoteMoyenne($noteMoyenne);
+                $manager->persist($infolivre);
+
             $manager->flush();
 
             return $this->redirectToRoute("front_fiche", ['id' => $id]);

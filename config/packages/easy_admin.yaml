@@ -49,6 +49,7 @@ easy_admin:
                     - { property: 'active', label: admin.livres.active}
                     - { property: 'resume', label: admin.livres.resume}
                     - { property: 'imageFile', type: 'vich_image', label: admin.livres.image }
+                    - { property: 'noteMoyenne' }
             edit:
                 fields:
                     - { property: 'isbn', label: admin.livres.isbn, type: 'text'}

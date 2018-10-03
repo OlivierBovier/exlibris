@@ -21,7 +21,7 @@
                     <h5 class="card-title">Résumé</h5>
                     <p class="card-text">{{ infolivre.resume }}</p>
                     <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                    <p>4.0 stars</p>
+                    <p>{% if infolivre.noteMoyenne > 0  %} {{ infolivre.noteMoyenne }} {% else %} Ce livre n'a pas encore de note.{% endif %}</p>
                     {% if in_panier %}
                         <a href="#" class="btn btn-info">Ce livre est déjà dans votre panier</a>
                     {% else %}
