@@ -20,6 +20,7 @@ class AuteursFixtures extends Fixture
     public const STEFANSSON = 'stefansson';
     public const ARAMBURU = 'aramburu';
     public const AVALLONE = 'avallone';
+    public const PRATO = 'prato';
 
     public function load(ObjectManager $manager)
     {
@@ -122,6 +123,16 @@ class AuteursFixtures extends Fixture
 
         $manager->persist($avallone);
         $this->addReference(self::AVALLONE, $avallone);
+
+        $prato = new Auteurs();
+        $prato->setPrenomAuteur('Dolores');
+        $prato->setNomAuteur('Prato');
+        $prato->setBiographieAuteur('Tôt écartelée ­depuis qu\'elle a été confiée, à l\'âge de 10 ans, à un internat de soeurs visitandines­ entre un monde d\'avant et un monde d\'après, Dolores Prato aura passé sa vie à tenter d\'effacer la frontière qui partage le dehors et le dedans, les paroles et les choses. Vainement. Son oeuvre elle-même est restée à l\'état de fragments, de membres désarticulés que les éditeurs, croyant la reconstituer vite et bien, ont fini par couper et découper allégrement. Et de manière saugrenue, comme s\'il s\'agissait de sauver une écriture qui n\'en avait nul besoin, vouée dès l\'origine à sa propre perte ­à couler indéfiniment vers le néant à l\'instar du monde avec lequel elle entendait de toutes ses forces se confondre. Car la brisure était bien plus profonde, remontant à la naissance même de Dolores Prato, à Rome en 1892. Fille illégitime d\'un père qui ne la reconnaît pas et d\'une mère d\'origine juive qui l\'abandonne très vite, elle est recueillie par un oncle prêtre. Ce sont les années du bonheur, le paradis perdu dans un village reculé des Marches, avant que ce même oncle qui pourtant l\'aime ne parvienne ­pour son bien­ à la faire accepter, nonobstant l\'irrégularité de ses origines, dans un collège tenu par un ordre contemplatif. En cette institution, connue à l\'époque comme un haut lieu d\'éducation des jeunes filles de la noblesse romaine, elle reste jusqu\'à ses 18 ans, jusqu\'à son retour à Rome pour y suivre des études de lettres. A cette expérience, et notamment à sa dernière année, Dolores Prato consacrera Brûlures, son seul texte achevé, une nouvelle que la critique salua comme «parfaite» à sa parution en 1965.
+        De mystérieux, dans ce couvent dont les nonnes sont soumises à la clôture la plus rigide, il n\'y a que tout ce qui se trouve à l\'extérieur alors que les mystères célestes semblent la chose la mieux partagée, dont on parle avec la plus grande précision et le plus bel à-propos. En revanche «quand il s\'agissait de mystères terrestres, ils étaient nerveux, rapides, sous-entendus plutôt que développés: C\'étaient des allusions si fuyantes qu\'elles ressemblaient au geste de celui qui touche quelque chose de brûlant. Et en effet, on évoquait souvent certaines "brûlures", sans plus de précisions, que le "monde" avait l\'habitude d\'infliger à ceux qui avaient trop de familiarité avec lui.» Les bonnes soeurs veulent à tout prix éviter de telles brûlures à Dolores. Elle est pratiquement orpheline, et le couvent a placé sur elle sa charité comme une sorte de capital qu\'il entend, le moment venu, récupérer avec les intérêts. Il ne leur semble donc ni fou ni illégitime de penser que la petite Dolores effrayée par ses premières brûlures leur revienne à jamais. Et elle se brûlera, jusqu\'au troisième degré, dans sa première journée de sa vie passée à la mer, et arborera ses cicatrices comme autant de tatouages marquant un passage initiatique. Ce sera finalement une fraîche rose rouge arborée sur ses cheveux en pleines matines qui signifiera aux nonnes horrifiées que l\'oiseau ne tardera pas à prendre son envol. Après une maîtrise de lettres, Dolores Prato enseigne dans des lycées de Toscane, des Marches et, enfin, de Rome. En 1938, à la suite des lois raciales promulguées par Mussolini, elle est exclue de l\'enseignement. Elle n\'y reviendra plus. Vivant de cours particuliers et de collaborations à différents quotidiens, elle se consacre à l\'écriture et réécriture de sa vie. En 1980 Einaudi publie son unique roman: Giù la piazza non c\'é nessuno (Bas dans la place il n\'y a personne). Avec ce récit de son enfance sauvage avant son entrée au couvent, Dolores Prato devient, à presque 90 ans, un cas littéraire. Elle meurt en 1983, sans que soit entièrement reconnue la grandeur de l\'éternelle débutante qui, au temps des Brûlures avait entrevu s\'ouvrir «une chose si grande qu\'elle commençait avec l\'océan et s\'achevait avec la vie».');
+        $prato->setImage('prato.jpg');
+
+        $manager->persist($prato);
+        $this->addReference(self::PRATO, $prato);
 
         $manager->flush();
     }

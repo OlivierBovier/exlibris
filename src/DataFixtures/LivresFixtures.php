@@ -286,6 +286,29 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $lavieparfaite->setActive(true);
         $manager->persist($lavieparfaite);
 
+        $baslaplace = new Livres();
+
+        $baslaplace->setISBN('978-2-864-32992-3');
+        $baslaplace->setTitre('Bas la place y\'a personne');
+        $baslaplace->setNbPages(896);
+        $baslaplace->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-09-20"));
+        $baslaplace->setPrixTtc(35);
+        $baslaplace->setEstConseil(1);
+        $baslaplace->setNoteMoyenne(0);
+        $baslaplace->setResume('Bas la place y\'a personne n\'est pas un récit d\'enfance comme les autres. Il s\'ouvre sur cette phrase : « Je suis née sous une petite table ». Dès lors le lecteur, saisi par la puissance et la singularité de cette prose légère et envoûtante, s\'attache à cette petite fille abandonnée qui a trouvé là un refuge et une façon qui n\'appartient qu\'à elle d\'appréhender le monde. Le lieu où l\'on eut les premières alertes de la vie devient nous-mêmes, écrit Dolores Prato.
+
+Pour éviter les pièges de la mémoire, l\'auteure décrit avec une précision scrupuleuse et une opiniâtreté généreuse la ville (il s\'agit de Treja, dans les Marches), les objets ou les personnages qui ont habité son enfance.
+
+Non seulement elle nous offre par-là de véritables tableaux d\'un monde disparu (l\'Italie rurale à la charnière du XIXe et du XXe siècle) qui n\'ont rien à envier aux écrits des anthropologues, mais elle donne ainsi à la narration toute son incandescence et sa vérité sensible. Le temps perdu de Dolores Prato est tout à la fois intime et public, et s\'il est retrouvé, c\'est parce que le parti pris des choses est aussi celui des mots.
+
+Dolores Prato a achevé son récit dans les années soixante-dix mais elle n\'en a jamais connu l\'édition intégrale. Tel fut le sort de ce texte que l\'on peut aujourd\'hui considérer comme un des classiques du XXe siècle et, à tout le moins, comme un des chefs-d\'oeuvre de la littérature italienne de l\'après-guerre.');
+        $baslaplace->setImage('baslaplace.jpg');
+        $baslaplace->setAuteur($this->getReference(AuteursFixtures::PRATO));
+        $baslaplace->setEditeur($this->getReference(EditeursFixtures::VERDIER));
+        $baslaplace->setCategorie($this->getReference(CategoriesFixtures::ROMAN_ETR));
+        $baslaplace->setActive(true);
+        $manager->persist($baslaplace);
+
         $manager->flush();
     }
 
