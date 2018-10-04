@@ -52,6 +52,7 @@
                     {% if liste_avis|length > 0 %}
                         {% for avis in liste_avis %}
                             <p>{{ avis.commentaire }}</p>
+                            <p>Note : {{ avis.note }} étoile(s)</p>
                             <small class="text-muted">Posté par {{ avis.user }}
                                 le {{ avis.dateavis|date("d/m/Y") }}</small>
                             <hr>

@@ -147,7 +147,7 @@ class FrontController extends AbstractController
         $infolivre = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findOneById($id);
-        dump($infolivre);
+
         // Formulaire d'ajout au panier
         $formAddToCart = $this->createFormBuilder()
             ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5)))
@@ -212,14 +212,20 @@ class FrontController extends AbstractController
                 foreach ($liste_avis as $value) {
                     $sommeNotes += $value->getNote();
                 }
-                if ($liste_avis) {
-                    $noteMoyenne = $sommeNotes / count($liste_avis);
+                $sommeNotes += $avis->getNote();
+
+                if (count($liste_avis) > 0) {
+                    $noteMoyenne = $sommeNotes / (count($liste_avis)+1);
                 } else {
-                    $noteMoyenne = 0;
+                    $noteMoyenne = $sommeNotes;
                 }
+
             // Enregistrement de la note moyenne des avis dans l'entité livre correspondant
+                dump($infolivre);
                 $infolivre->setNoteMoyenne($noteMoyenne);
+                dump($infolivre);
                 $manager->persist($infolivre);
+
 
             $manager->flush();
 
