@@ -9,6 +9,8 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class LivresFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const ASTA = 'asta';
+
     public function load(ObjectManager $manager)
     {
         $miserables = new Livres();
@@ -240,7 +242,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $Asta->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-08-29"));
         $Asta->setPrixTtc(23);
         $Asta->setEstConseil(1);
-        $Asta->setNoteMoyenne(0);
+        $Asta->setNoteMoyenne(4.5);
         $Asta->setResume('Reykjavik, au début des années 50. Sigvaldi et Helga décident de nommer leur deuxième fille Ásta, d\'après une grande héroïne de la littérature islandaise. Un prénom signifiant - à une lettre près - amour en islandais qui ne peut que porter chance à leur fille... Des années plus tard, Sigvaldi tombe d\'une échelle et se remémore toute son existence : il n\'a pas été un père à la hauteur, et la vie d\'Ásta n\'a pas tenu cette promesse de bonheur. Jón Kalman Stefánsson enjambe les époques et les pays pour nous raconter l\'urgence autant que l\'impossibilité d\'aimer. À travers l\'histoire de Sigvaldi et d\'Helga puis, une génération plus tard, celle d\'Ásta et de Jósef, il nous offre un superbe roman, lyrique et charnel, sur des sentiments plus grands que nous, et des vies qui s\'enlisent malgré notre inlassable quête du bonheur.');
         $Asta->setImage('asta.jpg');
         $Asta->setAuteur($this->getReference(AuteursFixtures::STEFANSSON));
@@ -248,6 +250,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $Asta->setCategorie($this->getReference(CategoriesFixtures::ROMAN_ETR));
         $Asta->setActive(true);
         $manager->persist($Asta);
+        $this->addReference(self::ASTA, $Asta);
 
         $Patria = new Livres();
 

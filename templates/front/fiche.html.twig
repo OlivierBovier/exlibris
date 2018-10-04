@@ -20,8 +20,12 @@
                     <h4>{{ infolivre.PrixTtc|number_format(2, ',', ' ') }} €</h4>
                     <h5 class="card-title">Résumé</h5>
                     <p class="card-text">{{ infolivre.resume }}</p>
-                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                    <p>{% if infolivre.noteMoyenne > 0  %} {{ infolivre.noteMoyenne }} {% else %} Ce livre n'a pas encore de note.{% endif %}</p>
+                    <p>{% if infolivre.noteMoyenne > 0  %}
+                            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                            {{ infolivre.noteMoyenne }}
+                        {% else %}
+                        {% endif %}
+                    </p>
                     {% if in_panier %}
                         <a href="#" class="btn btn-info">Ce livre est déjà dans votre panier</a>
                     {% else %}
