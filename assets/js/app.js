@@ -11,10 +11,13 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../../node_modules/bootstrap/scss/bootstrap.scss');
+require('../css/etoiles.css');
+require('../css/fontawesome-stars.css');
 require('../css/app.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 var $ = require('jquery');
+require('../js/jquery.barrating.min.js');
 
 // JS is equivalent to the normal "bootstrap" package
 // no need to set this to a variable, just require it
