@@ -27,7 +27,7 @@ class LignesCdeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('lig')
             ->select('(lig.livre)', '(SUM(lig.qte_ligne_cde))') // Les parenthèses entourant les champs sont nécessaires en cas de Composite Keys
             ->leftJoin('lig.livre', 'liv')
-            ->addSelect('liv.id', 'liv.titre', 'liv.image', 'liv.resume', 'liv.prix_ttc', 'liv.date_parution')
+            ->addSelect('liv.id', 'liv.titre', 'liv.image', 'liv.resume', 'liv.prix_ttc', 'liv.date_parution', 'liv.note_moyenne')
             ->leftJoin('liv.auteur', 'aut')
             ->addSelect('aut.prenom_auteur', 'aut.nom_auteur')
             ->groupBy('lig.livre')

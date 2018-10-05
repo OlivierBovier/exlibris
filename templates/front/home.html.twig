@@ -56,7 +56,7 @@
             <h2 class="text-muted">Le top des nouveautés !</h2>
             <div class="row">
                 {% for livrerecent in livresrecents %}
-                    <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
+                    <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                         <div class="card h-100">
                             <a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">
                                 <img class="card-img-top"
@@ -74,7 +74,14 @@
                                     le {{ livrerecent.dateParution|date("d/m/Y") }}</p>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                <div class="star-ratings-css text-nowrap">
+                                    <div class="star-ratings-css-top" style="width:{{ livrerecent.noteMoyenne * 20 }}%">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                    <div class="star-ratings-css-bottom">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -84,42 +91,53 @@
         </div>
     </div>
     {% endif %}
-    
+ 
+
+
     {% if venteparlivre|length > 0 %}
     <div class="row">
         <div class="col-sm-12">
             <h2 class="text-muted">Nos meilleures ventes</h2>
             <div class="row">
                 {% for livre_v in venteparlivre %}
-                    <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
-                        <div class="card h-100">
-                            <a href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">
-                                <img class="card-img-top"
-                                src="{{ asset('images/livres/' ~ livre_v.image ~'') }}"
-                                alt="{{ livre_v.titre }}">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title"><a
-                                            href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">{{ livre_v.titre }}</a>
-                                </h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ livre_v.prenom_auteur }} {{ livre_v.nom_auteur }}</h6>
-                                <h6>{{ livre_v.prix_ttc|number_format(2, ',', ' ') }} €</h6>
-                                <p class="card-text">{{ livre_v.resume|truncate(70, true) }}</p>
-                                <p class="card-subtitle mb-2 text-muted">Parution
-                                    le {{ livre_v.date_parution|date("d/m/Y") }}</p>
-                                <p class="card-subtitle mb-2 text-muted">{{ livre_v.2 }} vente(s)</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <a href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">
+                            <img class="card-img-top"
+                            src="{{ asset('images/livres/' ~ livre_v.image ~'') }}"
+                            alt="{{ livre_v.titre }}">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title"><a
+                                        href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">{{ livre_v.titre }}</a>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ livre_v.prenom_auteur }} {{ livre_v.nom_auteur }}</h6>
+                            <h6>{{ livre_v.prix_ttc|number_format(2, ',', ' ') }} €</h6>
+                            <p class="card-text">{{ livre_v.resume|truncate(70, true) }}</p>
+                            <p class="card-subtitle mb-2 text-muted">Parution
+                                le {{ livre_v.date_parution|date("d/m/Y") }}</p>
+                            <p class="card-subtitle mb-2 text-muted">{{ livre_v.2 }} vente(s)</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="star-ratings-css text-nowrap">
+                                <div class="star-ratings-css-top" style="width:{{ livre_v.note_moyenne * 20 }}%">
+                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                </div>
+                                <div class="star-ratings-css-bottom">
+                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 {% endfor %}
             </div>
             <!-- /.row -->
         </div>
     </div>
     {% endif %}
+
+
     
     {% if livresconseilles|length > 0 %}
     <div class="row">
@@ -145,7 +163,14 @@
                                     le {{ livre_c.dateParution|date("d/m/Y") }}</p>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                <div class="star-ratings-css text-nowrap">
+                                    <div class="star-ratings-css-top" style="width:{{ livre_c.NoteMoyenne * 20 }}%">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                    <div class="star-ratings-css-bottom">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

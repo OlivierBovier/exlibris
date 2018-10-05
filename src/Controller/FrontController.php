@@ -221,9 +221,7 @@ class FrontController extends AbstractController
                 }
 
             // Enregistrement de la note moyenne des avis dans l'entité livre correspondant
-                dump($infolivre);
                 $infolivre->setNoteMoyenne($noteMoyenne);
-                dump($infolivre);
                 $manager->persist($infolivre);
 
 
@@ -235,7 +233,6 @@ class FrontController extends AbstractController
         $suggestion_livres = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findSuggestion($id, $infolivre->getCategorie());
-        dump($suggestion_livres);
 
         return $this->render('front/fiche.html.twig', [
             'infolivre' => $infolivre,
@@ -293,7 +290,6 @@ class FrontController extends AbstractController
 
                 if ($changeAdresse['destinataire'] || $changeAdresse['adresse'] || $changeAdresse['codepostal'] || $changeAdresse['ville']) {
                     $user = $this->getUser();
-                    dump($user);
                     $user->setDestLiv($changeAdresse['destinataire']);
                     $user->setAdresseLiv($changeAdresse['adresse']);
                     $user->setCodepostalLiv($changeAdresse['codepostal']);
@@ -333,12 +329,6 @@ class FrontController extends AbstractController
 
                 $manager->flush();
 
-                    dump($changeAdresse);
-                    dump($session->get('contenu_panier'));
-                    dump($prix_total_ht_panier);
-                    dump($tva);
-                    dump($prix_total_ttc_panier);
-                    dump($commande->getId());
                     return $this->redirectToRoute("front_facture", array('id' => $commande->getId()));
             }
 
@@ -420,8 +410,6 @@ class FrontController extends AbstractController
         $bio = $this->getDoctrine()
             ->getRepository(Auteurs::class)
             ->findOneById($id);
-
-        dump($bio);
 
         return $this->render('front/bio.html.twig', ['bio' => $bio]);
     }
