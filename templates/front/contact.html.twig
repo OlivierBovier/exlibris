@@ -11,22 +11,36 @@
         <div class="alert alert-success">{{ flashMessage }}</div>
     {% endfor %}
 
-	<p>Formulaire de contact et Googlemaps</p>
+	
     <div class="row">
 	    <div class="col-lg-7">
-		    {{ form_start(formContact) }}
-		    {{ form_row(formContact.nom, {'label': 'Votre nom', 'attr': {'placeholder': 'votre nom ...'}}) }}
-		    {{ form_row(formContact.email, {'label': 'Votre email','attr': {'placeholder': 'votre mail pour vous répondre ...'}}) }}
-		    {{ form_row(formContact.objet, {'attr': {'placeholder': 'Objet de votre demande ...'}}) }}
-		    {{ form_row(formContact.contenu, {'attr': {'placeholder': 'Contenu de votre demande ...'}}) }}
-		    <button type="submit" class="btn btn-success">Envoyer votre demande</button>
-		    {{ form_end(formContact) }}
+	    	<div class="card-body">
+		    	<h3 class="card-title">Nous écrire</h3>
+			    {{ form_start(formContact) }}
+			    {{ form_row(formContact.nom, {'label': 'Votre nom', 'attr': {'placeholder': 'votre nom ...'}}) }}
+			    {{ form_row(formContact.email, {'label': 'Votre email','attr': {'placeholder': 'votre mail pour vous répondre ...'}}) }}
+			    {{ form_row(formContact.objet, {'attr': {'placeholder': 'Objet de votre demande ...'}}) }}
+			    {{ form_row(formContact.contenu, {'attr': {'placeholder': 'Contenu de votre demande ...'}}) }}
+			    <button type="submit" class="btn btn-success">Envoyer votre demande</button>
+			    {{ form_end(formContact) }}
+			</div>
 	    </div>
 	    <!-- /.col-lg-7 -->
 
 	    <div class="col-lg-5">
-	        <div class="card-body">
-	            <p>Googlemaps</p>
+	        <div class="card-body">	            
+	            <h3 class="card-title">Nous trouver</h3>
+	            <h5 class="card-subtitle mb-2 text-muted">Librairie Exlibris</h5>
+	            <p>15 rue Pottier<br>
+	            	78150 Le Chesnay<br>
+	            	Tél : 01 02 03 04 05</p>
+                <iframe
+                  width="420"
+                  height="324"
+                  frameborder="0" style="border:0"
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDr5k7tQIoUvppGCapybCaKCMJH8EgnB7o
+                    &q=15 rue pottier+Le Chesnay" allowfullscreen>
+                </iframe>
 	        </div>
 	    </div>
 	    <!-- /.col-lg-5 -->
