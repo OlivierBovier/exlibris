@@ -25,7 +25,6 @@ easy_admin:
             class: App\Entity\Livres
             list:
                 title: admin.livres.title
-                actions: ['show']
                 fields:
                     - { property: 'titre', label: admin.livres.titre, type: 'text' }
                     - { property: 'auteur', label: admin.livres.auteur}
@@ -49,7 +48,6 @@ easy_admin:
                     - { property: 'active', label: admin.livres.active}
                     - { property: 'resume', label: admin.livres.resume}
                     - { property: 'imageFile', type: 'vich_image', label: admin.livres.image }
-                    - { property: 'noteMoyenne' }
             edit:
                 fields:
                     - { property: 'isbn', label: admin.livres.isbn, type: 'text'}
@@ -83,7 +81,6 @@ easy_admin:
             class: App\Entity\Auteurs
             list:
                 title: admin.auteurs.title
-                actions: ['show']
                 fields:
                     - { property: 'prenomAuteur', label: admin.auteurs.prenom, type: 'text' }
                     - { property: 'nomAuteur', label: admin.auteurs.nom, type: 'text'}
@@ -137,7 +134,6 @@ easy_admin:
             disabled_actions: ['new']
             list:
                 title: admin.avis.title
-                actions: ['show']
                 fields:
                     - { property: 'user', label: admin.avis.user }
                     - { property: 'livre', label: admin.avis.livre }

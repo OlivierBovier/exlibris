@@ -43,6 +43,12 @@ class Avis
      */
     private $user;
 
+    public function __toString()
+    {
+        // to show the commentaire of the Avis in the select
+        return $this->getCommentaire();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

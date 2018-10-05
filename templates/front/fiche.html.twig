@@ -20,23 +20,6 @@
                     <h4>{{ infolivre.PrixTtc|number_format(2, ',', ' ') }} €</h4>
                     <h5 class="card-title">Résumé</h5>
                     <p class="card-text">{{ infolivre.resume }}</p>
-                    {% if infolivre.noteMoyenne > 0  %}
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="star-ratings-css">
-                                <div class="star-ratings-css-top" style="width:{{ infolivre.noteMoyenne * 20 }}%">
-                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                </div>
-                                <div class="star-ratings-css-bottom">
-                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        {#<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>#}
-                        {#{{ infolivre.noteMoyenne }}#}
-                        {% else %}
-                        {% endif %}
 
                     {% if in_panier %}
                         <a href="#" class="btn btn-info">Ce livre est déjà dans votre panier</a>
@@ -54,6 +37,17 @@
                 </div>
             </div>
             <!-- /.card -->
+            {% if infolivre.noteMoyenne > 0  %}
+            <div class="star-ratings-css">
+                <div class="star-ratings-css-top" style="width:{{ infolivre.noteMoyenne * 20 }}%">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <div class="star-ratings-css-bottom">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+            </div>
+            {% else %}
+            {% endif %}
 
             <div class="card card-outline-secondary my-4">
                 <div class="card-header">
@@ -64,7 +58,6 @@
                     {% if liste_avis|length > 0 %}
                         {% for avis in liste_avis %}
                             <p>{{ avis.commentaire }}</p>
-                            <p>Note : {{ avis.note }} étoile(s)</p>
                             <small class="text-muted">Posté par {{ avis.user }}
                                 le {{ avis.dateavis|date("d/m/Y") }}</small>
                             <hr>
