@@ -20,21 +20,24 @@
                     <h4>{{ infolivre.PrixTtc|number_format(2, ',', ' ') }} €</h4>
                     <h5 class="card-title">Résumé</h5>
                     <p class="card-text">{{ infolivre.resume }}</p>
-                    <p>{% if infolivre.noteMoyenne > 0  %}
-                            <!--  Essai de star rating
-                            <div class="col-md-3 star-ratings-css">
-                            <div class="star-ratings-css-top" style="width:' . {{ infolivre.noteMoyenne * 20 }} .'%">
-                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    {% if infolivre.noteMoyenne > 0  %}
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="star-ratings-css">
+                                <div class="star-ratings-css-top" style="width:{{ infolivre.noteMoyenne * 20 }}%">
+                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                </div>
+                                <div class="star-ratings-css-bottom">
+                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                </div>
                             </div>
-                                <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                            </div>
-                          </div>   -->
-
-                            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                            {{ infolivre.noteMoyenne }}
+                        </div>
+                    </div>
+                        {#<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>#}
+                        {#{{ infolivre.noteMoyenne }}#}
                         {% else %}
                         {% endif %}
-                    </p>
+
                     {% if in_panier %}
                         <a href="#" class="btn btn-info">Ce livre est déjà dans votre panier</a>
                     {% else %}
