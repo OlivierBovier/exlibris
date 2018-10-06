@@ -13,6 +13,7 @@
 require('../../node_modules/bootstrap/scss/bootstrap.scss');
 require('../css/etoiles.css');
 require('../css/fontawesome-stars.css');
+require('../css/blog-carousel-bootstrap4.css');
 require('../css/app.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
