@@ -27,7 +27,7 @@
                                 href="{{ path('front_fiche', {'id': article.id}) }}"> {{ article.titre }} </a></td>
                     <td class="text-center"><img class="img-fluid rounded"
                                                  src="{{ asset('images/livres/' ~ article.image ~ '') }}"
-                                                 alt="{{ article.titre }}" height="85" width="50"></td>
+                                                 alt="{{ article.titre }}" height="65" width="30"></td>
                     <td class="text-center align-middle">
                         <a href="{{ path('front_decrementartpanier', {'id': article.id}) }}"
                            class="btn btn-secondary btn-sm">-</a>
@@ -42,7 +42,17 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="3"></td>
+                {% if not app.session.get('remise') %}
+                <td class="text-right">{{ form_start(formAddPromo) }} {{ form_end(formAddPromo) }}</td>
+            {% else %}
+                <td colspan="3" class="border-0"></td>
+                <td class="text-right">Remise</td>
+                <td class="text-right">{{ app.session.get('remise') }} %</td>
+            {% endif %}
+                
+            </tr>    
+            <tr>                
+                <td colspan="3" class="border-0"></td>
                 <td class="text-right">Prix total HT</td>
                 <td class="text-right">{{ prix_total_ht_panier|number_format(2, ',', ' ') }} €</td>
             </tr>
@@ -63,8 +73,8 @@
                 {{ form_start(formEraseCart) }}
                 {{ form_end(formEraseCart) }}
             </div>
-            <div class="col-lg-2 col-md-4 col-sm-4 float-right offset-lg-6">
-                <a id="boutonSuiteCommande" href="javascript:visibilite();" class="btn btn-success">Suite commande</a>
+            <div class="col-lg-2 col-md-4 col-sm-4 float-right offset-lg-8">
+                <a id="boutonSuiteCommande" href="javascript:visibilite();" class="btn btn-sm btn-success">Suite commande</a>
             </div>
         </div>
         <div class="row" id="suiteCommande" style="display:none;">

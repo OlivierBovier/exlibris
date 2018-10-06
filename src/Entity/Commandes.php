@@ -49,9 +49,15 @@ class Commandes
      */
     private $lignesCdes;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $remise;
+
     public function __construct()
     {
         $this->lignesCdes = new ArrayCollection();
+        $this->remise = 0;
     }
 
     public function __toString()
@@ -153,6 +159,18 @@ class Commandes
                 $lignesCde->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRemise(): ?int
+    {
+        return $this->remise;
+    }
+
+    public function setRemise(?int $remise): self
+    {
+        $this->remise = $remise;
 
         return $this;
     }

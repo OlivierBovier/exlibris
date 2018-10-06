@@ -21,6 +21,7 @@ use App\Entity\Commandes;
 use App\Entity\LignesCde;
 use App\Entity\MouvStock;
 use App\Entity\Actu;
+use App\Entity\Promo;
 use App\Form\FiltreAuteurType;
 use App\Form\FiltreCategorieType;
 use App\Form\AvisType;
@@ -249,27 +250,64 @@ class FrontController extends AbstractController
     /**
      * @Route("/panier/", name="front_panier")
      */
-    public function panier(Request $request, ObjectManager $manager, Session $session)
+    public function panier(Request $request, ObjectManager $manager, Session $session, \Swift_Mailer $mailer)
     {
+        
+        // $session->remove('remise'); // A effecer, juste pour faciliter le dev
         $formEraseCart = $this->createFormBuilder()
-            ->add('save', SubmitType::class, array('label' => 'Supprimer votre panier', 'attr' => array('class' => 'btn btn-secondary')))
+            ->add('save', SubmitType::class, array('label' => 'Supprimer votre panier', 'attr' => array('class' => 'btn btn-sm btn-secondary')))
             ->getForm();
         $formEraseCart->handleRequest($request);
 
         if ($formEraseCart->isSubmitted() && $formEraseCart->isValid()) {
+            // On efface les données temporaire du panier en session
             $session->remove('contenu_panier');
+            // Création du mail de relance (-10%) suite à abandon de panier
+            $user = $this->getUser();
+            $message = (new \Swift_Message('ExLibris - Suite annulation de votre panier'))
+                ->setFrom(['exlibris.ifocop@free.fr' => 'ExLibris'])
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/abandon_panier.html.twig',
+                        array('name' => $user->getUsername())
+                    ),
+                    'text/html'
+                );
+            $mailer->send($message);
         }
+
+        $formAddPromo = $this->createFormBuilder()
+            ->add('codePromo', TextType::class, array('label' => false, 'attr' => array('placeholder' => 'Codo promo ? Indiquez le ici')))
+            ->add('save', SubmitType::class, array('label' => 'Validez votre promo !', 'attr' => array('class' => 'btn btn-sm btn-success')))
+            ->getForm();
+        $formAddPromo->handleRequest($request);
+        
 
         if ($session->get('contenu_panier')) {
 
-
             $articles_panier = $session->get('contenu_panier');
 
+            if ($formAddPromo->isSubmitted() && $formAddPromo->isValid()) {
+                // On récupère le code promo, puis la remise associée en base, puis on l'injecte dans une variable de session
+                $codePromo = $formAddPromo->getData();
+                $promo = $this->getDoctrine()
+                ->getRepository(Promo::class)
+                ->findOneByCodePromo($codePromo['codePromo']);
+                $remise = $promo->getRemise();
+                $session->set('remise', $remise);
+            }
+            
             $prix_total_ttc_panier = 0;
             foreach ($articles_panier as $valeurs) {
                 $prix_total_ttc = $valeurs['prix_total_ttc'];
                 $prix_total_ttc_panier += $prix_total_ttc;
             }
+            // Gestion de la remise si existante
+            if ($session->get('remise')) {
+                $remise = $session->get('remise');
+                $prix_total_ttc_panier = $prix_total_ttc_panier *(1 - ($remise/100));    
+            }          
 
             $prix_total_ht_panier = $prix_total_ttc_panier / 1.055;
             $tva = $prix_total_ttc_panier - $prix_total_ht_panier;
@@ -279,7 +317,7 @@ class FrontController extends AbstractController
                 ->add('adresse', TextType::class, array('required' => false))
                 ->add('codepostal', TextType::class, array('required' => false))
                 ->add('ville', TextType::class, array('required' => false))
-                ->add('ValidCommand', SubmitType::class, array('label' => 'Valider votre commande', 'attr' => array('class' => 'btn btn-success')))
+                ->add('ValidCommand', SubmitType::class, array('label' => 'Valider votre commande', 'attr' => array('class' => 'btn btn-sm btn-success')))
                 ->getForm();
             $formChangeAdresse->handleRequest($request);
 
@@ -302,6 +340,7 @@ class FrontController extends AbstractController
                 $commande = new Commandes();
                 $commande->setUser($this->getUser());
                 $commande->setDateCde(new \DateTime());
+                $commande->setRemise($session->get('remise'));
                 $commande->setTotalHtCde($prix_total_ht_panier);
                 $commande->setTvaCde($tva);
                 $commande->setTotalTtcCde($prix_total_ttc_panier);
@@ -338,6 +377,7 @@ class FrontController extends AbstractController
                 'tva' => $tva,
                 'prix_total_ht_panier' => $prix_total_ht_panier,
                 'formEraseCart' => $formEraseCart->createView(),
+                'formAddPromo' => $formAddPromo->createView(),
                 'formChangeAdresse' => $formChangeAdresse->createView()
             ]);
 
@@ -362,6 +402,7 @@ class FrontController extends AbstractController
             ->findByCommande($id);
 
         $session->remove('contenu_panier');
+        $session->remove('remise');
 
         return $this->render('front/facture.html.twig', [
             'commande' => $commande,

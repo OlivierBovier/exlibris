@@ -19,6 +19,7 @@ easy_admin:
             - { entity: 'MouvStock', label: 'Mouvements de stock', icon: 'tag' }
             - { entity: 'Actu', label: 'Actualités', icon: 'book' }
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
+            - { entity: 'Promo', label: 'Promotions', icon: 'tag' }
     entities:
        # List the entity class name you want to manage
         Livres:
@@ -160,25 +161,16 @@ easy_admin:
             disabled_actions: ['new']
             list:
                 title: admin.commandes.title
-                actions: ['show']
                 fields:
                     - { property: 'user', label: admin.commandes.user }
                     - { property: 'datecde', label: admin.commandes.datecde, type: 'datetime' }
                     - { property: 'totalttccde', label: admin.commandes.totalttccde }                    
                     # - { property: 'lignescdes', type_options: { by_reference: false} }
-            show:
-                fields:
-                    - { property: 'datecde', label: admin.commandes.datecde, type: 'datetime' }
-                    - { property: 'totalhtcde', label: admin.commandes.totalhtcde, format: '%01.2f' }
-                    - { property: 'tvacde', label: admin.commandes.tvacde, format: '%01.2f' }
-                    - { property: 'totalttccde', label: admin.commandes.totalttccde, format: '%01.2f' }
-                    - { property: 'user', label: admin.commandes.user }
-                    - { property: 'lignescdes',label: admin.commandes.lignescde, type: 'collection', type_options: { entry_type: 'App\Form\LignesCdeType', by_reference: false } }
-
             edit:
-                actions: ['show', '-delete']
+                actions: ['-delete']
                 fields:
                     - { property: 'datecde', label: admin.commandes.datecde, type: 'datetime' }
+                    - { property: 'remise', label: admin.commandes.remise }
                     - { property: 'totalhtcde', label: admin.commandes.totalhtcde, type: 'money', type_options: { currency: 'EUR' } }
                     - { property: 'tvacde', label: admin.commandes.tvacde, type: 'money', type_options: { currency: 'EUR' } }
                     - { property: 'totalttccde', label: admin.commandes.totalttccde, type: 'money', type_options: { currency: 'EUR' } }
@@ -225,3 +217,5 @@ easy_admin:
                     - { property: 'accroche', label: admin.actu.accroche, type: 'text'}
                     - { property: 'contenu', label: admin.actu.contenu, type: 'textarea'}
                     - { property: 'imageFile', type: 'vich_image', label: admin.actu.image }
+        Promo:
+            class: App\Entity\Promo

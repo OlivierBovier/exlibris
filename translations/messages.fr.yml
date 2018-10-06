@@ -48,6 +48,7 @@ admin:
         note: 'Note'
     commandes:
         title: 'Commandes'
+        remise: 'Remise (en %)'
         datecde: 'Date de commande'
         totalhtcde: 'Total HT'
         tvacde: 'TVA'
