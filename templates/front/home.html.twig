@@ -49,170 +49,185 @@
             Historique, nous trouver, coordonnées ...
         </div>
     </div>
-
     
+    <!-- LIVRES RECENTS -->
     {% if livresrecents|length > 0 %}
-    <h2 class="text-muted">Le top des nouveautés !</h2>
-    <div class="row blog">
-        <div class="col-sm-12">
-            <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+    <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+            <h3 class="text-muted">Le top des nouveautés !</h3>
+        </div>
+        <div class="card-body">
+   
+            <div class="row blog">
+                <div class="col-sm-12">
+                    <div id="blogCarousel" class="carousel slide" data-ride="carousel">
 
-                <ol class="carousel-indicators">
-                    <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#blogCarousel" data-slide-to="1"></li>
-                </ol>
+                        <ol class="carousel-indicators">
+                            <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#blogCarousel" data-slide-to="1"></li>
+                        </ol>
 
-                <!-- Carousel items -->
-                <div class="carousel-inner">
-                
-                {% for livrerecent in livresrecents %}
-                    {% if loop.first %}
-                    <div class="carousel-item active">
-                        <div class="row">
-                        {% endif %}
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                        
+                        {% for livrerecent in livresrecents %}
+                            {% if loop.first %}
+                            <div class="carousel-item active">
+                                <div class="row">
+                                {% endif %}
+                            {% if loop.index0 == 4 %}
+                            <div class="carousel-item">
+                                <div class="row">
+                                {% endif %}
 
-                            <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
-                                <div class="card h-100">
-                                    <a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">
-                                        <img class="card-img-top"
-                                        src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}"
-                                        alt="{{ livrerecent.titre }}">
-                                    </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><a
-                                                    href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">{{ livrerecent.titre }}</a>
-                                        </h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{ livrerecent.auteur.PrenomAuteur }} {{ livrerecent.auteur.NomAuteur }}</h6>
-                                        <h6>{{ livrerecent.PrixTtc|number_format(2, ',', ' ') }} €</h6>
-                                        <p class="card-text">{{ livrerecent.Resume|truncate(70, true) }}</p>
-                                        <p class="card-subtitle mb-2 text-muted">Parution
-                                            le {{ livrerecent.dateParution|date("d/m/Y") }}</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="star-ratings-css text-nowrap">
-                                            <div class="star-ratings-css-top" style="width:{{ livrerecent.noteMoyenne * 20 }}%">
-                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+                                        <div class="card h-100">
+                                            <a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">
+                                                <img class="card-img-top"
+                                                src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}"
+                                                alt="{{ livrerecent.titre }}">
+                                            </a>
+                                            <div class="card-body">
+                                                <h5 class="card-title"><a
+                                                            href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">{{ livrerecent.titre }}</a>
+                                                </h5>
+                                                <h6 class="card-subtitle mb-2 text-muted">{{ livrerecent.auteur.PrenomAuteur }} {{ livrerecent.auteur.NomAuteur }}</h6>
+                                                <h6>{{ livrerecent.PrixTtc|number_format(2, ',', ' ') }} €</h6>
+                                                <p class="card-text">{{ livrerecent.Resume|truncate(70, true) }}</p>
+                                                <p class="card-subtitle mb-2 text-muted">Parution
+                                                    le {{ livrerecent.dateParution|date("d/m/Y") }}</p>
                                             </div>
-                                            <div class="star-ratings-css-bottom">
-                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                            <div class="card-footer">
+                                                <div class="star-ratings-css text-nowrap">
+                                                    <div class="star-ratings-css-top" style="width:{{ livrerecent.noteMoyenne * 20 }}%">
+                                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                                    </div>
+                                                    <div class="star-ratings-css-bottom">
+                                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <!-- .card-footer -->
                                         </div>
+                                        <!-- .card h-100 -->
                                     </div>
-                                    <!-- .card-footer -->
+                                    <!-- .col-lg-3 -->
+                                {% if loop.index0 == 3 or loop.index0 == 7 %}
                                 </div>
-                                <!-- .card h-100 -->
+                                <!--.row-->
                             </div>
-                            <!-- .col-lg-3 -->
-                        {% if loop.index0 == 3  %}
+                            <!--.item-->  
+                                {% endif %}
+
+                        {% endfor %}
+                        </div>
+                        <!--.carousel-inner-->
+                    </div>
+                    <!--.Carousel-->
+                </div>
+                <!-- .col-sm-12 -->
+            </div>
+            <!-- .row blog -->
+        </div>
+        <!-- .card-body -->
+    </div>
+    <!-- .card -->
+    {% endif %}
+
+
+    <!-- NOS MEILLEURES VENTES -->
+    {% if venteparlivre|length > 0 %}
+    <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+            <h3 class="text-muted">Nos meilleures ventes</h3>
+        </div>
+        <div class="card-body">
+
+            <div class="row blog">
+                <div class="col-sm-12">
+                    <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+
+                        <ol class="carousel-indicators">
+                            <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#blogCarousel" data-slide-to="1"></li>
+                        </ol>
+
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+
+                        {% for livre_v in venteparlivre %}
+
+                            {% if loop.first %}
+                            <div class="carousel-item active">
+                                <div class="row">
+                                {% endif %}
+                            {% if loop.index0 == 4 %}
+                            <div class="carousel-item">
+                                <div class="row">
+                                {% endif %}
+
+                                    <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+                                        <div class="card h-100">
+                                            <a href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">
+                                                <img class="card-img-top"
+                                                src="{{ asset('images/livres/' ~ livre_v.image ~'') }}"
+                                                alt="{{ livre_v.titre }}">
+                                            </a>
+                                            <div class="card-body">
+                                                <h5 class="card-title"><a
+                                                            href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">{{ livre_v.titre }}</a>
+                                                </h5>
+                                                <h6 class="card-subtitle mb-2 text-muted">{{ livre_v.prenom_auteur }} {{ livre_v.nom_auteur }}</h6>
+                                                <h6>{{ livre_v.prix_ttc|number_format(2, ',', ' ') }} €</h6>
+                                                <p class="card-text">{{ livre_v.resume|truncate(70, true) }}</p>
+                                                <p class="card-subtitle mb-2 text-muted">Parution
+                                                    le {{ livre_v.date_parution|date("d/m/Y") }}</p>
+                                                <p class="card-subtitle mb-2 text-muted">{{ livre_v.2 }} vente(s)</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="star-ratings-css text-nowrap">
+                                                    <div class="star-ratings-css-top" style="width:{{ livre_v.note_moyenne * 20 }}%">
+                                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                                    </div>
+                                                    <div class="star-ratings-css-bottom">
+                                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- .card-footer -->
+                                        </div>
+                                        <!-- .card h-100 -->
+                                    </div>
+                                    <!-- .col-lg-3 -->
+                                {% if loop.index0 == 3 or loop.index0 == 7 %}
+                                </div>
+                                <!--.row-->
+                            </div>
+                            <!--.item--> 
+
+                                {% endif %}
+
+                        {% endfor %}
                         </div>
                         <!--.row-->
                     </div>
-                    <!--.item-->  
-                        {% endif %}
+                    <!--.item-->
 
-                {% endfor %}
+                        </div>
+                        <!--.carousel-inner-->
+                    </div>
+                    <!--.Carousel-->
                 </div>
-                <!--.carousel-inner-->
+                <!-- .col-sm-12 -->
             </div>
-            <!--.Carousel-->
+            <!-- .row blog -->
         </div>
-        <!-- .col-sm-12 -->
+        <!-- .card-body -->
     </div>
-    <!-- .row blog -->
+    <!-- .card -->            
     {% endif %}
 
-
-
-
-{#     {% if livresrecents|length > 0 %}
-    <div class="row">
-        <div class="col-sm-12">
-            <h2 class="text-muted">Le top des nouveautés !</h2>
-            <div class="row">
-                {% for livrerecent in livresrecents %}
-                    <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
-                        <div class="card h-100">
-                            <a href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">
-                                <img class="card-img-top"
-                                src="{{ asset('images/livres/' ~ livrerecent.image ~'') }}"
-                                alt="{{ livrerecent.titre }}">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title"><a
-                                            href=" {{ path('front_fiche', { 'id': livrerecent.id }) }} ">{{ livrerecent.titre }}</a>
-                                </h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ livrerecent.auteur.PrenomAuteur }} {{ livrerecent.auteur.NomAuteur }}</h6>
-                                <h6>{{ livrerecent.PrixTtc|number_format(2, ',', ' ') }} €</h6>
-                                <p class="card-text">{{ livrerecent.Resume|truncate(70, true) }}</p>
-                                <p class="card-subtitle mb-2 text-muted">Parution
-                                    le {{ livrerecent.dateParution|date("d/m/Y") }}</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="star-ratings-css text-nowrap">
-                                    <div class="star-ratings-css-top" style="width:{{ livrerecent.noteMoyenne * 20 }}%">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                    </div>
-                                    <div class="star-ratings-css-bottom">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <!-- /.row -->
-        </div>
-    </div>
-    {% endif %} #}
- 
-
-
-    {% if venteparlivre|length > 0 %}
-    <div class="row">
-        <div class="col-sm-12">
-            <h2 class="text-muted">Nos meilleures ventes</h2>
-            <div class="row">
-                {% for livre_v in venteparlivre %}
-                <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
-                    <div class="card h-100">
-                        <a href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">
-                            <img class="card-img-top"
-                            src="{{ asset('images/livres/' ~ livre_v.image ~'') }}"
-                            alt="{{ livre_v.titre }}">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title"><a
-                                        href=" {{ path('front_fiche', { 'id': livre_v.id }) }} ">{{ livre_v.titre }}</a>
-                            </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ livre_v.prenom_auteur }} {{ livre_v.nom_auteur }}</h6>
-                            <h6>{{ livre_v.prix_ttc|number_format(2, ',', ' ') }} €</h6>
-                            <p class="card-text">{{ livre_v.resume|truncate(70, true) }}</p>
-                            <p class="card-subtitle mb-2 text-muted">Parution
-                                le {{ livre_v.date_parution|date("d/m/Y") }}</p>
-                            <p class="card-subtitle mb-2 text-muted">{{ livre_v.2 }} vente(s)</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="star-ratings-css text-nowrap">
-                                <div class="star-ratings-css-top" style="width:{{ livre_v.note_moyenne * 20 }}%">
-                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                </div>
-                                <div class="star-ratings-css-bottom">
-                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <!-- /.row -->
-        </div>
-    </div>
-    {% endif %}
-
-
-    
+    <!-- CONSEILS DES LIBRAIRES -->
     {% if livresconseilles|length > 0 %}
     <div class="row">
         <div class="col-sm-12">
