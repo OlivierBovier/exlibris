@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
+use Knp\Snappy\Pdf;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use App\Entity\Livres;
 use App\Entity\Auteurs;
@@ -29,6 +30,7 @@ use App\Form\ContactType;
 
 class FrontController extends AbstractController
 {
+
     /**
      * @Route("/", name="front_home")
      */
@@ -388,6 +390,7 @@ class FrontController extends AbstractController
         }
     }
 
+
     /**
      * @Route("/facture/{id}", name="front_facture")
      */
@@ -409,6 +412,33 @@ class FrontController extends AbstractController
             'chgt_addresse_livr' => $session->get('chgt_addresse_livr'),
             'lignesCde' => $lignesCde
         ]);
+
+    }
+
+    
+    /**
+     * @Route("/facturepdf/{id}", name="front_facturepdf")
+     */
+    public function facturePdf($id, Session $session)
+    {
+         $commande = $this->getDoctrine()
+            ->getRepository(Commandes::class)
+            ->findOneById($id);
+
+        $lignesCde = $this->getDoctrine()
+            ->getRepository(LignesCde::class)
+            ->findByCommande($id);
+
+        $html = $this->renderView('front/facturepdf.html.twig', [
+            'commande' => $commande,
+            'chgt_addresse_livr' => $session->get('chgt_addresse_livr'),
+            'lignesCde' => $lignesCde
+        ]);
+
+        return new PdfResponse(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            'facture.pdf'
+        );
     }
 
 
