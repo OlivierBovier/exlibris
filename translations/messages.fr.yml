@@ -22,6 +22,7 @@ admin:
         prixttc: 'Prix TTC'
         estconseil: 'Conseillé'
         resume: 'Résumé'
+        note_moyenne: 'Note moyenne'
         image: 'Image associée au livre'
         active: 'Disponible à la vente'
     auteurs:

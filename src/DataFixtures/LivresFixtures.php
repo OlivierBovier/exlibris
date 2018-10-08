@@ -10,6 +10,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 class LivresFixtures extends Fixture implements DependentFixtureInterface
 {
     public const ASTA = 'asta';
+    public const BASLAPLACE = 'baslaplace';
 
     public function load(ObjectManager $manager)
     {
@@ -294,7 +295,7 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $baslaplace->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-09-20"));
         $baslaplace->setPrixTtc(35);
         $baslaplace->setEstConseil(1);
-        $baslaplace->setNoteMoyenne(0);
+        $baslaplace->setNoteMoyenne(3);
         $baslaplace->setResume('Bas la place y\'a personne n\'est pas un récit d\'enfance comme les autres. Il s\'ouvre sur cette phrase : « Je suis née sous une petite table ». Dès lors le lecteur, saisi par la puissance et la singularité de cette prose légère et envoûtante, s\'attache à cette petite fille abandonnée qui a trouvé là un refuge et une façon qui n\'appartient qu\'à elle d\'appréhender le monde. Le lieu où l\'on eut les premières alertes de la vie devient nous-mêmes, écrit Dolores Prato.
 
 Pour éviter les pièges de la mémoire, l\'auteure décrit avec une précision scrupuleuse et une opiniâtreté généreuse la ville (il s\'agit de Treja, dans les Marches), les objets ou les personnages qui ont habité son enfance.
@@ -308,6 +309,7 @@ Dolores Prato a achevé son récit dans les années soixante-dix mais elle n\'en
         $baslaplace->setCategorie($this->getReference(CategoriesFixtures::ROMAN_ETR));
         $baslaplace->setActive(true);
         $manager->persist($baslaplace);
+        $this->addReference(self::BASLAPLACE, $baslaplace);
 
         $manager->flush();
     }

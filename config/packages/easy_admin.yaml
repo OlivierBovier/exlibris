@@ -40,7 +40,6 @@ easy_admin:
                     - { property: 'titre', label: admin.livres.titre, type: 'text' }
                     - { property: 'auteur', label: admin.livres.auteur}
                     - { property: 'editeur', label: admin.livres.editeur}
-                    # - { property: 'categorie', label: admin.livres.categorie, type_options: { by_reference: false} }
                     - { property: 'categorie', label: admin.livres.categorie }
                     - { property: 'nbPages', label: admin.livres.nbpages, type: 'integer' }
                     - { property: 'prixTtc', label: admin.livres.prixttc, type: 'money', type_options: { currency: 'EUR' } }
@@ -60,6 +59,7 @@ easy_admin:
                     - { property: 'prixTtc', label: admin.livres.prixttc, type: 'money', type_options: { currency: 'EUR' } }
                     - { property: 'date_parution', label: admin.livres.parution, type: 'date'}
                     - { property: 'est_conseil', label: admin.livres.estconseil}
+                    - { property: 'note_moyenne', label: admin.livres.note_moyenne}
                     - { property: 'active', label: admin.livres.active}
                     - { property: 'resume', label: admin.livres.resume}
                     - { property: 'imageFile', type: 'vich_image', label: admin.livres.image }
