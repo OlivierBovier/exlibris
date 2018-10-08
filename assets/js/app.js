@@ -19,6 +19,7 @@ require('../css/app.css');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 var $ = require('jquery');
 require('../js/jquery.barrating.min.js');
+// require('../js/blog-carousel-bootstrap4.js');
 
 // JS is equivalent to the normal "bootstrap" package
 // no need to set this to a variable, just require it
