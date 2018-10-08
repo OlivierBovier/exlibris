@@ -8,7 +8,8 @@
         <div class="col-lg-11 mb-4">
             <div class="card h-100">
                 <div class="card-body">
-                    <p class="card-text">Merci pour votre achat dont voici le récapitulatif <span class="card-subtitle mb-2 text-muted"> (une facture au format pdf vous sera envoyée par email)</span></p>
+                    <h4 class="card-text">Merci pour votre achat dont voici le récapitulatif</h4>
+                    <p><span class="card-subtitle mb-2 text-muted">(<a href=" {{ path('front_facturepdf', { 'id': commande.id }) }} ">cliquez ici pour obtenir votre facture au format pdf</a>)</span></p>
 
                 </div>
             </div>

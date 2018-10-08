@@ -1,3 +1,7 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
     <div class="row">
         <div class="col-lg-7 mb-4">
             <div class="card h-100">
@@ -5,7 +9,7 @@
                     <img class="logo"
                          src="{{ asset('images/logo.jpg') }}" height="90"
                          alt="Logo">
-                    <h3 class="text-muted">ExLibris</h3>
+                    <h3 class="text-muted">Facture - ExLibris</h3>
                     <p class="card-text">Client : <span class="card-subtitle mb-2 text-muted">{{ commande.user.username }}</span><br>
                         Numéro client : <span class="card-subtitle mb-2 text-muted">{{ commande.user.id }}</span><br>
                             Numéro de commande : <span class="card-subtitle mb-2 text-muted">{{ commande.id }}</span>
@@ -89,3 +93,5 @@
             </div>
         </div>
     </div>
+
+{% endblock %}

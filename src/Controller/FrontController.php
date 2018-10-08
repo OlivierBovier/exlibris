@@ -419,7 +419,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/facturepdf/{id}", name="front_facturepdf")
      */
-    public function facturePdf($id, Session $session)
+    public function facturePdf($id, Session $session, Pdf $pdf)
     {
          $commande = $this->getDoctrine()
             ->getRepository(Commandes::class)
@@ -436,7 +436,7 @@ class FrontController extends AbstractController
         ]);
 
         return new PdfResponse(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            $pdf->getOutputFromHtml($html),
             'facture.pdf'
         );
     }
