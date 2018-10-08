@@ -229,54 +229,61 @@
 
     <!-- CONSEILS DES LIBRAIRES -->
     {% if livresconseilles|length > 0 %}
-    <div class="row">
-        <div class="col-sm-12">
-            <h2 class="text-muted">Conseils des libraires</h2>
+
+    <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+            <h3 class="text-muted">Conseils des libraires</h3>
+        </div>
+        <div class="card-body">
+
             <div class="row">
-                {% for livre_c in livresconseilles %}
-                    <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
-                        <div class="card h-100">
-                            <a href=" {{ path('front_fiche', { 'id': livre_c.id }) }} ">
-                                <img class="card-img-top"
-                                    src="{{ asset('images/livres/' ~ livre_c.image ~'') }}"
-                                    alt="{{ livre_c.titre }}">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title"><a
-                                            href=" {{ path('front_fiche', { 'id': livre_c.id }) }} ">{{ livre_c.titre }}</a>
-                                </h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ livre_c.auteur.PrenomAuteur }} {{ livre_c.auteur.NomAuteur }}</h6>
-                                <h6>{{ livre_c.PrixTtc|number_format(2, ',', ' ') }} €</h6>
-                                <p class="card-text">{{ livre_c.Resume|truncate(70, true) }}</p>
-                                <p class="card-subtitle mb-2 text-muted">Parution
-                                    le {{ livre_c.dateParution|date("d/m/Y") }}</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="star-ratings-css text-nowrap">
-                                    <div class="star-ratings-css-top" style="width:{{ livre_c.NoteMoyenne * 20 }}%">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                <div class="col-sm-12">
+                    <div class="row">
+                        {% for livre_c in livresconseilles %}
+                            <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
+                                <div class="card h-100">
+                                    <a href=" {{ path('front_fiche', { 'id': livre_c.id }) }} ">
+                                        <img class="card-img-top"
+                                            src="{{ asset('images/livres/' ~ livre_c.image ~'') }}"
+                                            alt="{{ livre_c.titre }}">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a
+                                                    href=" {{ path('front_fiche', { 'id': livre_c.id }) }} ">{{ livre_c.titre }}</a>
+                                        </h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ livre_c.auteur.PrenomAuteur }} {{ livre_c.auteur.NomAuteur }}</h6>
+                                        <h6>{{ livre_c.PrixTtc|number_format(2, ',', ' ') }} €</h6>
+                                        <p class="card-text">{{ livre_c.Resume|truncate(70, true) }}</p>
+                                        <p class="card-subtitle mb-2 text-muted">Parution
+                                            le {{ livre_c.dateParution|date("d/m/Y") }}</p>
                                     </div>
-                                    <div class="star-ratings-css-bottom">
-                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    <div class="card-footer">
+                                        <div class="star-ratings-css text-nowrap">
+                                            <div class="star-ratings-css-top" style="width:{{ livre_c.NoteMoyenne * 20 }}%">
+                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                            </div>
+                                            <div class="star-ratings-css-bottom">
+                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                    <!-- /.row -->
+                </div>
             </div>
-            <!-- /.row -->
+
         </div>
+        <!-- .card-body -->
     </div>
+        <!-- .card -->
+
     {% endif %}
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script>
-
-    </script>
-
 {% endblock %}
