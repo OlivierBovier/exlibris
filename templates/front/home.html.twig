@@ -9,7 +9,7 @@
     {% endfor %}
 
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-lg-8 col-md-6">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -44,9 +44,15 @@
                 </a>
             </div>
         </div>
-        <div class="col-sm-4">
-            <p>Notre librairie</p>
-            Historique, nous trouver, coordonnées ...
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-outline-secondary">
+                <div class="card-header">
+                    <h4>Notre librairie</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Fondée en 1923, notre librairie, située au Chesnay, proche de Versailles, a su évoluer au fil des générations de lecteurs. Nous aimons par dessus-tout vous faire découvrir nos coup de coeurs, et partager avec vous le plaisir de la lecture.<br>Notre boutique en ligne vient de voir le jour. Nous espérons qu'elle saura vous plaire. Vous pouvez nous laisser vos commentaires ou suggestions sur notre page <a class="text-muted pb-4" href= {{ path('front_contact') }}>contact</a>.</p>
+                </div>
+            </div>
         </div>
     </div>
     
