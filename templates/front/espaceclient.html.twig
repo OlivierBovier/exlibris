@@ -18,7 +18,7 @@
                         <th scope="col" class="text-center">N° Cde</th>
                         <th scope="col" class="text-center">Date commande</th>
                         <th scope="col" class="text-center">Montant TTC</th>
-                        <th scope="col" class="text-center">Voir le détail</th>
+                        <th scope="col" class="text-center">Facture (format pdf)</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,7 +27,9 @@
                             <td class="text-center align-middle">{{ commande.id }}</td>
                             <td class="text-center align-middle">{{ commande.datecde|date("d/m/Y") }}</td>
                             <td class="text-center align-middle">{{ commande.totalttccde|number_format(2, ',', ' ') }} €</td>
-                            <td class="text-center align-middle">Détail</td>
+                            <td class="text-center align-middle">
+                                <a href=" {{ path('front_facturepdf', { 'id': commande.id }) }} ">Facture {{ commande.id }}</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
