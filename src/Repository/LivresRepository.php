@@ -39,7 +39,7 @@ class LivresRepository extends ServiceEntityRepository
             ->andWhere('l.active = :val2')
             ->setParameters(array('val1' => true, 'val2' => true))
             ->orderBy('l.date_parution', 'DESC')
-            ->setMaxResults(12)
+            ->setMaxResults(18)
             ->getQuery()
             ->getResult()
         ;

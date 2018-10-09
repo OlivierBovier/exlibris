@@ -44,19 +44,20 @@ class FrontController extends AbstractController
             ->getRepository(Livres::class)
             ->findRecent();
 
-        $livresconseilles = $this->getDoctrine()
-            ->getRepository(Livres::class)
-            ->findConseil();
-
         $venteparlivre = $this->getDoctrine()
             ->getRepository(LignesCde::class)
             ->venteParLivre();
 
+        $livresconseilles = $this->getDoctrine()
+            ->getRepository(Livres::class)
+            ->findConseil();
+
         return $this->render('front/home.html.twig', [
             'actus' => $actus,
             'livresrecents' => $livresrecents,
-            'livresconseilles' => $livresconseilles,
-            'venteparlivre' => $venteparlivre
+            'venteparlivre' => $venteparlivre,
+            'livresconseilles' => $livresconseilles
+
         ]);
     }
 

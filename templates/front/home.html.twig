@@ -249,6 +249,7 @@
                         <ol class="carousel-indicators">
                             <li data-target="#carouselConseils" data-slide-to="0" class="active"></li>
                             <li data-target="#carouselConseils" data-slide-to="1"></li>
+                            <li data-target="#carouselConseils" data-slide-to="2"></li>
                         </ol>
 
                         <!-- Carousel items -->
@@ -259,7 +260,7 @@
                             <div class="carousel-item active">
                                 <div class="row">
                             {% endif %}
-                            {% if loop.index0 == 6 %}
+                            {% if loop.index0 == 6 or loop.index0 == 12 %}
                             <div class="carousel-item">
                                 <div class="row">
                             {% endif %}
@@ -295,7 +296,7 @@
                                 <!-- .card h-100 -->
                             </div>
                             <!-- .col-lg-2 -->
-                            {% if loop.index0 == 5 or loop.index0 == 11 %}
+                            {% if loop.index0 == 5 or loop.index0 == 11 or loop.index0 == 17 %}
                         </div>
                         <!--.row-->
                     </div>
