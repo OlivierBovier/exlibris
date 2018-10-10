@@ -430,8 +430,8 @@ class FrontController extends AbstractController
             ->getRepository(LignesCde::class)
             ->findByCommande($id);
 
-        $pathToLogo = '/var/www/html/exlibris/public/images/logo.jpg';
-        $pathToCss = '/var/www/html/exlibris/public/build/app.css';
+        $pathToLogo = '/var/www/exlibris/public/images/logo.jpg';
+        $pathToCss = '/var/www/exlibris/public/build/app.css';
 
 
         $html = $this->renderView('front/facturepdf.html.twig', [
