@@ -422,7 +422,7 @@ class FrontController extends AbstractController
      */
     public function facturePdf($id, Session $session, Pdf $pdf)
     {
-         $commande = $this->getDoctrine()
+        $commande = $this->getDoctrine()
             ->getRepository(Commandes::class)
             ->findOneById($id);
 
@@ -430,10 +430,16 @@ class FrontController extends AbstractController
             ->getRepository(LignesCde::class)
             ->findByCommande($id);
 
+        $pathToLogo = '/var/www/html/exlibris/public/images/logo.jpg';
+        $pathToCss = '/var/www/html/exlibris/public/build/app.css';
+
+
         $html = $this->renderView('front/facturepdf.html.twig', [
             'commande' => $commande,
             'chgt_addresse_livr' => $session->get('chgt_addresse_livr'),
-            'lignesCde' => $lignesCde
+            'lignesCde' => $lignesCde,
+            'pathToLogo' => $pathToLogo,
+            'pathToCss' => $pathToCss
         ]);
 
         return new PdfResponse(

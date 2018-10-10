@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
 
+    {% block stylesheets %}
+        <link href='{{ pathToCss }}' rel="stylesheet">
+        <link href={{ asset('build/sticky-footer-navbar.css') }} rel="stylesheet">
+    {% endblock %}
+
 {% block body %}
 
     <div class="row">
@@ -7,7 +12,7 @@
             <div class="card h-100">
                 <div class="card-body">
                     <img class="logo"
-                         src="{{ asset('images/logo.jpg') }}" height="90"
+                         src="{{ pathToLogo }}" height="90"
                          alt="Logo">
                     <h3 class="text-muted">Facture - ExLibris</h3>
                     <p class="card-text">Client : <span class="card-subtitle mb-2 text-muted">{{ commande.user.username }}</span><br>
