@@ -201,6 +201,23 @@ class LivresFixtures extends Fixture implements DependentFixtureInterface
         $mille984->setActive(true);
         $manager->persist($mille984);
 
+        $ferme = new Livres();
+
+        $ferme->setISBN('978-2-070-37516-5');
+        $ferme->setTitre('La Ferme des Animaux');
+        $ferme->setNbPages(150);
+        $ferme->setDateParution(\DateTime::createFromFormat('Y-m-d', "1945-01-01"));
+        $ferme->setPrixTtc(6.6);
+        $ferme->setEstConseil(1);
+        $ferme->setNoteMoyenne(0);
+        $ferme->setResume('Un certain 21 juin eut lieu en Angleterre la révolte des animaux. Les cochons dirigent le nouveau régime. Snowball et Napoléon, cochons en chef, affichent un règlement : " Tout ce qui est sur deux jambes est un ennemi. Tout ce qui est sur quatre jambes ou possède des ailes est un ami. Aucun animal ne portera de vêtements. Aucun animal ne dormira dans un lit. Aucun animal ne boira d\'alcool. Aucun animal ne tuera un autre animal. Tous les animaux son égaux. "Le temps passe. La pluie efface les commandements. L\'âne, un cynique, arrive encore à déchiffrer : " Tous les animaux sont égaux, mais (il semble que cela ait été rajouté) il y en a qui le sont plus que d\'autres. "');
+        $ferme->setImage('lafermedesanimaux.jpg');
+        $ferme->setAuteur($this->getReference(AuteursFixtures::ORWELL));
+        $ferme->setEditeur($this->getReference(EditeursFixtures::GALLIMARD));
+        $ferme->setCategorie($this->getReference(CategoriesFixtures::ANTICIPATION));
+        $ferme->setActive(true);
+        $manager->persist($ferme);
+
         $un_bonheur_insoutenable = new Livres();
 
         $un_bonheur_insoutenable->setISBN('978-2-290-33285-6');

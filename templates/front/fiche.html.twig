@@ -112,7 +112,14 @@
                                             le {{ livre.dateParution|date("d/m/Y") }}</p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                        <div class="star-ratings-css text-nowrap">
+                                            <div class="star-ratings-css-top" style="width:{{ livre.noteMoyenne * 20 }}%">
+                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                            </div>
+                                            <div class="star-ratings-css-bottom">
+                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
