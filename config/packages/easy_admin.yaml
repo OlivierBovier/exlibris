@@ -18,8 +18,9 @@ easy_admin:
             # - { entity: 'LignesCde', label: 'Lignes de commande', icon: 'copy' }
             - { entity: 'MouvStock', label: 'Mouvements de stock', icon: 'tag' }
             - { entity: 'Actu', label: 'Actualités', icon: 'book' }
-            - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
             - { entity: 'Promo', label: 'Promotions', icon: 'tag' }
+            - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
+
     entities:
        # List the entity class name you want to manage
         Livres:
