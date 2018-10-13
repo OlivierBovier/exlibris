@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\LivresRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Vich\Uploadable
+ * @ORM\Table(name="livres", indexes={@ORM\Index(columns={"titre", "resume"},flags={"fulltext"})})
  */
 class Livres
 {

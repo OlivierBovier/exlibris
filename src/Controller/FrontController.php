@@ -27,6 +27,7 @@ use App\Form\FiltreAuteurType;
 use App\Form\FiltreCategorieType;
 use App\Form\AvisType;
 use App\Form\ContactType;
+use App\Form\SearchType;
 
 class FrontController extends AbstractController
 {
@@ -34,7 +35,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="front_home")
      */
-    public function home()
+    public function home(Request $request)
     {
         $actus = $this->getDoctrine()
             ->getRepository(Actu::class)
@@ -52,14 +53,48 @@ class FrontController extends AbstractController
             ->getRepository(Livres::class)
             ->findConseil();
 
+        $formSearch = $this->createForm(SearchType::class);
+        $formSearch->handleRequest($request);
+
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $search = $formSearch->getData();
+            return $this->render('front/search.html.twig', [
+            'search' => $search
+            ]);
+        }
+
         return $this->render('front/home.html.twig', [
             'actus' => $actus,
             'livresrecents' => $livresrecents,
             'venteparlivre' => $venteparlivre,
-            'livresconseilles' => $livresconseilles
-
+            'livresconseilles' => $livresconseilles,
+            'formSearch' => $formSearch->createView()
         ]);
     }
+
+
+    /**
+    * @Route("/recherche/", name="front_search")
+    */
+    public function search(Request $request)
+    {
+        $formSearch = $this->createForm(SearchType::class);
+        $formSearch->handleRequest($request);
+
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $search = $formSearch->getData();
+
+            return $this->render('front/search.html.twig', [
+            'search' => $search
+            ]);
+        }
+
+        dump($search);
+        return $this->render('front/search.html.twig', [
+        'formSearch' => $formSearch->createView()
+        ]);
+    }
+
 
     /**
      * @Route("/actu/{id}", name="front_actu")
@@ -514,15 +549,7 @@ class FrontController extends AbstractController
             ]);
     }
 
-    /**
-     * @Route("/mentions/", name="front_mentions")
-     */
-    public function mentions()
-    {
 
-
-        return $this->render('front/mentions.html.twig');
-    }
 
 
     /**
@@ -562,20 +589,23 @@ class FrontController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/mentions/", name="front_mentions")
+     */
+    public function mentions()
+    {
+
+        return $this->render('front/mentions.html.twig');
+    }
+
+
     /**
     * @Route("/cgv/", name="front_cgv")
     */
     public function cgv()
     {
         return $this->render('front/cgv.html.twig');
-    }
-
-    /**
-     * @Route("/qui/", name="front_qui")
-     */
-    public function qui()
-    {
-        return $this->render('front/qui.html.twig');
     }
 
 

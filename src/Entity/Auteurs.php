@@ -8,9 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuteursRepository")
  * @Vich\Uploadable
+ * @ORM\Table(name="auteurs", indexes={@ORM\Index(columns={"nom_auteur", "biographie_auteur"},flags={"fulltext"})})
  */
 class Auteurs
 {
