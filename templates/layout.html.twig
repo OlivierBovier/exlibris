@@ -60,12 +60,11 @@
                         </li>
                     {% endif %}
 
+                    <a class="nav-link mt-2 mt-md-0" href= {{ path('front_search') }}>Rechercher un livre</a>
+
 
                 </ul>
-                    {{ form_start(formSearch, {'attr': {'class': 'form-inline mt-2 mt-md-0'}}) }}
-                    {{ form_row(formSearch.search, {'attr': {'class': 'form-control mr-sm-2'}}) }}
-                    <input type="submit" class="btn my-2 my-sm-0" value= "Rechercher">
-                    {{ form_end(formSearch) }}
+
             </div>
         </nav>
     </header>

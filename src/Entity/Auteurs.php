@@ -39,7 +39,7 @@ class Auteurs
     private $biographie_auteur;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Livres", mappedBy="auteur", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Livres", mappedBy="auteur")
      */
     private $livres;
 

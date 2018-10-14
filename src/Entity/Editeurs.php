@@ -24,7 +24,7 @@ class Editeurs
     private $nom_editeur;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Livres", mappedBy="editeur", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Livres", mappedBy="editeur")
      */
     private $livres;
 

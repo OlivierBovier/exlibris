@@ -4,7 +4,18 @@
 
 {% block contenu %}
     <main role="main" class="container">
-search
+
+        {{ form_start(formSearch, {'attr': {'class': 'form-inline mt-2 mt-md-0'}}) }}
+        {{ form_row(formSearch.search, {'attr': {'class': 'form-control mr-sm-2'}}) }}
+        <input type="submit" class="btn my-2 my-sm-0" value= "Rechercher">
+        {{ form_end(formSearch) }}
+
+        {% if results is defined %}
+        	{% for result in results %}
+				{{ result.titre}}
+        	{% endfor %}
+
+        {% endif %}
 
     </main>
 

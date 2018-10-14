@@ -81,6 +81,7 @@ easy_admin:
         
         Auteurs:
             class: App\Entity\Auteurs
+            disabled_actions: ['delete']
             list:
                 title: admin.auteurs.title
                 fields:
@@ -104,6 +105,7 @@ easy_admin:
                     
         Editeurs:
             class: App\Entity\Editeurs
+            disabled_actions: ['delete']
             list:
                 title: admin.editeurs.title
                 actions: ['show']
@@ -117,7 +119,8 @@ easy_admin:
                 fields:
                     - { property: 'nomEditeur', label: admin.editeurs.nom, type: 'text' }
         Categories:
-            class: App\Entity\Categories         
+            class: App\Entity\Categories  
+            disabled_actions: ['delete']       
             list:
                 title: admin.categories.title
                 actions: ['show']

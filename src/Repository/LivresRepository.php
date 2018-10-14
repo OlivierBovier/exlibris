@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Livres;
+use App\Extensions\Doctrine\MatchAgaints;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -91,6 +92,20 @@ class LivresRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findSearch($search)
+    {
+        return $this->createQueryBuilder('l')
+            ->addSelect("MATCH_AGAINST (l.titre, l.resume, :searchterm 'IN NATURAL MODE') as score")
+            ->add('where', 'MATCH_AGAINST(l.titre, l.resume, :searchterm) > 0.8')
+            ->setParameter('searchterm', $search)
+            ->orderBy('score', 'desc')
+            ->getQuery()
+            ->getResult();       
+    }
+
+
+
 
 //    /**
 //     * @return Livres[] Returns an array of Livres objects
