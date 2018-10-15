@@ -21,6 +21,8 @@ class AuteursFixtures extends Fixture
     public const ARAMBURU = 'aramburu';
     public const AVALLONE = 'avallone';
     public const PRATO = 'prato';
+    public const BICKFORD = 'bickford';
+    public const FOURNIER = 'fournier';
 
     public function load(ObjectManager $manager)
     {
@@ -133,6 +135,28 @@ class AuteursFixtures extends Fixture
 
         $manager->persist($prato);
         $this->addReference(self::PRATO, $prato);
+
+        $bickford = new Auteurs();
+        $bickford->setPrenomAuteur('Coralie');
+        $bickford->setNomAuteur('Bickford-Smith');
+        $bickford->setBiographieAuteur('Illustratrice chez Penguin - ses couvertures ont été saluées par plusieurs prix - Coralie Bickford-Smith a étudié la typographie et la communication visuelle à l\'université de Reading. Elle a fait la une de nombreux médias internationaux, tels que le New York Times, Vogue ou le Guardian. Elle a participé à des rencontres et expositions en Grande-Bretagne, Suède, Allemagne, Portugal et USA. Le renard et l\'étoile est son premier album jeunesse, inspiré par William Blake et le travail graphique de William Morris.');
+        $bickford->setImage('bickford.jpg');
+
+        $manager->persist($bickford);
+        $this->addReference(self::BICKFORD, $bickford);
+
+        $fournier = new Auteurs();
+        $fournier->setPrenomAuteur('Alain');
+        $fournier->setNomAuteur('Fournier');
+        $fournier->setBiographieAuteur('Alain Fournier est né à La Chapelle-d\'Angillon (France) le 3 octobe 1886 et mort à Saint-Rémy-la-Calonne (France) le 22 septembre 1914.
+
+Alain Fournier, de son vrai prénom Henri-Alban, est né à La Chapelle-d\'Angillon dans le Cher, de parents instituteurs. Il est l\'ami d\'enfance de l\'homme de lettres Jacques Rivière, qui épousera plus tard sa soeur cadette, Isabelle. Chroniqueur littéraire puis secrétaire de l\'ancien président de la République Claude Casimir-Périer, il est également écrivain. En 1913, il publie "Le Grand Meaulnes" qui rate d\'une seule voix le prix Goncourt. Écrit à la Belle Époque, son roman reprend de nombreux détails de sa vie, du décor de sa jeunesse dans le Berry et de son premier amour, une certaine Yvonne de Quièvrecourt. "Le Grand Meaulnes" est l\'unique roman d\'Alain-Fournier achevé et publié de son vivant.
+
+Lieutenant de réserve durant la Seconde Guerre mondiale, Alain Fournier est mobilisé dès le 4 août 1914. Quittant le Pays basque, il écrit à sa soeur : "Je pars content". Deux mois après, le 22 septembre 1914, le jeune écrivain âgé de seulement 27 ans est porté disparu dans les Hauts de Meuse avec 20 autres de ses compagnons. Son second roman, "Colombe Blanchet" restera inachevé. En 1924, des nouvelles et poèmes écrits par Alain Fournier sont rassemblés sous le titre "Miracles" et publiés à l\'initiative de Jacques Rivière. Mort pour la France, Alain-Fournier a été nommé chevalier de la Légion d\'honneur et décoré de la Croix de guerre avec palme, à titre posthume.');
+        $fournier->setImage('fournier.jpg');
+
+        $manager->persist($fournier);
+        $this->addReference(self::FOURNIER, $fournier);
 
         $manager->flush();
     }

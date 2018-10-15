@@ -12,6 +12,7 @@ class CategoriesFixtures extends Fixture
     public const ROMAN_ETR = 'roman_etr';
     public const BD = 'bd';
     public const ANTICIPATION = 'anticipation';
+    public const JEUNESSE = 'jeunesse';
 
     public function load(ObjectManager $manager)
     {
@@ -39,6 +40,12 @@ class CategoriesFixtures extends Fixture
 
         $manager->persist($anticipation);
         $this->addReference(self::ANTICIPATION, $anticipation);
+
+        $litt_jeunesse = new Categories();
+        $litt_jeunesse->setLibelleCategorie('Littérature jeunesse');
+
+        $manager->persist($litt_jeunesse);
+        $this->addReference(self::JEUNESSE, $litt_jeunesse);
 
 
         $manager->flush();

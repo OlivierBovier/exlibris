@@ -328,6 +328,41 @@ Dolores Prato a achevé son récit dans les années soixante-dix mais elle n\'en
         $manager->persist($baslaplace);
         $this->addReference(self::BASLAPLACE, $baslaplace);
 
+        $leverloiseau = new Livres();
+
+        $leverloiseau->setISBN('978-2-075-10814-0');
+        $leverloiseau->setTitre('Le Ver et l\'Oiseau');
+        $leverloiseau->setNbPages(26);
+        $leverloiseau->setDateParution(\DateTime::createFromFormat('Y-m-d', "2018-10-11"));
+        $leverloiseau->setPrixTtc(15);
+        $leverloiseau->setEstConseil(1);
+        $leverloiseau->setNoteMoyenne(0);
+        $leverloiseau->setResume('Sous la terre où grouille la vie, le ver rêve d\'espace et de tranquillité. Au-dessus de lui, l\'oiseau attend, bravant la pluie et le vent. Lui aussi rêve de calme et d\'immensité. Le ver sort enfin. Il croise l\'oiseau. Vont-ils trouver ce qu\'ils ont tant cherché ? Une merveille d\'album, invitation à savourer chaque moment, par la créatrice du «Renard et l\'étoile».');
+        $leverloiseau->setImage('leveretloiseau.jpg');
+        $leverloiseau->setAuteur($this->getReference(AuteursFixtures::BICKFORD));
+        $leverloiseau->setEditeur($this->getReference(EditeursFixtures::GALLIMARD));
+        $leverloiseau->setCategorie($this->getReference(CategoriesFixtures::JEUNESSE));
+        $leverloiseau->setActive(true);
+        $manager->persist($leverloiseau);
+
+        $grandmeaulnes = new Livres();
+
+        $grandmeaulnes->setISBN('978-2-070-58320-1');
+        $grandmeaulnes->setTitre('Le Grand Meaulnes');
+        $grandmeaulnes->setNbPages(336);
+        $grandmeaulnes->setDateParution(\DateTime::createFromFormat('Y-m-d', "1913-01-01"));
+        $grandmeaulnes->setPrixTtc(4.6);
+        $grandmeaulnes->setEstConseil(1);
+        $grandmeaulnes->setNoteMoyenne(0);
+        $grandmeaulnes->setResume('Nouvel élève à Sainte-Agathe, Augustin Meaulnes fascine François dont il devient le meilleur ami. Un jour d\'hiver, il disparaît. À son retour, il n\'est plus le même. Où est-il allé ? Qu\'a-t-il vécu de si extraordinaire? Seul François est dans la confidence. Ce secret partagé va changer pour toujours le destin des deux garçons...
+Entre réalisme et merveilleux, une bouleversante histoire d\'amour et d\'amité. L\'unique roman d\'un jeune écrivain mort à la guerre de 1914. ');
+        $grandmeaulnes->setImage('grandmeaulnes.jpg');
+        $grandmeaulnes->setAuteur($this->getReference(AuteursFixtures::FOURNIER));
+        $grandmeaulnes->setEditeur($this->getReference(EditeursFixtures::GALLIMARD));
+        $grandmeaulnes->setCategorie($this->getReference(CategoriesFixtures::JEUNESSE));
+        $grandmeaulnes->setActive(true);
+        $manager->persist($grandmeaulnes);
+
         $manager->flush();
     }
 
