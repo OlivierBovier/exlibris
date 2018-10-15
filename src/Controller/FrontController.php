@@ -188,7 +188,7 @@ class FrontController extends AbstractController
         $infolivre = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findOneById($id);
-        dump($infolivre);
+
         // Formulaire d'ajout au panier
         $formAddToCart = $this->createFormBuilder()
             ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5)))
@@ -278,7 +278,7 @@ class FrontController extends AbstractController
         // Traitement du formulaire de partage du livre à un ami par mail
         if ($formShare->isSubmitted() && $formShare->isValid()) {
             $formShareData = $formShare->getData();
-            dump($formShareData);
+
             // Envoi de l'email de reccomandation à un ami
             $message = (new \Swift_Message('Contact depuis le site ExLibris'))
                 ->setFrom(['exlibris.ifocop@free.fr' => 'ExLibris'])
