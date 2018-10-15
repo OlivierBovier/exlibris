@@ -71,11 +71,19 @@ class FrontController extends AbstractController
         $formSearch->handleRequest($request);
 
         if ($formSearch->isSubmitted() && $formSearch->isValid()) {
-            $search = $formSearch->getData();
-            $results = $this->getDoctrine()
-            ->getRepository(Livres::class)
-            ->findSearch($search['search']);
-            dump($results);
+            $data = $formSearch->getData();
+            $search = $data['search'];
+
+            $em = $this->getDoctrine()->getManager();
+            $RAW_QUERY = 'SELECT *,
+                MATCH(l.titre, l.resume) AGAINST(:search) AS score_livre, MATCH(a.nom_auteur, a.biographie_auteur) AGAINST(:search) AS score_auteur
+                 FROM Auteurs a LEFT JOIN Livres l ON a.id = l.auteur_id WHERE MATCH(l.titre, l.resume) AGAINST(:search) OR MATCH(a.nom_auteur, a.biographie_auteur) AGAINST(:search)
+                 ORDER BY (score_livre+score_auteur*0.5) DESC;';            
+            $statement = $em->getConnection()->prepare($RAW_QUERY);
+            //Set parameters 
+            $statement->bindValue('search', $search);
+            $statement->execute();
+            $results = $statement->fetchAll();
 
             return $this->render('front/search.html.twig', [
             'formSearch' => $formSearch->createView(),
@@ -83,7 +91,6 @@ class FrontController extends AbstractController
             ]);
         } 
 
-        // dump($search);
         return $this->render('front/search.html.twig', [
         'formSearch' => $formSearch->createView()
         ]);
