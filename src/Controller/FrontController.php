@@ -78,7 +78,7 @@ class FrontController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $RAW_QUERY = 'SELECT *,
                 MATCH(l.titre, l.resume) AGAINST(:search) AS score_livre, MATCH(a.nom_auteur, a.biographie_auteur) AGAINST(:search) AS score_auteur
-                 FROM Auteurs a LEFT JOIN Livres l ON a.id = l.auteur_id WHERE MATCH(l.titre, l.resume) AGAINST(:search) OR MATCH(a.nom_auteur, a.biographie_auteur) AGAINST(:search)
+                 FROM auteurs a LEFT JOIN livres l ON a.id = l.auteur_id WHERE MATCH(l.titre, l.resume) AGAINST(:search) OR MATCH(a.nom_auteur, a.biographie_auteur) AGAINST(:search)
                  ORDER BY (score_livre+score_auteur*0.5) DESC;';            
             $statement = $em->getConnection()->prepare($RAW_QUERY);
             //Set parameters 
