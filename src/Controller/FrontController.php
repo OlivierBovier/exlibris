@@ -28,6 +28,7 @@ use App\Form\FiltreCategorieType;
 use App\Form\AvisType;
 use App\Form\ContactType;
 use App\Form\SearchType;
+use App\Form\ShareProductType;
 
 class FrontController extends AbstractController
 {
@@ -176,7 +177,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/fiche/{id}", name="front_fiche")
      */
-    public function fiche(Request $request, $id, Session $session, ObjectManager $manager)
+    public function fiche(Request $request, $id, Session $session, ObjectManager $manager, \Swift_Mailer $mailer)
     {
         // Si pas de panier en session, on le crée (vide)
         if (!$session->get('contenu_panier')) {
@@ -187,7 +188,7 @@ class FrontController extends AbstractController
         $infolivre = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findOneById($id);
-
+        dump($infolivre);
         // Formulaire d'ajout au panier
         $formAddToCart = $this->createFormBuilder()
             ->add('qte', ChoiceType::class, array('label' => 'Quantité à commander', 'choices' => array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5)))
@@ -231,7 +232,7 @@ class FrontController extends AbstractController
             ->getRepository(Avis::class)
             ->findBy(['livre' => $infolivre, 'user' => $this->getUser()]);
         
-
+        // Création du formulaire de dépose d'un avis
         $formAvis = $this->createForm(AvisType::class);
         $formAvis->handleRequest($request);
 
@@ -270,6 +271,31 @@ class FrontController extends AbstractController
             return $this->redirectToRoute("front_fiche", ['id' => $id]);
         }
 
+        // Création du formulaire de partage du livre à un ami par mail
+        $formShare = $this->createForm(ShareProductType::class);
+        $formShare->handleRequest($request);
+
+        // Traitement du formulaire de partage du livre à un ami par mail
+        if ($formShare->isSubmitted() && $formShare->isValid()) {
+            $formShareData = $formShare->getData();
+            dump($formShareData);
+            // Envoi de l'email de reccomandation à un ami
+            $message = (new \Swift_Message('Contact depuis le site ExLibris'))
+                ->setFrom(['exlibris.ifocop@free.fr' => 'ExLibris'])
+                ->setTo($formShareData['his_mail'])
+                ->setBody(
+                    $this->renderView(
+                        'emails/share.html.twig',
+                        array('your_name' => $formShareData['your_name'], 'your_mail' => $formShareData['your_mail'], 'his_mail' => $formShareData['his_mail'], 'contenu' => $formShareData['contenu'], 'titre' => $infolivre->getTitre(), 'id' => $id)
+                    ),
+                    'text/html'
+                );
+            $mailer->send($message);
+
+            $session->getFlashBag()->add('notice', 'L\'email a bien été envoyé à votre ami(e) Merci.');
+        }
+
+        // Récupération en base des livres suggérés
         $suggestion_livres = $this->getDoctrine()
             ->getRepository(Livres::class)
             ->findSuggestion($id, $infolivre->getCategorie());
@@ -280,6 +306,7 @@ class FrontController extends AbstractController
             'liste_avis' => $liste_avis,
             'formAddToCart' => $formAddToCart->createView(),
             'formAvis' => $formAvis->createView(),
+            'formShare' => $formShare->createView(),
             'avis_existant' => $avis_existant,
             'suggestion_livres' => $suggestion_livres
         ]);

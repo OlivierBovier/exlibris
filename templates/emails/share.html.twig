@@ -1,0 +1,10 @@
+{# templates/emails/share.html.twig #}
+
+<p>Bonjour,</p>
+<p>Vous avez reçu un message de {{ your_name }} ({{ your_mail }}).</p>
+<p>Voici son message concernant le livre "{{ titre }}".</p>
+<p>"{{ contenu }}"</p>
+
+<p>Vous pouvez retrouver plus d'information sur ce livre en cliquant <a href="{{ url('front_fiche', {id: id}) }}">ici</a> et toute l'actualité de l'édition, des livres, bandes-dessinées et des auteurs sur notre site web <a href="{{ url('front_home') }}">Exlibris</a>.</p>
+
+<p>Toute l'équipe de la librairie ExLibris vous souhaite une bonne journée.</p>
