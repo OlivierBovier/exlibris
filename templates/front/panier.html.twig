@@ -99,10 +99,11 @@
                             <div class="card-title">
                                 <p>Voulez-vous indiquer une autre adresse pour cette livraison ?</p>
                                 {{ form_start(formChangeAdresse) }}
-                                {{ form_row(formChangeAdresse.destinataire, {'label': 'Destinataire', 'attr': {'placeholder': 'Destinataire (facultatif)'}}) }}
-                                {{ form_row(formChangeAdresse.adresse, {'attr': {'placeholder': 'votre adresse (facultative)'}}) }}
-                                {{ form_row(formChangeAdresse.codepostal, {'attr': {'placeholder': 'votre code postal (facultatif)'}}) }}
-                                {{ form_row(formChangeAdresse.ville, {'attr': {'placeholder': 'votre ville (facultative)'}}) }}
+                                {{ form_row(formChangeAdresse.destinataire, {'label': 'Destinataire', 'attr': {'placeholder': 'Destinataire'}}) }}
+                                {{ form_row(formChangeAdresse.adresse, {'attr': {'placeholder': 'Adresse'}}) }}
+                                {{ form_row(formChangeAdresse.codepostal, {'attr': {'placeholder': 'Code postal'}}) }}
+                                {{ form_row(formChangeAdresse.ville, {'attr': {'placeholder': 'Ville'}}) }}
+                                {{ form_row(formChangeAdresse.cgv, {'label': 'Vous acceptez nos CGV'}) }}
                                 {{ form_end(formChangeAdresse) }}
                             </div>
                         </div>
