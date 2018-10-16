@@ -40,8 +40,8 @@ class LignesCde
 
     public function __toString()
     {
-        $id_string = $this->id;
-        $setIdToString = settype($id_string, "string");
+        $id_int = $this->id;
+        $id_string = settype($id_int, "string");
         return $id_string;
     }
 

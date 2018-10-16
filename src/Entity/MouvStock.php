@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MouvStockRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class MouvStock
 {
@@ -37,6 +38,18 @@ class MouvStock
      */
     private $livre;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        $id_int = $this->id;
+        $id_string = settype($id_int, "string");
+        return $id_string;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,18 +77,6 @@ class MouvStock
         $this->createdAt = $createdAt;
 
         return $this;
-    }
-
-    /**
-     * Gets triggered only on insert
-     *
-     * @ORM\PrePersist
-     */
-    public function onPrePersist()
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface

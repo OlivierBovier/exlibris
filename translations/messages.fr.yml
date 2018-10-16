@@ -58,8 +58,13 @@ admin:
         lignescde: 'Livres commandés'
     lignescde:
         title: 'Lignes de commande'
-    mouvstock:
+    mouv_stock:
         title: 'Mouvements de stock'
+        qte_mouv: 'Quantité'
+        created_at: 'Date de création'
+        updated_at: 'Date de modification'
+        livre: 'Livre'
+
     actu:
         title: 'Actualités'
         titre: 'Titre'

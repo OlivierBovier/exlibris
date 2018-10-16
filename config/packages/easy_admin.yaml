@@ -185,11 +185,35 @@ easy_admin:
             class: App\Entity\LignesCde
             list:
                 title: admin.lignescde.title
+                
         MouvStock:
             class: App\Entity\MouvStock
             list:
-                title: admin.mouvstock.title
+                title: admin.mouv_stock.title
                 actions: ['show']
+                fields:
+                    - { property: 'qte_mouv', label: admin.mouv_stock.qte_mouv }
+                    - { property: 'createdAt', label: admin.mouv_stock.created_at, type: 'datetime' }
+                    - { property: 'updatedAt', label: admin.mouv_stock.updated_at, type: 'datetime' }
+                    - { property: 'livre', label: admin.mouv_stock.livre }
+            show:
+                title: admin.mouv_stock.title
+                fields:
+                    - { property: 'qte_mouv', label: admin.mouv_stock.qte_mouv }
+                    - { property: 'createdAt', label: admin.mouv_stock.created_at, type: 'datetime' }
+                    - { property: 'updatedAt', label: admin.mouv_stock.updated_at, type: 'datetime' }
+                    - { property: 'livre', label: admin.mouv_stock.livre }
+            new:
+                fields:
+                    - { property: 'qte_mouv', label: admin.mouv_stock.qte_mouv }
+                    - { property: 'createdAt', label: admin.mouv_stock.created_at, type: 'datetime' }
+                    - { property: 'livre', label: admin.mouv_stock.livre }
+            edit:
+                fields:
+                    - { property: 'qte_mouv', label: admin.mouv_stock.qte_mouv }
+                    - { property: 'createdAt', label: admin.mouv_stock.created_at, type: 'datetime' }
+                    - { property: 'livre', label: admin.mouv_stock.livre }
+
         Actu:
             class: App\Entity\Actu
             list:
