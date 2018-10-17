@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Knp\Component\Pager\PaginatorInterface;
 use Knp\Snappy\Pdf;
@@ -386,6 +387,7 @@ class FrontController extends AbstractController
                 ->add('adresse', TextType::class, array('required' => false))
                 ->add('codepostal', TextType::class, array('required' => false))
                 ->add('ville', TextType::class, array('required' => false))
+                ->add('cgv', CheckboxType::class, array('required' => true))
                 ->add('ValidCommand', SubmitType::class, array('label' => 'Valider votre commande', 'attr' => array('class' => 'btn btn-sm btn-success')))
                 ->getForm();
             $formChangeAdresse->handleRequest($request);
