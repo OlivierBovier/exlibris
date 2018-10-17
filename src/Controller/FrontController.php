@@ -328,19 +328,22 @@ class FrontController extends AbstractController
         if ($formEraseCart->isSubmitted() && $formEraseCart->isValid()) {
             // On efface les données temporaire du panier en session
             $session->remove('contenu_panier');
-            // Création du mail de relance (-10%) suite à abandon de panier
-            $user = $this->getUser();
-            $message = (new \Swift_Message('ExLibris - Suite annulation de votre panier'))
-                ->setFrom(['exlibris.ifocop@free.fr' => 'ExLibris'])
-                ->setTo($user->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'emails/abandon_panier.html.twig',
-                        array('name' => $user->getUsername())
-                    ),
-                    'text/html'
-                );
-            $mailer->send($message);
+
+            // Création du mail de relance (-10%) suite à abandon de panier (si user connecté)
+            if (null !== $this->getUser()) {
+                $user = $this->getUser();
+                $message = (new \Swift_Message('ExLibris - Suite annulation de votre panier'))
+                    ->setFrom(['exlibris.ifocop@free.fr' => 'ExLibris'])
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'emails/abandon_panier.html.twig',
+                            array('name' => $user->getUsername())
+                        ),
+                        'text/html'
+                    );
+                $mailer->send($message);
+            }
         }
 
         $formAddPromo = $this->createFormBuilder()
